@@ -2,3 +2,37 @@
     margin: 0;
     padding: 0;
 }
+
+.wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #eee;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+.intro{
+    padding: 10px 0 0 20px;
+    font-size: 1.5em;
+}
+
+table {
+    margin-top: 30px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table td,.table  th{
+    border: 1px solid #333;
+    width: 500px;
+}
+
+a:link {
+    color: green;
+}
