@@ -36,3 +36,8 @@ table {
 a:link {
     color: green;
 }
+
+.footer {
+    position: absolute;
+    bottom: -100px;
+}
