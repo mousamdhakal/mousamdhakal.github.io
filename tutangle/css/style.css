@@ -16,7 +16,7 @@ body {
 .search-icon {
     position: relative;
     top: 6px;
-    right: 16px;
+    right: 15px;
 }
 .header-wrapper input {
     display: inline-block;
@@ -102,9 +102,9 @@ body {
 
 
 .secondary-wrapper .topic-box {
-    background: url("../images/topic-boxes-icon.png") no-repeat;
+    background: url("../images/blue-tab.png") no-repeat;
     padding-left: 19px;
-    height: 13px;
+    height: 16px;
     margin-right: 21px;
 }
 
