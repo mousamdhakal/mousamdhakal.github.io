@@ -31,10 +31,12 @@ table {
 .table td,.table  th{
     border: 1px solid #333;
     width: 500px;
+    text-align: center;
 }
 
-a:link {
+a {
     color: green;
+    text-decoration: none;
 }
 
 .footer {
