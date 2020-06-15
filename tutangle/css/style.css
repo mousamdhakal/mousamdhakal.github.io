@@ -92,6 +92,7 @@ body {
     display: inline-block;
     margin: 0 10px;
     letter-spacing: 0.08em;
+    cursor: pointer;
 }
 
 .secondary-wrapper .user-dashboard {
@@ -394,6 +395,7 @@ body {
     position: relative;
     bottom: 11px;
     left: 4px;
+    cursor: pointer;
 }
 
 .footer-wrapper .last-footer-item {
