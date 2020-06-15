@@ -13,18 +13,21 @@ body {
     margin: 11px 0 0 14px;
 }
 
-.search-icon {
-    position: relative;
-    top: 6px;
-    right: 15px;
-}
-.header-wrapper input {
+.search-container {
+    background: url("../images/search-input.png") no-repeat;
     display: inline-block;
+    position: relative;
+    width: 285px;
+    left: 11px;
+    top: 5px;
+    
+}
+
+.header-wrapper input {
+    background-color: transparent;
     border: none;
     color: #899596;
-    background: url("../images/search-input.png") no-repeat;
-    width: 253px;
-    margin: 0 0 0 10px;
+    width: 80%;
     font-size: 10.3px;
     line-height: 20px;
     padding: 0 6px 0 6px;
@@ -38,7 +41,8 @@ body {
     width: 54px;
     height: 20px;
     position: relative;
-    right: 10px;
+    left: 3px;
+    top: 5px;
     cursor: pointer;
 }
 
