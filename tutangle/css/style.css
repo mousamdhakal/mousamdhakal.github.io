@@ -39,6 +39,7 @@ body {
     height: 20px;
     position: relative;
     right: 10px;
+    cursor: pointer;
 }
 
 .header-wrapper h1 {
@@ -162,6 +163,7 @@ body {
     font-size: 12px;
     padding: 10px 12px 11px 12px;
     max-height: 33px;
+    cursor: pointer;
 }
 
 .grey-tab:hover {
@@ -327,6 +329,7 @@ body {
 .entry-text-wrapper h4 {
     font-size: 15px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .entry-text-wrapper span {
