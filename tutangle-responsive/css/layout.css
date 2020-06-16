@@ -1,0 +1,91 @@
+.container {
+    max-width: 474px;
+    padding: 11px;
+    margin: 0 auto;
+}
+
+.header-wrapper {
+    background-color: #8ad8e7;
+    width: 100%;
+    min-width: 480px;
+    height: 65px;
+}
+
+.form-wrapper {
+    background-color: #8ad8e7;
+}
+
+.main-wrapper {
+    background-color: #fff;
+    width: 100%;
+    min-width: 480px;
+}
+
+.footer-wrapper {
+    background-color: #737373;
+    width: 100%;
+    min-width: 480px;
+    min-height: 40px;
+}
+
+.secondary-wrapper {
+    background-color: #f5f5f5;
+    width: 100%;
+    min-width: 480px;
+}
+
+.info-panel {
+    background-color: #8ad8e7;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+/* 
+    ====================================
+    Responsive for Tablet 
+    ====================================
+
+*/
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 756px;
+        padding: 20px;
+    }
+
+    .header-wrapper {
+        height: 75px;
+    }
+
+    .secondary-wrapper {
+        height: 50px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 961px;
+    }
+
+    .header-wrapper {
+        height: 85px;
+    }
+
+    .secondary-wrapper {
+        height: 40px;
+    }
+
+    .main-wrapper {
+        height: 660px;
+    }
+
+    .footer-wrapper {
+        height: 45px;
+    }
+}
