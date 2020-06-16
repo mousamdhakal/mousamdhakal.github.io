@@ -46,6 +46,10 @@ body {
     font-size: 20px;
 }
 
+.main-upper-tabs {
+    border-bottom: 2px solid #4ac1d9;
+}
+
 .main-upper-tabs > div {
     background-color:#f5f5f5;
     width: 48%;
@@ -53,8 +57,76 @@ body {
     border: 1px solid #f5f5f5;
     padding: 5px 2px 10px 2px;
     font-size: 14px;
+    height: 42px;
 }
 
+.main-upper-tabs .main-left-tab {
+    border-top-left-radius: 18px;
+    position: relative;
+}
+
+.main-upper-tabs .main-right-tab {
+    border-top-right-radius: 18px ;
+    position: relative;
+}
+
+.main-tab-text {
+    font-size: 13px;
+    position: relative;
+    top: 5px;
+}
+
+.main-upper-tabs button {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-size: 11px;
+}
+
+.main-upper-tabs .lower-tabs-right button:hover,
+.main-upper-tabs .lower-tabs-left button:hover {
+    background-color: #4ac1d9;
+    border: 1px solid #4ac1d9;
+    cursor: pointer;
+}
+
+.main-left-tab .lower-tabs-left button {
+    background-color: #4ac1d9;
+    border: 1px solid #4ac1d9;
+    position: absolute;
+    bottom: -1px;
+    left: 7px;
+    padding: 7px 18px 4px 18px;
+    color: #fff;    
+}
+
+.main-left-tab .lower-tabs-right button , .main-right-tab .lower-tabs-right button, 
+.main-right-tab .lower-tabs-left button{
+    background-color: #dedede;
+    border: 1px solid #dedede;
+    
+}
+
+.main-left-tab .lower-tabs-right button {
+    position: absolute;
+    bottom: -1px;
+    right: 4px;
+    padding: 7px 32px 3px 32px; 
+}
+
+.main-right-tab .lower-tabs-left button {
+    position: absolute;
+    bottom: -1px;
+    left: 5px;
+    padding: 7px 19px 4px 19px;
+
+}
+
+.main-right-tab .lower-tabs-right button {
+    position: absolute;
+    bottom: -1px;
+    right: 5px;
+    padding: 7px 10px 4px 12px;
+}
 /* 
     ====================================
     List of Entries Section
@@ -438,6 +510,35 @@ body {
     .list-item-wrapper-bigger {
         max-height: 50px;
     }   
+
+    .main-upper-tabs button {
+        font-size: 12px;
+    }
+
+    .main-left-tab .lower-tabs-left button {
+        left: 11px;
+        padding: 7px 22px 5px 22px;
+    }
+
+    .main-left-tab .lower-tabs-right button {
+        right: 4px;
+        padding: 7px 38px 5px 34px; 
+    }
+
+    .main-right-tab .lower-tabs-left button {
+        left: 9px;
+        padding: 6px 24px 5px 21px;
+    }
+
+    .main-right-tab .lower-tabs-right button {
+        right: 7px;
+        padding: 7px 13px 5px 16px;
+    }
+
+    .main-upper-tabs > div {
+        height: 49px;
+    }
+    
 }
 
 @media (min-width: 992px) {
@@ -541,6 +642,18 @@ body {
 
     .footer-wrapper > div::after {
         content: none;
+    }
+
+    .footer-wrapper ul {
+        position: relative;
+        bottom: 8px;
+        left: 16px;
+    }
+
+    .footer-wrapper span {
+        position: relative;
+        right: 15px;
+        bottom: 8px;
     }
 
 
