@@ -1,0 +1,548 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ /* Mobile design  */
+
+/* 
+    ====================================
+    Header
+    ====================================
+
+*/
+
+.header-wrapper .form-wrapper, .header-wrapper .info-panel{
+    display: none;
+}
+
+.header-wrapper h1 img {
+    width: 180px;
+    vertical-align: middle;
+}
+
+.hamburger-menu img {
+    height: 33px;
+    margin: 5px 10px 1px 1px;
+    cursor: pointer;
+}
+
+.form-wrapper {
+    position: relative;
+    top: 5px;
+}
+
+.secondary-wrapper {
+    display: none;
+}
+
+.sidebar {
+    display: none;
+}
+
+.main-container h3 {
+    text-align: center;
+    margin-bottom: 5px;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.main-upper-tabs > div {
+    background-color:#f5f5f5;
+    width: 48%;
+    text-align: center;
+    border: 1px solid #f5f5f5;
+    padding: 5px 2px 10px 2px;
+    font-size: 14px;
+}
+
+/* 
+    ====================================
+    List of Entries Section
+    ====================================
+
+*/
+
+.entries-section-container {
+    padding: 15px 0;
+    border-bottom: 1px solid #d9d9d9;
+    height: 70px;
+    width: 100%;
+}
+
+.profile-image-wrapper {
+    margin-right: 9px;
+}
+
+.entry-text-wrapper {
+    line-height: 18px;
+}
+
+.entry-text-wrapper h4 a {
+    text-decoration: none;
+    color: #2e2e2e;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.entry-text-wrapper span {
+    font-size: 11.6px;
+}
+
+.entry-topic-box {
+    position: relative;
+    bottom: 2px;
+}
+
+.entry-link {
+    text-decoration: none;
+    color: #5cb0c1;
+    font-weight: 600;
+}
+
+.entry-subscription {
+    font-weight: 600;
+    color: #7c8d29;
+}
+
+.entry-text-wrapper .entry-new-alert {
+    font-size: 10.6px;
+    line-height: 16px;
+    color: #429eaf;
+    font-weight: 600;
+}
+
+.entry-text-wrapper .entry-invite-alert {
+    font-size: 10.6px;
+    line-height: 16px;
+    color: #cd4d24;
+    font-weight: 600;
+}
+
+
+/* 
+    ====================================
+    Footer
+    ====================================
+
+*/
+
+.footer-wrapper {
+    text-align: center;
+    z-index: 2;
+}
+
+.footer-wrapper span {
+    color: #fff;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+}
+
+.footer-wrapper li {
+    display: inline;
+    font-size: 8px;
+    letter-spacing: 0.082em;
+    background: url('../images/footer-tick.png') no-repeat;
+    background-position: right;
+    padding-right: 12px;
+    margin-right: 4px;
+}
+
+.footer-wrapper li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-wrapper .last-footer-item {
+    background: none;
+}
+
+/* 
+    ====================================
+    Effect when hamburger-clicked
+    ====================================
+
+*/
+.hamburger-clicked .header-wrapper {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+
+.hamburger-clicked .header-wrapper .form-wrapper{
+   display: block;
+   position: fixed;
+   width: 100%;
+   top: 53px;
+   left: 0px;
+   padding: 4px;
+   z-index: 2;
+}
+
+.form-wrapper form {
+   max-width: 384px;
+   padding: 11px;
+   margin: 0 auto;
+}
+
+.header-wrapper form input {
+    display: block;
+    border: none;
+    background-color: #cfeff6;
+    padding: 5px 10px 5px 10px;
+    border-radius: 15px;
+    width: 125%;
+    font-size: 13px;
+}
+
+.header-wrapper .search-container {
+    float: left;
+}
+
+.header-wrapper button {
+    float: left;
+    margin-left: 82px;
+    background-color: #284c56;
+    color: #fff;
+    border: 1px solid #284c56;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* Secondary wrapper on hamburger  */
+
+.hamburger-clicked .secondary-wrapper{
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 108px;
+    z-index: 2;
+}
+
+.secondary-wrapper ul {
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.secondary-wrapper li {
+    letter-spacing: 0.08em;
+    border: 1px solid #8ad8e7;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.secondary-wrapper li:hover {
+    background-color: #8ad8e7;
+}
+
+.secondary-wrapper a {
+    text-decoration: none;
+    color: #2e2e2e;
+}
+
+.secondary-wrapper img {
+    position: relative;
+    top: 2px;
+}
+
+.hamburger-clicked .info-panel{
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 396px;
+    z-index: 2;
+    width: 100%;
+    padding: 15px;
+}
+
+.info-panel span{
+    color: #2e2e2e;
+    font-size: 16px;
+}
+
+.info-panel .bordered-items {
+    border-right: 1px solid #2e2e2e;
+    padding-right: 6px;
+}
+
+.info-panel li a {
+    text-decoration: none;
+    color: #2e2e2e;
+    font-size: 12px;
+}
+
+.info-panel li {
+    display: inline-block;
+}
+
+/* 
+    ====================================
+    Responsive for Tablet 
+    ====================================
+
+*/
+@media (min-width: 768px) {
+    .hamburger-menu {
+        display: none;
+    }
+
+    .header-wrapper .form-wrapper, .header-wrapper .info-panel{
+        display: inline-block;
+    }
+
+    .header-wrapper .form-wrapper{
+        background-color: transparent;
+        position: static;
+        margin-left: 10px;
+    }
+
+    .header-wrapper h1 img {
+        width: 190px;
+    }
+
+    .header-wrapper form input {
+        font-size: 10.3px;
+        line-height: 20px;
+        padding: 0 6px;
+    }
+
+    .header-wrapper button {
+        font-size: 10px;
+        height: 25px;
+        position: relative;
+        left: -22px;
+        top: 1px;
+        height: 20px;
+        padding: 2px 6px;
+    }
+    
+    .info-panel {
+        float: right;
+        text-align: right;
+    }
+
+    .secondary-wrapper {
+        display: block;
+    }
+
+    .secondary-wrapper ul {
+        margin-bottom: 0px;
+        font-size: 10px;
+        vertical-align: middle;
+    }
+
+    .secondary-wrapper li {
+        display: inline-block;
+        padding: 1px;
+        margin: 0 10px;
+        border: none;
+    }
+
+    .secondary-wrapper li:hover {
+        background-color: transparent;
+    }
+
+    .secondary-wrapper .secondary-links {
+        float: left;
+    }
+
+    .secondary-wrapper .user-dashboard {
+        float: right;
+        font-size: 10px;
+        position: relative;
+        bottom: 8px;
+    }
+
+    .first-main-container {
+        float: left;
+        width: 70%;
+    }
+
+    .right-sidebar {
+        display: block;
+        float: right;
+        width: 24%;
+        height: 567px;
+        background-color: #f5f5f5;
+    }
+
+
+    .blue-tab {
+        background-color: #4ac1d9;
+        color: #fff;
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        padding: 12px 12px 13px 12px;
+        ;
+    }
+
+    .grey-tab {
+        background-color: #f5f5f5;
+        font-size: 12px;
+        padding: 10px 12px 11px 12px;
+        max-height: 33px;
+        cursor: pointer;
+    }
+
+    .grey-tab:hover {
+        background-color: #fff;
+    }
+
+    .sidebar h3 {
+        font-weight: 300;
+    }
+
+    .sidebar ul {
+        line-height: 17px;
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        color: #2e2e2e;
+    }
+
+    .sample {
+        max-height: 30px;
+    }
+
+    .upper-list .side-text {
+        display: inline-block;
+        max-width: 122px;
+    }
+
+    .sidebar .tab {
+        position: relative;
+    }
+
+    .side-icon {
+        position: absolute;
+        bottom: 14px;
+        right: 13px;
+    }
+
+    .lower-list .side-text {
+        display: inline-block;
+        max-width: 150px;
+    }
+
+    .right-sidebar .list-item-wrapper {
+        max-height: 32px;
+    }
+
+    .lower-list .list-item-wrapper {
+        max-height: 32px;
+    }
+
+    .list-item-wrapper-bigger {
+        max-height: 50px;
+    }   
+}
+
+@media (min-width: 992px) {
+    .header-wrapper h1 img {
+        width: 223px;
+        position: relative;
+        left: 12px;
+    }
+
+    .header-wrapper form {
+        position: relative;
+        top: 8px;
+        left: 16px;
+    }
+
+    .header-wrapper form input {
+        width: 175%;
+    }
+
+    .header-wrapper button {
+        left: 62px;
+    }
+
+    .header-wrapper .info-panel {
+        position: relative;
+        top: 7px;
+        right: 12px;
+    }
+
+    .secondary-wrapper ul {
+        font-size: 13px;
+    }
+
+    .secondary-wrapper .user-dashboard {
+        letter-spacing: 0.08em;
+        bottom: 14px;
+    }
+
+    .secondary-wrapper .secondary-links {
+        position: relative;
+        bottom: 7px;
+        left: 6px;
+    }
+
+    .secondary-wrapper img {
+        position: relative;
+        top: 5px;
+        right: 3px;
+    }
+
+    .secondary-wrapper .topic-box {
+        position: relative;
+        right: 12px;
+    }
+
+    .secondary-wrapper .topic-box img {
+        right: 6px;
+    }
+
+    .second-main-container {
+        float: left;
+        width: 194px;
+        position: relative;
+        left: 12px;
+        top: 11px;
+    }
+
+    .right-sidebar {
+        width: 176px;
+        position: relative;
+        right: 11px;
+        top: 11px;
+    }
+
+    .left-sidebar {
+        display: block;
+        float: left;
+        background-color: #f5f5f5;
+        width: 194px;
+    }
+
+    .main-container {
+        float: right;
+        width: 518px;
+    }
+
+    .first-main-container {
+        width: 750px;
+    }
+
+    .sidebar {
+        height: 604px;
+        background-color: #f5f5f5;
+    }
+
+    .main-container h3 {
+        text-align: left;
+        font-size: 30px;
+        margin-top: 4px;
+    }
+
+    .footer-wrapper > div::after {
+        content: none;
+    }
+
+
+}
+
