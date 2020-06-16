@@ -60,15 +60,20 @@ body {
     color: #2e2e2e;
     font-size: 12px;
 }
+
 .info-panel ul {
     position: relative;
     top: 3px;
     right: 8px;
 }
 
+.info-panel .bordered-items {
+    border-right: 1px solid #2e2e2e;
+    padding-right: 6px;
+}
+
 .info-panel {
-    text-align: right;
-    
+    text-align: right; 
 }
 
 .info-panel span {
@@ -97,6 +102,11 @@ body {
     margin: 0 10px;
     letter-spacing: 0.08em;
     cursor: pointer;
+}
+
+.secondary-wrapper a {
+    text-decoration: none;
+    color: #2e2e2e;
 }
 
 .secondary-wrapper .user-dashboard {
@@ -331,10 +341,11 @@ body {
     line-height: 18px;
 }
 
-.entry-text-wrapper h4 {
+.entry-text-wrapper h4 a {
+    text-decoration: none;
+    color: #2e2e2e;
     font-size: 15px;
     font-weight: 300;
-    cursor: pointer;
 }
 
 .entry-text-wrapper span {
@@ -389,7 +400,6 @@ body {
 
 .footer-wrapper li {
     display: inline;
-    color: #fff;
     font-size: 8px;
     letter-spacing: 0.082em;
     background: url('../images/footer-tick.png') no-repeat;
@@ -399,7 +409,11 @@ body {
     position: relative;
     bottom: 11px;
     left: 4px;
-    cursor: pointer;
+}
+
+.footer-wrapper li a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .footer-wrapper .last-footer-item {
