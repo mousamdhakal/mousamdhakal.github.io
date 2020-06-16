@@ -262,18 +262,27 @@ body {
     border: none;
     background-color: #cfeff6;
     padding: 5px 10px 5px 10px;
-    border-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     width: 125%;
     font-size: 13px;
 }
 
 .header-wrapper .search-container {
     float: left;
+    position: relative;
+}
+
+.search-container img {
+    position: absolute;
+    left: 250px;
+    bottom: 2px;
+    transform: scale(1.28);
 }
 
 .header-wrapper button {
     float: left;
-    margin-left: 82px;
+    margin-left: 106px;
     background-color: #284c56;
     color: #fff;
     border: 1px solid #284c56;
@@ -384,7 +393,7 @@ body {
         font-size: 10px;
         height: 25px;
         position: relative;
-        left: -22px;
+        left: 0px;
         top: 1px;
         height: 20px;
         padding: 2px 6px;
@@ -538,6 +547,13 @@ body {
     .main-upper-tabs > div {
         height: 49px;
     }
+
+    .header-wrapper .form-wrapper img {
+        position: absolute;
+        bottom: 0px;
+        left: 186px;
+        transform: scale(1);
+    }
     
 }
 
@@ -654,6 +670,11 @@ body {
         position: relative;
         right: 15px;
         bottom: 8px;
+    }
+
+    .header-wrapper .form-wrapper img {
+        bottom: 0px;
+        left: 254px;
     }
 
 
