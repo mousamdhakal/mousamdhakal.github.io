@@ -9,6 +9,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: 40px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .header--hotline-number{
@@ -57,6 +58,10 @@
   cursor: pointer;
 }
 
+.header__nav-button button:hover {
+  box-shadow: 0px 0px 15px #e5e5e5;
+}
+
 .header__navbar {
   font-family: 'Roboto', sans-serif;
   width: 100%;
@@ -74,6 +79,10 @@
   text-decoration: none;
   text-transform: uppercase;
   color: #575c64;
+}
+
+.main {
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .main__section {
@@ -94,7 +103,7 @@
 .main__paragraph {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 15px;
   text-align: center;
   color: #6b7c93;
   margin-top: 32px;
@@ -114,6 +123,67 @@
   cursor: pointer;
 }
 
+h2 {
+  font-size: 21px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #8191a6;
+}
+
+
+.customer__text h2, .services__head {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.customer__text p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  margin-top: 12px;
+}
+
+ .services__head {
+   padding: 10px;
+   margin-top: 20px;
+ }
+
+ .services__head p {
+    margin: 12px 0px;
+    width: 80%;
+ }
+
+ .service__image-first, .service-image-second {
+   width: 35px;
+ }
+
+ .service__image-third {
+   width: 19px;
+ }
+
+ .service__image-fourth {
+   width: 30px;
+ }
+
+ .services__list-heading {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+ }
+
+ .services__list-paragraph {
+   margin-top: 8px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 300;
+  }
+
+  .services__image {
+    display: none;
+  }
+
+
 /* 
   ==============================
   Responsive for tablet
@@ -121,6 +191,11 @@
 */
 
 @media (min-width: 768px) {
+
+  p {
+    line-height: 23px;
+  }
+
   .header__navbar__li {
     display: inline-block;
     padding: 1px;
@@ -184,6 +259,7 @@
     position: relative;
     bottom: 2px;
     margin-top: 0;
+    background: transparent;
   }
 
   .header__navbar__link {
@@ -205,12 +281,12 @@
   }
 
   .main {
-    height: 846px;
+    height: 893px;
   }
 
   .main__heading {
-    font-size: 56px;
-    line-height: 67px;
+    font-size: 46px;
+    line-height: 57px;
   }
 
   .main__section {
@@ -219,9 +295,103 @@
 
   .main__paragraph {
     width: 77%;
-    font-size: 18px;
+    font-size: 16px;
     margin: 36px auto;
-    line-height: 25px;
+    line-height: 20px;
+  }
+
+  .customer__text {
+    font-size: 24px;
+    margin: 40px 0px 35px 0px;
+    line-height: 23px;
+    padding: 0px;
+  }
+
+  .customer__text h2 {
+    font-size: 23.5px;
+  }
+
+
+  .customer__text p {
+    margin-top: 15px;
+  }
+
+  .customer__logos {
+    margin: 40px 0;
+  }
+
+  .customer__first {
+    position: relative;
+    left: 8px;
+  }
+
+  .customer__second {
+    position: relative;
+    left: 53px;
+    top: 2px;
+  }
+
+  .customer__third {
+    position: relative;
+    left: 68px;
+    top: 9px;
+  }
+
+  .customer__fourth {
+    position: relative;
+    left: 56px;
+    top: 10px;
+  }
+
+  .services__head {
+    padding: 5px;
+    margin-top: 155px;
+  }
+
+  .services__head h2 {
+    font-size: 34.5px;
+  }
+
+  .services__head p {
+    margin: 20px 0px;
+    width: 86%;
+  }
+
+  .services__list {
+    margin-top: 46px;
+  }
+
+  .services__list-item {
+    margin: 38px 0;
+  }
+
+  .services__list-item-right {
+    padding-left: 30px;
+  }
+
+  .services__list-right {
+    padding-left: 27px;
+  }
+
+  .services__list-heading {
+    font-size: 13px;
+    position: relative;
+    bottom: 5px;
+  }
+
+  .services__list-paragraph{
+    margin-top: 12px;
+  }
+
+  .services__image {
+    display: block;
+    position: absolute;
+    right: 726px;
+    top: 105px;
+  }
+
+  .services .container {
+    position: relative;
   }
 }
 
@@ -235,4 +405,16 @@
   .main__section {
     top: 303px;
   }
+
+  .main__heading {
+    font-size: 56px;
+    line-height: 67px;
+  }
+
+  .main__paragraph {
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  
 }

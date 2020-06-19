@@ -39,7 +39,6 @@
 
 .header__info {
   height: 40px;
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .header__main {
@@ -78,16 +77,76 @@
 }
 
 .main {
-  height: 500px;
+  height: 550px;
   background-image: url('../images/header-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 72%;
+  background-position: 72% -10px;
 }
 
 .main .container {
   padding-top: 109px;
   position: relative;
+}
+
+.customer__text {
+  width: 80%;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.customer__logos {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.customer__logo {
+  width: 50%;
+  padding: 10px;
+}
+
+.customer__logo img {
+  height: 80px;
+  max-width: 100px;
+  display: block;
+  margin: 0px auto;
+}
+
+.customer__logo:first-child {
+  margin-top: 35px;
+}
+
+.customer__logo:first-child img {
+  height: auto;
+}
+
+.customer__section {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.services__head {
+  width: 100%;
+}
+
+.services__list {
+  width: 100%;
+}
+
+.services__list-item {
+  width: 100%;
+  padding: 5px;
+  margin: 15px 0;
+}
+
+.services__list-left {
+  width: 56px;
+  max-height: 53px;
+}
+
+.services__list-right {
+  width: 80%;
+  padding-left: 12px;
+  border-left: 1px solid #e5e5e5;
 }
 
 /* 
@@ -97,6 +156,10 @@
 */
 
 @media (min-width: 768px)  {
+
+  .main {
+    background-position: center -10px;
+  }
 
   .container {
     max-width: 1170px;
@@ -110,7 +173,7 @@
     margin-top: 13px;
     position: static;
     box-shadow: none;
-    padding-left: none;
+    padding-left: 0px;
   }
 
   .header__nav-group {
@@ -123,13 +186,79 @@
     width: 20%;
   }
 
+  .customer__logo {
+    width: 25%;
+    padding: 10px;
+  }
+
+  .services__list-item {
+    width: 50%;
+    margin: 20px 0;
+  }
+
 }
 
+/* 
+  ==============================
+  Responsive for small desktop
+  ==============================
+*/
+
+
 @media (min-width: 1170px){
+  
+  .customer__text {
+    width: 34%;
+  }
+
+  .customer__logos {
+    width: 60%;
+  }
+
+  .customer__logo{
+    width: 23.33%;
+    padding: 0px;
+  }
+
+  .customer__logo:first-child {
+    width: 30%;
+    margin-top: 14px;
+  }
+
+  .customer__logo img {
+    max-width: none;
+    height: auto;
+    margin: 0px;
+  }
+
+  .services__main-content {
+    float: right;
+    width: 750px;
+  }
+
+  .services__list-left{
+    width: 60px;
+  }
+
+  /* .services .container {
+    height: 762px;
+    background-image: url('../images/laptop-image.png');
+    background-position: -43% 119%;
+    background-repeat: no-repeat;
+  } */
+
+}
+
+/* 
+  ==============================
+  Responsive for extra-large according to template
+  ==============================
+*/
+
+@media (min-width: 1800px){
   .main {
     background-position: 0 -8px;
   }
-
 }
 
 .clearfix:after {
