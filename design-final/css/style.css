@@ -4,9 +4,13 @@
   ==============================
 */
 
+h1,h2,h3,h4,span,p,a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
 
 .header__info {
-  font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: 40px;
   border-bottom: 1px solid #e5e5e5;
@@ -63,7 +67,6 @@
 }
 
 .header__navbar {
-  font-family: 'Roboto', sans-serif;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.98);
   box-shadow: 0 4px 12px #e5e5e5;;
@@ -93,7 +96,6 @@
 }
 
 .main__heading {
-  font-family: 'Roboto', sans-serif;
   color: #303842;
   font-size: 30px;
   font-weight: 300;
@@ -101,7 +103,6 @@
 }
 
 .main__paragraph {
-  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 15px;
   text-align: center;
@@ -134,8 +135,7 @@ p {
 }
 
 
-.customer__text h2, .services__head {
-  font-family: 'Roboto', sans-serif;
+.customer__text h2, .services__head, .portfolio__head {
   font-weight: 300;
 }
 
@@ -145,12 +145,13 @@ p {
   margin-top: 12px;
 }
 
- .services__head {
+ .services__head , .portfolio__head, .contact__head {
    padding: 10px;
-   margin-top: 20px;
+   margin-top: 55px;
+   margin-bottom: 15px;
  }
 
- .services__head p {
+ .services__head p , .portfolio__head p {
     margin: 12px 0px;
     width: 80%;
  }
@@ -175,13 +176,95 @@ p {
 
  .services__list-paragraph {
    margin-top: 8px;
-   font-family: 'Roboto', sans-serif;
    font-weight: 300;
   }
 
-  .services__image {
-    display: none;
+  .portfolio__number , .portfolio__number-text {
+    display: block;
   }
+
+  .portfolio__number {
+    font-size: 35px;
+    font-weight: 100;
+  }
+
+  .portfolio__number-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #303842;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  .portfolio__number-first {
+    color: #32d5ba;
+  }
+
+  .portfolio__number-second {
+    color: #6dc4f2;
+  }
+
+  .portfolio__number-third {
+    color: #ffd13c;
+  }
+
+  .portfolio__number-fourth {
+    color: #f44336;
+  }
+
+  .contact__head {
+    text-align: center;
+  }
+
+  .contact__head p {
+    margin-top: 12px;
+    max-width: 270px;
+    margin: 0px auto;
+  }
+
+  .contact__form {
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 35px 20px;
+    margin-top: 33px;
+    box-shadow: 0px 0px 20px #e5e5e5;
+  }
+
+  .form__element {
+    margin-bottom: 20px;
+  }
+
+  .form__label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .form__input {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    margin-top: 4px;
+    width: 100%;
+    outline: none;
+    padding: 13px;
+    background-color: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    
+  }
+
+  .contact__form textarea {
+    height: 80px;
+    resize: none;
+  }
+
+  .contact__form button {
+    margin-top: 0px;
+  }
+
+
 
 
 /* 
@@ -228,6 +311,18 @@ p {
     border-radius: 25px;
   }
 
+  .contact__form {
+    padding: 50px 45px;
+  }
+
+  .contact__head p {
+    max-width: 500px;
+    margin: 12px auto;
+  }
+
+  .contact__form textarea {
+    height: 100px;
+  }
 }
 
 /* 
@@ -298,6 +393,10 @@ p {
     font-size: 16px;
     margin: 36px auto;
     line-height: 20px;
+  }
+
+  .services__head , .portfolio__head, .contact__head {
+    margin-bottom: 0px;
   }
 
   .customer__text {
@@ -383,16 +482,76 @@ p {
     margin-top: 12px;
   }
 
-  .services__image {
-    display: block;
-    position: absolute;
-    right: 726px;
-    top: 105px;
-  }
-
   .services .container {
     position: relative;
   }
+
+  .portfolio__head {
+    margin-top: 155px;
+    padding: 0px;
+  }
+
+  .portfolio__head h2 {
+    font-size: 34px;
+  }
+
+  .portfolio__head p {
+    margin-top: 26px;
+    width: 100%;
+    line-height: 25px;
+  }
+
+  .portfolio__number {
+    font-size: 44px;
+  }
+
+  .portfolio__number-text {
+    font-size: 15px;
+    margin-top: 12px;
+  }
+
+  .contact__form {
+    padding: 73px 65px;
+    margin-top: 62px;
+  }
+
+  .contact__head {
+    margin-top: 29px;
+  }
+
+  .contact__head h2 {
+    font-size: 34px;
+  }
+
+  .contact__head p {
+    max-width: 530px;
+    margin: 23px auto;
+    position: relative;
+    left: 3px;
+  }
+
+  .form__label {
+    font-size: 13.5px;
+  }
+
+  .form__input {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    padding: 26px;
+  }
+
+  .contact__form textarea {
+    height: 172px;
+  }
+
+  .contact__form button {
+    text-transform: uppercase;
+    margin-top: 29px;
+    position: relative;
+    left: 8px;
+    margin-bottom: 13px;
+  }
+
 }
 
 /* 
@@ -415,6 +574,12 @@ p {
     font-size: 18px;
     line-height: 25px;
   }
+
+  .portfolio__head {
+    margin-top: 0px;
+  }
+
+  
 
   
 }
