@@ -25,6 +25,11 @@ h1,h2,h3,h4,span,p,li {
   margin-right: 10px;
 }
 
+.header__social-icons a:active, 
+.footer__social a:active {
+  color: #1f9923;
+}
+
 .facebook-icon i:hover {
   color: #4267B2;
 }
@@ -120,6 +125,7 @@ h1,h2,h3,h4,span,p,li {
   margin-top: 32px;
 }
 
+
 .main__button {
   font-size: 14px;
   color: #4caf50;
@@ -132,6 +138,18 @@ h1,h2,h3,h4,span,p,li {
   box-shadow: 0 0 10px #d2c6c6;
   margin-top: 25px;
   cursor: pointer;
+}
+
+.main__button:hover {
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.main__button:active {
+  color: #fff;
+  background-color: #1f9923;
+  border: 1px solid #1f9923;
 }
 
 h2 {
