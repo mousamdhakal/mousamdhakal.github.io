@@ -57,10 +57,6 @@ h1,h2,h3,h4,span,p,li {
   color: #34526f;
 }
 
-.header__brand-logo, .footer__brand-logo {
-  display: block;
-}
-
 
 .header__nav-button button {
   background: url('../images/navbar-icon.png') no-repeat;
