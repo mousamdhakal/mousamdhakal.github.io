@@ -4,7 +4,7 @@
   ==============================
 */
 
-h1,h2,h3,h4,span,p,a {
+h1,h2,h3,h4,span,p,a,li {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -47,6 +47,14 @@ h1,h2,h3,h4,span,p,a {
 
 .dribble-icon i:hover {
   color: #ea4c89;
+}
+
+.google-plus-icon i:hover {
+  color: #db4a39;
+}
+
+.tumblr-icon i:hover {
+  color: #34526f;
 }
 
 
@@ -170,7 +178,7 @@ p {
 
  .services__list-heading {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   text-transform: uppercase;
  }
 
@@ -228,6 +236,7 @@ p {
     border-radius: 8px;
     padding: 35px 20px;
     margin-top: 33px;
+    margin-bottom: 70px;
     box-shadow: 0px 0px 20px #e5e5e5;
   }
 
@@ -237,7 +246,7 @@ p {
 
   .form__label {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 10px;
     text-transform: uppercase;
   }
@@ -262,7 +271,62 @@ p {
 
   .contact__form button {
     margin-top: 0px;
+    text-transform: uppercase;
+
   }
+
+  .footer h4 , .footer li a {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .footer h4 {
+    text-transform: uppercase;
+    color: #303842;
+    margin-bottom: 12px;
+  }
+
+  .footer li a {
+    color: #8191a6;
+    margin: 15px 0;
+    text-decoration: none;
+    display: block;
+  }
+
+  .footer li a:hover {
+    color: #303842;
+  }
+
+  .footer__list {
+    margin-top: 15px;
+  }
+
+  .footer__social , .footer__main-content{
+    margin-top: 15px;
+    padding: 10px 0;
+  }
+
+  .footer__social a {
+    color: grey;
+    margin-right: 20px;
+  }
+
+  .footer__main-headings {
+    margin-top: 15px;
+  }
+
+  .footer__main-headings a {
+    text-decoration: none;
+    display: block;
+    color: #303842;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .copyright-text {
+    font-weight: 400;
+  }
+
 
 
 
@@ -322,6 +386,11 @@ p {
 
   .contact__form textarea {
     height: 100px;
+  }
+
+  .footer__social {
+    margin-top: 0px;
+    padding: 0px;
   }
 }
 
@@ -516,7 +585,7 @@ p {
   }
 
   .contact__head {
-    margin-top: 29px;
+    margin-top: 2px;
   }
 
   .contact__head h2 {
@@ -531,7 +600,7 @@ p {
   }
 
   .form__label {
-    font-size: 13.5px;
+    font-size: 13px;
   }
 
   .form__input {
@@ -545,11 +614,47 @@ p {
   }
 
   .contact__form button {
-    text-transform: uppercase;
     margin-top: 29px;
     position: relative;
     left: 8px;
     margin-bottom: 13px;
+  }
+
+  .footer__main-content {
+    margin-top: 57px;
+  }
+
+  .footer__main-headings {
+    margin-top: 34px;
+  }
+
+  .footer__main-headings a {
+    letter-spacing: 0.1em;
+  }
+
+  .footer__main-content .copyright-text {
+    margin-top: 4px;
+  }
+
+  .footer h4, .footer li a {
+    font-size: 14px;
+  }
+
+  .footer__list {
+    margin-top: 32px;
+  }
+
+  .footer li a {
+    margin: 20px 0;
+  }
+
+
+  .footer__social h4 {
+    margin-bottom: 41px;
+  }
+
+  .footer__social a {
+    margin-right: 20px;
   }
 
 }
@@ -578,8 +683,5 @@ p {
   .portfolio__head {
     margin-top: 0px;
   }
-
-  
-
   
 }
