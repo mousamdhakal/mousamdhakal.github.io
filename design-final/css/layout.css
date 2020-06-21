@@ -59,8 +59,13 @@
   margin: 13px 0;
 }
 
+.header__nav-group{
+  position: relative;
+}
+
 .header__nav-button {
-  float: right;
+  position: absolute;
+  right: 0px;
 }
 
 .hide .header__navbar {
