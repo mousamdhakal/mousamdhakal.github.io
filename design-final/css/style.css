@@ -4,7 +4,7 @@
   ==============================
 */
 
-h1,h2,h3,h4,span,p,a,li {
+h1,h2,h3,h4,span,p,li {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -57,6 +57,10 @@ h1,h2,h3,h4,span,p,a,li {
   color: #34526f;
 }
 
+.header__brand-logo, .footer__brand-logo {
+  display: block;
+}
+
 
 .header__nav-button button {
   background: url('../images/navbar-icon.png') no-repeat;
@@ -85,6 +89,8 @@ h1,h2,h3,h4,span,p,a,li {
 }
 
 .header__navbar__link {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   display: inline-block;
   width: 100%;
   text-decoration: none;
@@ -278,6 +284,10 @@ p {
   .footer h4 , .footer li a {
     font-size: 16px;
     font-weight: 400;
+  }
+
+  .footer a {
+    font-family: 'Roboto', sans-serif;
   }
 
   .footer h4 {
