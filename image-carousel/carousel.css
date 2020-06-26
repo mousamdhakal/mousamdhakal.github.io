@@ -1,0 +1,72 @@
+.carousel-container {
+  position: relative;
+  left: 500px;
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.carousel-image-wrapper:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* .cont */
+
+.carousel-image-wrapper {
+  position: absolute;
+  width: 1500px;
+}
+
+.carousel-image {
+  float: left;
+}
+
+.button__group{
+  position: absolute;
+  top: 50%;
+  width: 500px;
+}
+
+
+.button__carousel { 
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(256,256,256,0.5);
+  cursor: pointer;
+}
+
+.button__carousel img {
+  width: 20px;
+}
+
+.dotsgroup {
+  position: absolute;
+  bottom: 10px;
+  left: 220px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin-right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.active-dot {
+  background-color: green;
+}
+
+.button-left {
+  float: left;
+}
+
+.button-right {
+  float: right;
+}
