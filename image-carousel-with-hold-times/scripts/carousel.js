@@ -1,5 +1,5 @@
 /**
- * Create a Carousel Object, Call Carousel.setCarousel to paint on DOM
+ * Create a Carousel Object
  * @param  {String} containerId - Id of the container of the carousel
  * @param  {Number} [transitionDuration = 500] - Amount of time it takes to move from one slide to another
  * @param  {Number} [holdTime = 2000] - Amount of time it holds on one slide before moving on to next slide
