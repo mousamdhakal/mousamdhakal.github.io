@@ -42,6 +42,12 @@ function init() {
 function repaintDOM() {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
 
+  // Text on animation finish
+  if (antsArray.length == 0) {
+    ctx.font = "30px Arial";
+    ctx.fillText("You have smashed all ants :(", 10, 50);
+  }
+
   antsArray.forEach(function (ant) {
     ant.moveant();
   });
