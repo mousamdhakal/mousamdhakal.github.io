@@ -10,17 +10,18 @@ function Ant(x, y) {
   this.y = y;
   this.width = 57;
   this.height = 39;
-  this.dx = 1;
-  this.dy = 1;
+  this.dx = Math.round(Math.random()) * 3 + -1.5;
+  this.dy = Math.round(Math.random()) * 3 + -1.5;
 
   // Fetch images to display when moving to forward and backward direction
   var imgFront = new Image();
   var imgBack = new Image();
   imgFront.src = "./images/ant.gif";
   imgBack.src = "./images/ant-back.gif";
+  var img;
 
   // Set initial image moving to forward direction
-  var img = imgFront;
+  this.dx > 0 ? (img = imgFront) : (img = imgBack);
 
   // Change image to simulate reverse movement on hitting wall and other ants
   this.changeDirection = function () {
