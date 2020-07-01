@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Game</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div id="main">
+    <div id="start-wrapper" class="center">
+      <div class="center">
+        <h1>Car Game</h1>
+        <p>Use left and right arrow keys to move left and right respectively.</p>
+        <p>Use spacebar to fire bullets, Hit the ammodrops to increase number of bullets.</p>
+        <button onclick="startGame()">Start Game</button>
+      </div> 
+    </div>
+    <div id="end-wrapper" class="center">
+      <div class="center">
+        <h1>Game Over</h1>
+        <p class="scoreboard">Your score is <span id="score">20</p>
+          <p class="scoreboard">Your best score is <span id="bestscore">0</p>
+          <button class="end__button" onclick="restartGame()">Play Again</button>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/component.js"></script>
+  <script src="./scripts/obstacles.js"></script>
+  <script src="./scripts/game.js"></script>
+</body>
+</html>
