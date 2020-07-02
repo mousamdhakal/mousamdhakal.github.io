@@ -21,6 +21,7 @@ function Game(key, endContainer, score, bestscore) {
   this.gameRunning = true; // Set to filter multiple keydown events continuously
   this.obstacleNumber = 0;
   this.key = key;
+  this.checkCollision = true;
   this.endContainer = endContainer;
   this.scoreContainer = score;
   this.bestscore = bestscore;
