@@ -1,4 +1,14 @@
+/**
+ * Create an instance of game on the canvas
+ * @param  {Number} key - Keycode for the key pressing which the bird flies in this instance
+ * @param  {Object} endContainer - DOM Container element to show on gameove
+ * @param  {Object} score - DOM element where score is displayed
+ * @param  {Object} bestscore - DOM element where bestscore is displayed
+ * @returns {Object} An instance of the game
+ */
+
 function Game(key, endContainer, score, bestscore) {
+  // Initialize variables
   this.bird = null;
   this.obstaclesList = [];
   this.interval = null;
@@ -8,14 +18,14 @@ function Game(key, endContainer, score, bestscore) {
   this.context = this.canvas.getContext('2d');
   this.frameNo = 0;
   this.background = null;
-  this.gameRunning = true;
+  this.gameRunning = true; // Set to filter multiple keydown events continuously
   this.obstacleNumber = 0;
-  this.checkCollision = true;
   this.key = key;
   this.endContainer = endContainer;
   this.scoreContainer = score;
   this.bestscore = bestscore;
 
+  // Fetch the sprite sheet and start game once fetchign completed
   this.img = new Image();
   this.img.src = './images/flappyBird.png';
 
@@ -23,6 +33,9 @@ function Game(key, endContainer, score, bestscore) {
     this.init();
   }.bind(this);
 
+  /**
+   * Initilaize the game creating bird background and score
+   */
   this.init = function () {
     this.bird = new Component(
       52,
@@ -63,6 +76,9 @@ function Game(key, endContainer, score, bestscore) {
     this.start();
   };
 
+  /**
+   * Set the canvas
+   */
   this.start = function () {
     this.canvas.width = CANVAS_WIDTH;
     this.canvas.height = CANVAS_HEIGHT;
@@ -70,6 +86,9 @@ function Game(key, endContainer, score, bestscore) {
     this.updateGameArea();
   };
 
+  /**
+   * Show score on screen and stop game after game ends
+   */
   this.endGame = function () {
     //Set the score on Endscreen
     this.scoreContainer.innerHTML = '' + this.scoreCount;
@@ -87,6 +106,9 @@ function Game(key, endContainer, score, bestscore) {
     clearInterval(this.interval);
   };
 
+  /**
+   * Reset variables on game restart
+   */
   this.resetGame = function () {
     this.bird = null;
     this.obstaclesList = [];
@@ -100,10 +122,16 @@ function Game(key, endContainer, score, bestscore) {
     this.init();
   };
 
+  /**
+   * Clear the canvas
+   */
   this.clearCanvas = function () {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   };
 
+  /**
+   * Check for collision of bird and update canvas
+   */
   this.updateGameArea = function () {
     if (this.checkCollision) {
       for (i = 0; i < this.obstaclesList.length; i++) {
@@ -116,6 +144,9 @@ function Game(key, endContainer, score, bestscore) {
     this.updateCanvas();
   }.bind(this);
 
+  /**
+   * Update the canvas for background,score,bird and obstacles
+   */
   this.updateCanvas = function () {
     this.clearCanvas();
     this.background.update();
@@ -136,6 +167,9 @@ function Game(key, endContainer, score, bestscore) {
     return false;
   };
 
+  /**
+   * React to keydown event
+   */
   this.reactToKeyDown = function (pressedKey) {
     if (pressedKey == this.key && this.gameRunning) {
       this.bird.animateBird();
@@ -144,12 +178,18 @@ function Game(key, endContainer, score, bestscore) {
     }
   }.bind(this);
 
+  /**
+   * React to keyup event
+   */
   this.reactToKeyUp = function (pressedKey) {
     if (pressedKey == this.key) {
       this.accelerate(0.1);
     }
   }.bind(this);
 
+  /**
+   * Acceleerate the bird to simulate gravity
+   */
   this.accelerate = function (n) {
     var self = this;
     if (!this.interval) {

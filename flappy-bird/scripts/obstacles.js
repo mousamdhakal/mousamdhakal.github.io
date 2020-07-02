@@ -1,4 +1,9 @@
+/**
+ * Handles the creation and update of obstacles
+ * @param {Object} parent - Instance of game from which the function is called
+ */
 function obstacleHandler(parent) {
+  // Create a new obstacle on every 200 frames
   if (parent.frameNo == 1 || parent.everyInterval(200)) {
     x = parent.canvas.width;
     height = Math.floor(
@@ -51,6 +56,7 @@ function obstacleHandler(parent) {
       parent.obstacleNumber++;
     }
   }
+  // Update obstacle position on canvas
   for (i = 0; i < parent.obstaclesList.length; i++) {
     parent.obstaclesList[i].x += -1;
     parent.obstaclesList[i].update(parent);

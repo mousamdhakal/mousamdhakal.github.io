@@ -1,3 +1,18 @@
+/**
+ * Create an component on the canvas
+ * @param  {Number} width - Width of the canvas element or font-size for text element
+ * @param  {Number} height - Height of the canvas element or font-family for text element
+ * @param  {string} color - specifies color for shape and text or source for image files
+ * @param  {Number} x - x co-ordinate to draw on canvas
+ * @param  {Number} y - y co-ordinate to draw on canvas
+ * @param  {object} parent - the parent game object from where component is created
+ * @param  {string} type - (optional) specifies type of the element, required if element is text, image or background-image
+ * @param  {Number} sx - (optional) The x position of the spritesheet where image starts
+ * @param  {Number} sy - (optional) The y position of the spritesheet where image starts
+ * @param  {Number} sWidth - (optional) The width of the image on the spritesheet
+ * @param  {Number} sHeight - (optional) The height of the image on the spritesheet
+ * @returns {Object} A component that can be rendered on the canvas
+ */
 function Component(
   width,
   height,
@@ -11,6 +26,7 @@ function Component(
   sWidth,
   sHeight
 ) {
+  // Initializes the value for the component
   this.type = type;
   this.score = 0;
   this.width = width;
@@ -52,12 +68,18 @@ function Component(
     }
   };
 
+  /**
+   * Sets the text element on canvas
+   */
   this.setText = function () {
     ctx.font = this.width + ' ' + this.height;
     ctx.fillStyle = color;
     ctx.fillText(this.text, this.x, this.y);
   };
 
+  /**
+   * Sets the image element on canvas
+   */
   this.setImage = function () {
     ctx.drawImage(
       this.parent.img,
@@ -70,23 +92,11 @@ function Component(
       this.width,
       this.height
     );
-
-    // Continuoulsy loop the background images
-    // if (this.type == "background") {
-    //   ctx.drawImage(
-    //     this.parent.img,
-    //     this.sx,
-    //     this.sy,
-    //     this.sWidth,
-    //     this.sHeight,
-    //     this.x + 220,
-    //     this.y,
-    //     this.width,
-    //     this.height
-    //   );
-    // }
   };
 
+  /**
+   * Ceates new position for the component and checks if boundary is hit
+   */
   this.newPos = function () {
     this.gravitySpeed += this.gravity;
     this.x += this.speedX;
@@ -94,6 +104,9 @@ function Component(
     this.hitBoundary();
   };
 
+  /**
+   * Checks if component has hit the boundary
+   */
   this.hitBoundary = function () {
     var bottom = this.parent.canvas.height - this.height;
     var top = 0;
@@ -102,6 +115,9 @@ function Component(
     }
   };
 
+  /**
+   * Checks if this object(bird) has crashed with another object
+   */
   this.crashWith = function (otherobj) {
     var myleft = this.x;
     var myright = this.x + this.width;
@@ -123,6 +139,9 @@ function Component(
     return crash;
   };
 
+  /**
+   * Creates flying animation on bird changing image posiiton from spritesheet in every three frames
+   */
   this.flyBird = function () {
     if (parent.everyInterval(3)) {
       this.sy = BIRDINITIAL + this.birdPositions[this.birdPosition] * BIRDGAP;
@@ -134,23 +153,13 @@ function Component(
   };
 
   /**
-   * Slide the car from one lane to another using animation
-   * @param  {Number} position - Current position of the car
-   * @param  {Number} stepIncrease - Direction in which car needs to be moved 1 for right and -1 for left
+   * Animates bird on hitting the key to fly
    */
   this.animateBird = function () {
-    // // if the car is moving or the car is trying to move right from third lane or left from first lane , return
-    // if (
-    //   this.x != position ||
-    //   (position == lanePosition[0] && stepIncrease < 0) ||
-    //   (position == lanePosition[2] && stepIncrease > 0)
-    // ) {
-    //   return;
-    // }
     var max = 30;
     var stepIncrease = -3;
     var self = this;
-    var currentPosition = this.y; // Current position of car
+    var currentPosition = this.y; // Current position of bord
     var animationAmount = 0;
 
     /**
@@ -158,23 +167,11 @@ function Component(
      */
     function step() {
       animationAmount += stepIncrease;
-      // self.gravitySpeed = 0;
 
-      // Slide left gradually if stepIncrease is negative
-      // if (stepIncrease > 0) {
-      // self.x = currentPosition + Math.min(animationAmount, max);
-      // if (Math.min(animationAmount, max) != max) {
-      //   window.requestAnimationFrame(step);
-      // }
-      // }
-
-      // // Slide right gradually if stepIncrease is positive
-      // if (stepIncrease < 0) {
       self.y = currentPosition + Math.max(animationAmount, -max);
       if (Math.max(animationAmount, -max) != -max) {
         window.requestAnimationFrame(step);
       }
-      // }
     }
 
     window.requestAnimationFrame(step); // Start the animation
