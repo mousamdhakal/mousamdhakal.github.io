@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Tank Battle</title>
+</head>
+<body>
+  <div class="main">
+    <h1>3D Tank Battle</h1>
+    <p>Use a,w,s,d for controls</p>
+    <canvas id="gameCanvas" width="840" height="400">
+      Loading ....
+    </canvas>
+  </div>
+
+  <!-- <button onclick="game.init()">Start Game</button> -->
+
+  <!-- <div id="minimapcontainer">
+    <canvas id="minimap"></canvas>
+    <canvas id="minimapcomponents"></canvas>
+  </div> -->
+  
+  <script src="./scripts/globals.js"></script>
+  <script src="./scripts/trignometry.js"></script>
+  <script src="./scripts/maps.js"></script>
+  <script src="./scripts/player.js"></script>
+  <script src="./scripts/keyhandlers.js"></script>
+  <script type="module" src="./scripts/draw.js"></script>
+  <script type="module" src="./scripts/raycaster.js"></script>
+  <script type="module" src="./scripts/miniMap.js"></script>
+  <script type="module" src="./scripts/game.js"></script>
+  <script type="module" src="./scripts/script.js"></script>
+</body>
+</html>
