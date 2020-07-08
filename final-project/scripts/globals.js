@@ -2,6 +2,8 @@
 const PROJECTIONPLANEWIDTH = 640;
 const PROJECTIONPLANEHEIGHT = 400;
 
+const MAPPOSITION = 500;
+
 // Minimum distance from the player position to the wall
 const MINDISTANCETOWALL = 20;
 
@@ -31,18 +33,17 @@ const WALL_HEIGHT = 64;
 // main game object
 let game;
 
-// var itemTypes = [
-//   {  }, // 0
-// ];
-
-var mapItems = [
-  // Armor in front of player
-  { x: 10, y: 14, img: "./images/armor.png", visible: false, xToPut: 9, yToPut: 14 },
-  { x: 17, y: 14, img: "./images/armor.png", visible: false, xToPut: 18, yToPut: 14 }
-  // { x: 10, y: 15, img: "./images/armor.png", visible: false, offset: 0, drawY: 0, size: 0, xToPut: 9, yToPut: 14 }
-  // { x: 6, y: 14, img: "./images/armor.png", visible: false, offset: 0, drawY: 0, size: 0 }
+// Obstacles in front of player
+let mapItems = [
+  { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1, maxDx: 7, maxDy: 3 },
+  { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1, maxDx: 3, maxDy: 7 },
+  { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1, maxDx: 7, maxDy: 3 },
+  { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1, maxDx: 3, maxDy: 7 }
 ];
 
-var spriteMap;
 
-var visibleSprites = [];
+//Map to represent the obstacles
+let spriteMap;
+
+// Obstacles that are currently visible to the user
+let visibleSprites = [];

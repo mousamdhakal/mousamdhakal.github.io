@@ -100,10 +100,11 @@ export function castRays() {
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
+          // Check if there is an obstacle in the current grid
           if (spriteMap[yGridIndex][xGridIndex] > 1) {
-            // Find the mapIndex position to look at
+            // Get position of obstacle from spriteMap
             var mapIndex = spriteMap[yGridIndex][xGridIndex];
-            // this.renderSprites(mapIndex - 2);
+            // If obstacle is not already visivle set visibilty to true and push to visiblesprites array
             if (!mapItems[mapIndex - 2].visible) {
               mapItems[mapIndex - 2].visible = true;
               visibleSprites.push(mapItems[mapIndex - 2]);
