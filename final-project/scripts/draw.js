@@ -135,7 +135,7 @@ export function drawLine(startX, startY, endX, endY, red, green, blue, alpha) {
  * @param {Number} height 
  * @param {Number} xOffset 
  */
-export function drawWallSliceRectangleTinted(x, y, width, height, xOffset) {
+export function drawWallSliceRectangle(x, y, width, height, xOffset) {
 
   // Wait until the image loads
   if (game.wallImageBuffer == undefined)

@@ -1,0 +1,6 @@
+1. Fix the z-index issue by drawing the obstacle pixel by pixel
+2. Draw the enemy tank on certain position on screen
+3. make the enemy tank move
+4. make the user tank fire bullet on pressing a key
+5. make enemy tank also fire bullet on seeing or being near user tank
+6. create small raycasts function that casts rays in each direction and checks if user in that block, if returns true then follows to that block and if distance smaller then certain distance makes angle equal to user angle and fires bullet 
