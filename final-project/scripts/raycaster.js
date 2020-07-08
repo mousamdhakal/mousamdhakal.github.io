@@ -1,4 +1,4 @@
-import { drawWallSliceRectangleTinted } from './draw.js';
+import { drawWallSliceRectangle } from "./draw.js";
 
 export function castRays() {
   // Horizontal or vertical co-ordinate of intersection
@@ -30,7 +30,7 @@ export function castRays() {
   // Subtract it by 30 degrees as we are using FOV of 60 degrees, the starting point will be current angle of player - half of FOV
   castArc -= ANGLE30;
 
-  // If this angle goes to negative, add 360 degrees to bring it into one of the four quadrants. 
+  // If this angle goes to negative, add 360 degrees to bring it into one of the four quadrants.
   if (castArc < 0) {
     castArc = ANGLE360 + castArc;
   }
@@ -39,7 +39,8 @@ export function castRays() {
     // If the ray is between 0 and 180 degrees, ray is facing down
     if (castArc > ANGLE0 && castArc < ANGLE180) {
       // Get co-ordinate of first grid in front of player in pixel unit rounded down
-      horizontalGrid = Math.floor(this.player.y / BLOCK_SIZE) * BLOCK_SIZE + BLOCK_SIZE;
+      horizontalGrid =
+        Math.floor(this.player.y / BLOCK_SIZE) * BLOCK_SIZE + BLOCK_SIZE;
 
       // Compute distance to next horizontal grid
       distToNextHorizontalGrid = BLOCK_SIZE;
@@ -65,7 +66,7 @@ export function castRays() {
 
     /** Look for horizontal wall */
 
-    // If ray is directly facing left or right then ignore it 
+    // If ray is directly facing left or right then ignore it
     if (castArc == ANGLE0 || castArc == ANGLE180) {
       distToHorizontalGridBeingHit = Number.MAX_VALUE;
     }
@@ -78,25 +79,36 @@ export function castRays() {
         xGridIndex = Math.floor(xIntersection / BLOCK_SIZE);
         yGridIndex = Math.floor(horizontalGrid / BLOCK_SIZE);
 
-        // Find the mapIndex position to look at
-        var mapIndex = Math.floor(yGridIndex * this.MAP_WIDTH + xGridIndex);
-
         // Stop if we've looked as far as outside the map index
-        if ((xGridIndex >= this.MAP_WIDTH) ||
-          (yGridIndex >= this.MAP_HEIGHT) ||
-          xGridIndex < 0 || yGridIndex < 0) {
+        if (
+          xGridIndex >= this.MAP_WIDTH ||
+          yGridIndex >= this.MAP_HEIGHT ||
+          xGridIndex < 0 ||
+          yGridIndex < 0
+        ) {
           distToHorizontalGridBeingHit = Number.MAX_VALUE;
           break;
         }
 
         // Check if the grid is opening or wall
-        else if (this.currentMap.charAt(mapIndex) != 'O') {
-          distToHorizontalGridBeingHit = (xIntersection - this.player.x) * cosITable[castArc];
+        else if (this.currentMap[yGridIndex][xGridIndex] != 0) {
+
+          distToHorizontalGridBeingHit =
+            (xIntersection - this.player.x) * cosITable[castArc];
           break;
         }
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
+          if (spriteMap[yGridIndex][xGridIndex] > 1) {
+            // Find the mapIndex position to look at
+            var mapIndex = spriteMap[yGridIndex][xGridIndex];
+            // this.renderSprites(mapIndex - 2);
+            if (!mapItems[mapIndex - 2].visible) {
+              mapItems[mapIndex - 2].visible = true;
+              visibleSprites.push(mapItems[mapIndex - 2]);
+            }
+          }
           xIntersection += distToNextXIntersection;
           horizontalGrid += distToNextHorizontalGrid;
         }
@@ -107,7 +119,8 @@ export function castRays() {
     // Ray is facing right
     if (castArc < ANGLE90 || castArc > ANGLE270) {
       // Get co-ordinate of first grid in front of player in pixel unit rounded down
-      verticalGrid = BLOCK_SIZE + Math.floor(this.player.x / BLOCK_SIZE) * BLOCK_SIZE;
+      verticalGrid =
+        BLOCK_SIZE + Math.floor(this.player.x / BLOCK_SIZE) * BLOCK_SIZE;
 
       // Compute distance to next vertical grid
       distToNextVerticalGrid = BLOCK_SIZE;
@@ -115,7 +128,6 @@ export function castRays() {
       // This is the vertical distance to grid which is found by 1/tan(arc) * horizontalDistance
       var ytemp = tanTable[castArc] * (verticalGrid - this.player.x);
       yIntersection = ytemp + this.player.y;
-
     }
     // Ray is facing left
     else {
@@ -128,15 +140,13 @@ export function castRays() {
 
       // Reduce the verticalGrid by 1 as the intersection is taking place on left part of the grid and not on the right part
       verticalGrid--;
-
     }
 
     /** Look for vertical wall */
-    // If ray is directly facing up or down then ignore it 
+    // If ray is directly facing up or down then ignore it
     if (castArc == ANGLE90 || castArc == ANGLE270) {
       distToVerticalGridBeingHit = Number.MAX_VALUE;
-    }
-    else {
+    } else {
       // Distance to next Y intersection is constant which depends on cast angle which is extracted from generated table
       distToNextYIntersection = yStepTable[castArc];
       while (true) {
@@ -144,25 +154,37 @@ export function castRays() {
         xGridIndex = Math.floor(verticalGrid / BLOCK_SIZE);
         yGridIndex = Math.floor(yIntersection / BLOCK_SIZE);
 
-        // Find the mapIndex position to look at
-        var mapIndex = Math.floor(yGridIndex * this.MAP_WIDTH + xGridIndex);
+
 
         // Stop if we've looked as far as outside the map index
-        if ((xGridIndex >= this.MAP_WIDTH) ||
-          (yGridIndex >= this.MAP_HEIGHT) ||
-          xGridIndex < 0 || yGridIndex < 0) {
+        if (
+          xGridIndex >= this.MAP_WIDTH ||
+          yGridIndex >= this.MAP_HEIGHT ||
+          xGridIndex < 0 ||
+          yGridIndex < 0
+        ) {
           distToVerticalGridBeingHit = Number.MAX_VALUE;
           break;
         }
 
         // Check if the grid is opening or wall
-        else if (this.currentMap.charAt(mapIndex) != 'O') {
-          distToVerticalGridBeingHit = (yIntersection - this.player.y) * sinITable[castArc];
+        else if (this.currentMap[yGridIndex][xGridIndex] != 0) {
+          distToVerticalGridBeingHit =
+            (yIntersection - this.player.y) * sinITable[castArc];
           break;
         }
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
+          if (spriteMap[yGridIndex][xGridIndex] > 1) {
+            // Find the mapIndex position to look at
+            var mapIndex = spriteMap[yGridIndex][xGridIndex];
+            // this.renderSprites(mapIndex - 2);
+            if (!mapItems[mapIndex - 2].visible) {
+              mapItems[mapIndex - 2].visible = true;
+              visibleSprites.push(mapItems[mapIndex - 2]);
+            }
+          }
           yIntersection += distToNextYIntersection;
           verticalGrid += distToNextVerticalGrid;
         }
@@ -171,8 +193,8 @@ export function castRays() {
     // Draw the part of the wall
     var dist;
     var xOffset;
-    var topOfWall;   // used to find bottom of the ceiling
-    var bottomOfWall;   // used to find starting position of the floor
+    var topOfWall; // used to find bottom of the ceiling
+    var bottomOfWall; // used to find starting position of the floor
 
     // If horizontal wall is closer than vertical wall
     if (distToHorizontalGridBeingHit < distToVerticalGridBeingHit) {
@@ -190,20 +212,24 @@ export function castRays() {
     // correct distance (compensate for the fishbowl effect) by correction from constant value for each angle extracted from generated table
     dist /= fishEyeCorrectionTable[castColumn];
     // projected_wall_height/wall_height = fPlayerDistToProjectionPlane/dist;
-    var projectedWallHeight = (WALL_HEIGHT * this.player.distanceToProjectionPlane / dist);
-    bottomOfWall = PROJECTIONPLANECENTERHEIGHT + (projectedWallHeight * 0.5);
-    topOfWall = PROJECTIONPLANECENTERHEIGHT - (projectedWallHeight * 0.5);
+    var projectedWallHeight =
+      (WALL_HEIGHT * this.player.distanceToProjectionPlane) / dist;
+    bottomOfWall = PROJECTIONPLANECENTERHEIGHT + projectedWallHeight * 0.5;
+    topOfWall = PROJECTIONPLANECENTERHEIGHT - projectedWallHeight * 0.5;
 
     dist = Math.floor(dist);
     // Draw the wall slice in the correct position
-    drawWallSliceRectangleTinted(castColumn, topOfWall, 1, (bottomOfWall - topOfWall) + 1, xOffset);
-
+    drawWallSliceRectangle(
+      castColumn,
+      topOfWall,
+      1,
+      bottomOfWall - topOfWall + 1,
+      xOffset
+    );
 
     // Trace the next ray
     castArc += 1;
     // Wrap around the ray if necessary
-    if (castArc >= ANGLE360)
-      castArc -= ANGLE360;
+    if (castArc >= ANGLE360) castArc -= ANGLE360;
   }
-
 }

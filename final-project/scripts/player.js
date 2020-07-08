@@ -3,7 +3,8 @@ let player = {
   x: 160,
   y: 160,
   arc: 0,
-  distanceToProjectionPlane: 277,
-  height: 64,
-  speed: MOVEMENTSPEED
-}
+  deg: 0,
+  distanceToProjectionPlane: VIEWDIST,
+  height: 32,
+  speed: MOVEMENTSPEED,
+};

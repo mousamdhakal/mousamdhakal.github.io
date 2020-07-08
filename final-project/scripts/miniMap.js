@@ -6,7 +6,7 @@ import { drawFillRectangle, drawLine } from './draw.js';
 export function drawMiniMap() {
   for (let r = 0; r < this.MAP_HEIGHT; r++) {
     for (let c = 0; c < this.MAP_WIDTH; c++) {
-      if (this.currentMap.charAt(r * this.MAP_WIDTH + c) != "O") {
+      if (this.currentMap[r][c] != 0) {
         // Draw grey square if there is a wall
         drawFillRectangle(PROJECTIONPLANEWIDTH + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 100, 100, 100, 255);
