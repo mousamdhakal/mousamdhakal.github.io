@@ -23,10 +23,12 @@ export class Game {
     // All the drawing will take place on the hiddenCanvas at first and later the hiddenCanvas will be
     // cleared in each update of the screen and the data of the entire image of
     this.hiddenCanvas = document.createElement("canvas");
+
     // Set the dimensions equal to that of onscreen canvas
     this.hiddenCanvas.width = this.width;
     this.hiddenCanvas.height = this.height;
     this.hiddenCanvasContext = this.hiddenCanvas.getContext("2d");
+
     // Get imagedata, i.e- the rgba value of all the pixels  of offscreen canvas
     this.hiddenCanvasPixels = this.hiddenCanvasContext.getImageData(
       0,
@@ -53,17 +55,21 @@ export class Game {
     this.MAP_WIDTH = 28;
     this.MAP_HEIGHT = 28;
 
+    // Pixel information for the wall
     this.wallPixels;
 
     // Load image of the wall
     this.loadWallImage();
 
-    // Set the current map and remove spaces if any
-    // this.currentMap = map.replace(/\s+/g, "");
+    // Set the current map
     this.currentMap = map;
+
     this.initSprites();
   }
 
+  /**
+   * Create a map to represent position of obstacles
+   */
   initSprites() {
     spriteMap = [];
     for (var i = 0; i < this.MAP_WIDTH; i++) {
@@ -74,6 +80,9 @@ export class Game {
     }
   }
 
+  /**
+   * Clear the list of visible obstacles and set visibility of all obstacles to false
+   */
   clearSprites() {
     for (var i = 0; i < mapItems.length; i++) {
       mapItems[i].visible = false;
@@ -159,34 +168,48 @@ export class Game {
    */
   raycast = castRays;
 
-  renderSprites(i) {
+  /**
+   * Display all obstacles that are currently visible on the screen
+   */
+  renderSprites() {
     for (var i = 0; i < visibleSprites.length; i++) {
       var sprite = visibleSprites[i];
+      // Get the image of the obstacle
       var img = new Image();
-      img.src = visibleSprites[0].img;
+      img.src = visibleSprites[i].img;
 
-      var dx = ((sprite.xToPut * BLOCK_SIZE - player.x) / BLOCK_SIZE);
-      var dy = ((sprite.yToPut * BLOCK_SIZE - player.y) / BLOCK_SIZE);
+      // Calculate distance to the sprite in both co-ordinates
+      var dx = ((sprite.x * BLOCK_SIZE - player.x) / BLOCK_SIZE);
+      var dy = ((sprite.y * BLOCK_SIZE - player.y) / BLOCK_SIZE);
+
+      // Return if the sprite is out of the visibility range
+      if (dx > visibleSprites[i].maxDx || dy > visibleSprites[i].maxDy || dx < -visibleSprites[i].maxDx || dy < -visibleSprites[i].maxDy) {
+        return;
+      }
 
       var dist = Math.sqrt(dx * dx + dy * dy);
 
-      // console.log(player.deg);
+      // Calculate angle of the sprite relative to the player angle
       var spriteAngle = Math.atan2(dy, dx) - player.deg;
-      // console.log(spriteAngle, dist);
 
+      // Calculate size of the sprite to be drawn
       var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
       if (size <= 0) {
         continue;
       }
-      // console.log(size);
 
       // x position on the screen
       var x = Math.tan(spriteAngle) * VIEWDIST;
-      // console.log(x);
       x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
+
+      // y position on the screen
       var y = (PROJECTIONPLANEHEIGHT - size) / 2;
-      // console.log(x, y, size);
-      this.canvasContext.drawImage(img, x, y, size, size);
+
+      // Offset value to make up for error in calculations
+      var xOffset = visibleSprites[i].offset * size / 2;
+
+      // Draw obstacle on the canvas
+      this.canvasContext.drawImage(img, x + xOffset, y, size, size);
     }
   }
 
@@ -195,10 +218,9 @@ export class Game {
    */
   update() {
     this.clearhiddenCanvas();
-    this.drawMiniMap();
     this.drawBackground();
     this.raycast();
-    // this.renderSprites();
+    this.drawMiniMap();
     this.drawPlayerOnMiniMap();
     this.updateMainCanvas();
     this.clearSprites();
@@ -271,8 +293,8 @@ function handlePlayerMovement() {
     // Player is moving right
     if (
       game.currentMap[playerYCell][playerXCell + 1] !=
-      0 &&
-      playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      0 && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      || spriteMap[playerYCell][playerXCell + 1] > 1
     ) {
       // Move player back if wall crossed
       game.player.x -= playerXCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
@@ -281,8 +303,8 @@ function handlePlayerMovement() {
     // Player is moving left
     if (
       game.currentMap[playerYCell][playerXCell - 1] !=
-      0 &&
-      playerXCellOffset < MINDISTANCETOWALL
+      0 && playerXCellOffset < MINDISTANCETOWALL ||
+      spriteMap[playerYCell][playerXCell - 1] > 1
     ) {
       // Move player back if wall crossed
       game.player.x += MINDISTANCETOWALL - playerXCellOffset;
@@ -293,7 +315,8 @@ function handlePlayerMovement() {
     // Player is moving up
     if (
       game.currentMap[playerYCell - 1][playerXCell] != 0 &&
-      playerYCellOffset < MINDISTANCETOWALL
+      playerYCellOffset < MINDISTANCETOWALL ||
+      spriteMap[playerYCell - 1][playerXCell] > 1
     ) {
       // Move player back if wall crossed
       game.player.y += MINDISTANCETOWALL - playerYCellOffset;
@@ -302,7 +325,8 @@ function handlePlayerMovement() {
     // Player is moving down
     if (
       game.currentMap[playerYCell + 1][playerXCell] != 0 &&
-      playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL ||
+      spriteMap[playerYCell + 1][playerXCell] > 1
     ) {
       // Move player back if wall crossed
       game.player.y -= playerYCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);

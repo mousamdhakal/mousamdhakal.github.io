@@ -8,19 +8,19 @@ export function drawMiniMap() {
     for (let c = 0; c < this.MAP_WIDTH; c++) {
       if (this.currentMap[r][c] != 0) {
         // Draw grey square if there is a wall
-        drawFillRectangle(PROJECTIONPLANEWIDTH + (c * MINIMAPSCALE),
+        drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 100, 100, 100, 255);
       }
       else {
         // Draw white square if there is a blank space
-        drawFillRectangle(PROJECTIONPLANEWIDTH + (c * MINIMAPSCALE),
+        drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 255, 255, 255, 255);
       }
     }
   }
 
   // Draw player position on the overhead map
-  this.miniMapX = PROJECTIONPLANEWIDTH + ((this.player.x / BLOCK_SIZE) * MINIMAPSCALE);
+  this.miniMapX = MAPPOSITION + ((this.player.x / BLOCK_SIZE) * MINIMAPSCALE);
   this.miniMapY = ((this.player.y / BLOCK_SIZE) * MINIMAPSCALE);
 }
 
