@@ -47,3 +47,31 @@ let spriteMap;
 
 // Obstacles that are currently visible to the user
 let visibleSprites = [];
+let visibleEnemies = [];
+
+var enemyTypes = [{
+  img: './images/tank-front.png',
+  moveSpeed: 5,
+  rotSpeed: 3,
+  totalStates: 1
+}
+]
+
+var mapEnemies = [
+  { type: 0, x: 416, y: 128, offset: 0.55, visible: false, maxDx: 10, maxDy: 3 }
+]
+
+var enemies = [];
+
+let someAngle;
+
+function checkEnemyTank(ycell, xcell) {
+  for (i = 0; i < mapEnemies.length; i++) {
+    let enemyX = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
+    let enemyY = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+    if (xcell == enemyX && ycell == enemyY) {
+      return true;
+    }
+  }
+  return false;
+}

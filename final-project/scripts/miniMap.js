@@ -11,6 +11,16 @@ export function drawMiniMap() {
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 100, 100, 100, 255);
       }
+      else if (spriteMap[r][c] > 1) {
+        // Draw blue square if there is an obstacle
+        drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
+          (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 200, 255);
+      }
+      else if (checkEnemyTank(r, c)) {
+        // Draw blue square if there is an obstacle
+        drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
+          (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 0, 255);
+      }
       else {
         // Draw white square if there is a blank space
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),

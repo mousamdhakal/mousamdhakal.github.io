@@ -110,6 +110,15 @@ export function castRays() {
               visibleSprites.push(mapItems[mapIndex - 2]);
             }
           }
+          for (i = 0; i < mapEnemies.length; i++) {
+            let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
+            let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+            if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
+              mapEnemies[i].visible = true;
+              visibleEnemies.push(mapEnemies[i]);
+            }
+
+          }
           xIntersection += distToNextXIntersection;
           horizontalGrid += distToNextHorizontalGrid;
         }
@@ -185,6 +194,16 @@ export function castRays() {
               mapItems[mapIndex - 2].visible = true;
               visibleSprites.push(mapItems[mapIndex - 2]);
             }
+          }
+
+          for (i = 0; i < mapEnemies.length; i++) {
+            let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
+            let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+            if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
+              mapEnemies[i].visible = true;
+              visibleEnemies.push(mapEnemies[i]);
+            }
+
           }
           yIntersection += distToNextYIntersection;
           verticalGrid += distToNextVerticalGrid;

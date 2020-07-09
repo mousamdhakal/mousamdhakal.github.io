@@ -38,7 +38,7 @@ const yStepTable = new Array(ANGLE360 + 1);
 for (i = 0; i <= ANGLE360; i++) {
   // Fill the lookup tables by calculating the values
   // Add 0.0001  to avoid division by 0 which creates holes on walls at 0,90,270,180 degrees angles.
-  radian = arcToRad(i) + (0.001);
+  radian = arcToRad(i) + (0.0001);
   sinTable[i] = Math.sin(radian);
   sinITable[i] = (1.0 / (sinTable[i]));
   cosTable[i] = Math.cos(radian);
