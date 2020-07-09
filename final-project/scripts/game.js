@@ -65,6 +65,7 @@ export class Game {
     this.currentMap = map;
 
     this.initSprites();
+    this.initEnemies();
   }
 
   /**
@@ -88,6 +89,35 @@ export class Game {
       mapItems[i].visible = false;
     }
     visibleSprites = [];
+  }
+
+  /**
+   * Clear the list of visible obstacles and set visibility of all obstacles to false
+   */
+  clearEnemies() {
+    for (var i = 0; i < mapEnemies.length; i++) {
+      mapEnemies[i].visible = false;
+    }
+    visibleEnemies = [];
+  }
+
+  initEnemies() {
+    for (i = 0; i < mapEnemies.length; i++) {
+      var enemy = mapEnemies[i];
+      var type = enemyTypes[enemy.type];
+
+      var img = new Image();
+      img.src = type.img;
+
+      enemy.state = 0;
+      enemy.deg = 0;
+      enemy.speed = type.moveSpeed;
+      enemy.rotSpeed = type.rotSpeed;
+      enemy.totalStates = type.totalStates;
+      enemy.img = img;
+
+      enemies.push(enemy);
+    }
   }
 
   /**
@@ -136,6 +166,7 @@ export class Game {
   updateMainCanvas = function () {
     this.canvasContext.putImageData(this.hiddenCanvasPixels, 0, 0);
     this.renderSprites();
+    this.renderEnemies();
   };
 
   /**
@@ -184,7 +215,7 @@ export class Game {
 
       // Return if the sprite is out of the visibility range
       if (dx > visibleSprites[i].maxDx || dy > visibleSprites[i].maxDy || dx < -visibleSprites[i].maxDx || dy < -visibleSprites[i].maxDy) {
-        return;
+        continue;
       }
 
       var dist = Math.sqrt(dx * dx + dy * dy);
@@ -213,6 +244,54 @@ export class Game {
     }
   }
 
+  renderEnemies() {
+    for (var i = 0; i < visibleEnemies.length; i++) {
+      var enemy = enemies[i];
+      var img = enemy.img;
+
+      // Calculate distance to the sprite in both co-ordinates
+      var dx = ((enemy.x - player.x) / BLOCK_SIZE);
+      var dy = ((enemy.y - player.y) / BLOCK_SIZE);
+
+      // Return if the sprite is out of the visibility range
+      if (dx > visibleEnemies[i].maxDx || dy > visibleEnemies[i].maxDy || dx < -visibleEnemies[i].maxDx || dy < -visibleEnemies[i].maxDy) {
+        continue;
+      }
+      // Angle relative to player direction
+      var angle = Math.atan2(dy, dx) - player.deg;
+
+
+      // Make angle from +/- PI
+      if (angle < -Math.PI) angle += 2 * Math.PI;
+      if (angle >= Math.PI) angle -= 2 * Math.PI;
+
+      if (angle > - Math.PI * 0.5 && angle < Math.PI * 0.5) {
+        var distSquared = dx * dx + dy * dy;
+        var dist = Math.sqrt(distSquared);
+        var size = VIEWDIST / (Math.cos(angle) * dist);
+
+        if (size <= 0) {
+          continue;
+        }
+
+        // x position on the screen
+        var x = Math.tan(angle) * VIEWDIST;
+        x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
+
+        var xOffset = enemy.offset * size / 2;
+
+        if (dx < 0) {
+          xOffset *= -1;
+        }
+
+        // y position on the screen
+        var y = (PROJECTIONPLANEHEIGHT - size) / 2;
+
+        this.canvasContext.drawImage(img, x + xOffset, y, size, size);
+      }
+    }
+  }
+
   /**
    * Recursive function that gets called FRAMERATE number of times every second
    */
@@ -224,6 +303,7 @@ export class Game {
     this.drawPlayerOnMiniMap();
     this.updateMainCanvas();
     this.clearSprites();
+    this.clearEnemies();
 
     handlePlayerMovement();
 
@@ -241,19 +321,22 @@ function handlePlayerMovement() {
   // If left key pressed flag is up, rotate left by 5 degrees
   if (game.keyLeftPressed) {
     game.player.arc -= ANGLE2;
-    game.player.deg -= Math.PI / 90;
+    // Track the degree of player and reduce a small value to account for small decrease in angle in radian while creating the tables
+    game.player.deg -= Math.PI / 90 - 0.00055;
+
     // Wrap around the angle if it becomes negative
     if (game.player.arc < ANGLE0) game.player.arc += ANGLE360;
-    if (game.player.deg < -2 * Math.PI) game.player.deg += 2 * Math.PI;
+    if (game.player.deg < -Math.PI) game.player.deg += 2 * Math.PI;
   }
 
   // If right key pressed flag is up, rotate right by 5 degrees
   else if (game.keyRightPressed) {
     game.player.arc += ANGLE2;
-    game.player.deg += Math.PI / 90;
+    // Track the degree of player and reduce a small value to account for small decrease in angle in radian while creating the tables
+    game.player.deg += Math.PI / 90 - 0.00055;
     // Wrap around the angle if it exceeds 360
     if (game.player.arc >= ANGLE360) game.player.arc -= ANGLE360;
-    if (game.player.deg >= 2 * Math.PI) game.player.deg -= 2 * Math.PI;
+    if (game.player.deg > Math.PI) game.player.deg -= 2 * Math.PI;
   }
 
   // Calculate the x and y direction to move by taking cos and sin angles respectively
@@ -294,7 +377,7 @@ function handlePlayerMovement() {
     if (
       game.currentMap[playerYCell][playerXCell + 1] !=
       0 && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
-      || spriteMap[playerYCell][playerXCell + 1] > 1
+      || spriteMap[playerYCell][playerXCell + 1] > 1 || checkEnemyTank(playerYCell, playerXCell + 1)
     ) {
       // Move player back if wall crossed
       game.player.x -= playerXCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
@@ -304,7 +387,7 @@ function handlePlayerMovement() {
     if (
       game.currentMap[playerYCell][playerXCell - 1] !=
       0 && playerXCellOffset < MINDISTANCETOWALL ||
-      spriteMap[playerYCell][playerXCell - 1] > 1
+      spriteMap[playerYCell][playerXCell - 1] > 1 || checkEnemyTank(playerYCell, playerXCell - 1)
     ) {
       // Move player back if wall crossed
       game.player.x += MINDISTANCETOWALL - playerXCellOffset;
@@ -316,7 +399,7 @@ function handlePlayerMovement() {
     if (
       game.currentMap[playerYCell - 1][playerXCell] != 0 &&
       playerYCellOffset < MINDISTANCETOWALL ||
-      spriteMap[playerYCell - 1][playerXCell] > 1
+      spriteMap[playerYCell - 1][playerXCell] > 1 || checkEnemyTank(playerYCell - 1, playerXCell)
     ) {
       // Move player back if wall crossed
       game.player.y += MINDISTANCETOWALL - playerYCellOffset;
@@ -326,7 +409,7 @@ function handlePlayerMovement() {
     if (
       game.currentMap[playerYCell + 1][playerXCell] != 0 &&
       playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL ||
-      spriteMap[playerYCell + 1][playerXCell] > 1
+      spriteMap[playerYCell + 1][playerXCell] > 1 || checkEnemyTank(playerYCell + 1, playerXCell)
     ) {
       // Move player back if wall crossed
       game.player.y -= playerYCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
