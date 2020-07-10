@@ -1,5 +1,5 @@
 import { drawFillRectangle, drawLine } from './draw.js';
-
+import { checkEnemyTank } from './check.js';
 /**
  * Draws minimap for navigation on the right side of the main game screen
  */

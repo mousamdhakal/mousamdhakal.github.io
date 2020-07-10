@@ -35,10 +35,10 @@ let game;
 
 // Obstacles in front of player
 let mapItems = [
-  { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1, maxDx: 7, maxDy: 3 },
-  { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1, maxDx: 3, maxDy: 7 },
-  { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1, maxDx: 7, maxDy: 3 },
-  { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1, maxDx: 3, maxDy: 7 }
+  { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1 },
+  { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1 },
+  { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1 },
+  { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1 }
 ];
 
 
@@ -113,20 +113,3 @@ var enemies = [];
 
 let someAngle;
 
-function checkEnemyTank(ycell, xcell) {
-  for (i = 0; i < mapEnemies.length; i++) {
-    let enemyX = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
-    let enemyY = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
-    if (xcell == enemyX && ycell == enemyY) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function checkWall(ycell, xcell) {
-  if (game.currentMap[ycell][xcell] != 0) {
-    return true;
-  }
-  return false;
-}

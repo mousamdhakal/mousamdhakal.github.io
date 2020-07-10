@@ -33,7 +33,7 @@ var mapEnemies = [
     offset: 1,
     visible: false,
     maxDx: 20,
-    maxDy: 15,
+    maxDy: 2,
     speedX: 1,
     speedY: 0,
     moved: 0

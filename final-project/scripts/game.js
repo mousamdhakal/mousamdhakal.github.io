@@ -1,6 +1,7 @@
 import { drawBackground } from "./draw.js";
 import { drawMiniMap, drawPlayerOnMiniMap } from "./miniMap.js";
 import { castRays } from "./raycaster.js";
+import { checkEnemyTank, checkWall, checkWallBetween } from './check.js';
 
 /**
  * Game class which contains all methods and properties of our game
@@ -232,42 +233,43 @@ export class Game {
   renderSprites() {
     for (var i = 0; i < visibleSprites.length; i++) {
       var sprite = visibleSprites[i];
-      // Get the image of the obstacle
-      var img = new Image();
-      img.src = visibleSprites[i].img;
 
-      // Calculate distance to the sprite in both co-ordinates
-      var dx = ((sprite.x * BLOCK_SIZE - player.x) / BLOCK_SIZE);
-      var dy = ((sprite.y * BLOCK_SIZE - player.y) / BLOCK_SIZE);
+      var playerXCell = Math.floor(player.x / BLOCK_SIZE);
+      var playerYCell = Math.floor(player.y / BLOCK_SIZE);
 
-      // Return if the sprite is out of the visibility range
-      if (dx > visibleSprites[i].maxDx || dy > visibleSprites[i].maxDy || dx < -visibleSprites[i].maxDx || dy < -visibleSprites[i].maxDy) {
-        continue;
+      if (!checkWallBetween(playerXCell, playerYCell, sprite.x, sprite.y)) {
+        // Get the image of the obstacle
+        var img = new Image();
+        img.src = visibleSprites[i].img;
+
+        // Calculate distance to the sprite in both co-ordinates
+        var dx = ((sprite.x * BLOCK_SIZE - player.x) / BLOCK_SIZE);
+        var dy = ((sprite.y * BLOCK_SIZE - player.y) / BLOCK_SIZE);
+
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate angle of the sprite relative to the player angle
+        var spriteAngle = Math.atan2(dy, dx) - player.deg;
+
+        // Calculate size of the sprite to be drawn
+        var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
+        if (size <= 0) {
+          continue;
+        }
+
+        // x position on the screen
+        var x = Math.tan(spriteAngle) * VIEWDIST;
+        x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
+
+        // y position on the screen
+        var y = (PROJECTIONPLANEHEIGHT - size) / 2;
+
+        // Offset value to make up for error in calculations
+        var xOffset = visibleSprites[i].offset * size / 2;
+
+        // Draw obstacle on the canvas
+        this.canvasContext.drawImage(img, x + xOffset, y, size, size);
       }
-
-      var dist = Math.sqrt(dx * dx + dy * dy);
-
-      // Calculate angle of the sprite relative to the player angle
-      var spriteAngle = Math.atan2(dy, dx) - player.deg;
-
-      // Calculate size of the sprite to be drawn
-      var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
-      if (size <= 0) {
-        continue;
-      }
-
-      // x position on the screen
-      var x = Math.tan(spriteAngle) * VIEWDIST;
-      x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
-
-      // y position on the screen
-      var y = (PROJECTIONPLANEHEIGHT - size) / 2;
-
-      // Offset value to make up for error in calculations
-      var xOffset = visibleSprites[i].offset * size / 2;
-
-      // Draw obstacle on the canvas
-      this.canvasContext.drawImage(img, x + xOffset, y, size, size);
     }
   }
 
@@ -276,66 +278,68 @@ export class Game {
       var enemy = visibleEnemies[i];
       var enemyType = enemy.type;
 
-      // console.log(img);
+      var enemyXCell = Math.floor(enemy.x / BLOCK_SIZE);
+      var enemyYCell = Math.floor(enemy.y / BLOCK_SIZE);
+      var playerXCell = Math.floor(player.x / BLOCK_SIZE);
+      var playerYCell = Math.floor(player.y / BLOCK_SIZE);
+      if (!checkWallBetween(playerXCell, playerYCell, enemyXCell, enemyYCell)) {
 
-      // Calculate distance to the sprite in both co-ordinates
-      var dx = ((enemy.x - player.x) / BLOCK_SIZE);
-      var dy = ((enemy.y - player.y) / BLOCK_SIZE);
+        // Calculate distance to the sprite in both co-ordinates
+        var dx = ((enemy.x - player.x) / BLOCK_SIZE);
+        var dy = ((enemy.y - player.y) / BLOCK_SIZE);
 
-      if (dy < -2) {
-        enemyType = (enemyType + 2) % 7;
-      } else if (dy > 2) {
-        enemyType = (enemyType + 6) % 7;
-      }
-      else if (dx < 0) {
-        enemyType = (enemyType + 4) % 7;
-      }
-
-
-
-      // if (dy >= 0) {
-      //   enemyType = (enemyType + 2) % 7;
-      // }
-
-
-      var img = enemies[enemyType];
-
-
-      // Return if the sprite is out of the visibility range
-      if (dx > visibleEnemies[i].maxDx || dy > visibleEnemies[i].maxDy || dx < -visibleEnemies[i].maxDx || dy < -visibleEnemies[i].maxDy) {
-        continue;
-      }
-      // Angle relative to player direction
-      var angle = Math.atan2(dy, dx) - player.deg;
-
-
-      // Make angle from +/- PI
-      if (angle < -Math.PI) angle += 2 * Math.PI;
-      if (angle >= Math.PI) angle -= 2 * Math.PI;
-
-      if (angle > - Math.PI * 0.5 && angle < Math.PI * 0.5) {
-        var distSquared = dx * dx + dy * dy;
-        var dist = Math.sqrt(distSquared);
-        var size = VIEWDIST / (Math.cos(angle) * dist);
-
-        if (size <= 0) {
-          continue;
+        if (dy < -2) {
+          enemyType = (enemyType + 2) % 7;
+        } else if (dy > 2) {
+          enemyType = (enemyType + 6) % 7;
+        }
+        else if (dx < 0) {
+          enemyType = (enemyType + 4) % 7;
         }
 
-        // x position on the screen
-        var x = Math.tan(angle) * VIEWDIST;
-        x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
 
-        var xOffset = enemy.offset * size / 2;
 
-        if (dx < 0) {
-          xOffset *= -1;
+        // if (dy >= 0) {
+        //   enemyType = (enemyType + 2) % 7;
+        // }
+
+
+        var img = enemies[enemyType];
+
+        // Angle relative to player direction
+        var angle = Math.atan2(dy, dx) - player.deg;
+
+
+        // Make angle from +/- PI
+        if (angle < -Math.PI) angle += 2 * Math.PI;
+        if (angle >= Math.PI) angle -= 2 * Math.PI;
+
+        if (angle > - Math.PI * 0.5 && angle < Math.PI * 0.5) {
+          var distSquared = dx * dx + dy * dy;
+          var dist = Math.sqrt(distSquared);
+          var size = VIEWDIST / (Math.cos(angle) * dist);
+
+          if (size <= 0) {
+            continue;
+          }
+
+          // x position on the screen
+          var x = Math.tan(angle) * VIEWDIST;
+          x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
+
+          var xOffset = enemy.offset * size / 2;
+
+          if (dx < 0) {
+            xOffset *= -1;
+          }
+
+          // y position on the screen
+          var y = (PROJECTIONPLANEHEIGHT - size) / 2;
+
+          this.canvasContext.drawImage(img, x + xOffset, y, size, size);
         }
+        // console.log(img);
 
-        // y position on the screen
-        var y = (PROJECTIONPLANEHEIGHT - size) / 2;
-
-        this.canvasContext.drawImage(img, x + xOffset, y, size, size);
       }
     }
   }
