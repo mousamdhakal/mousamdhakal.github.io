@@ -26,7 +26,7 @@ var mapEnemies = [
   },
   {
     type: 4,
-    x: 416,
+    x: 316,
     y: 1600,
     arc: 0,
     deg: 0,
