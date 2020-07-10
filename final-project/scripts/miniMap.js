@@ -29,15 +29,18 @@ export function drawMiniMap() {
     }
   }
 
-  // Draw player position on the overhead map
-  this.miniMapX = MAPPOSITION + ((this.player.x / BLOCK_SIZE) * MINIMAPSCALE);
-  this.miniMapY = ((this.player.y / BLOCK_SIZE) * MINIMAPSCALE);
+
 }
 
 /**
  * Draws the player position on minimap 
  */
-export function drawPlayerOnMiniMap() {
+export function drawPlayerOnMiniMap(tank) {
+
+  // Draw player position on the overhead map
+  this.miniMapX = MAPPOSITION + ((tank.x / BLOCK_SIZE) * MINIMAPSCALE);
+  this.miniMapY = ((tank.y / BLOCK_SIZE) * MINIMAPSCALE);
+
   // Draw a red square to show player position
   drawFillRectangle(Math.floor(this.miniMapX - 2), Math.floor(this.miniMapY - 2), 5, 5, 255, 0, 0, 255);
 
@@ -45,7 +48,7 @@ export function drawPlayerOnMiniMap() {
   drawLine(
     Math.floor(this.miniMapX),
     Math.floor(this.miniMapY),
-    Math.floor(this.miniMapX + cosTable[this.player.arc] * 8),
-    Math.floor(this.miniMapY + sinTable[this.player.arc] * 8),
+    Math.floor(this.miniMapX + cosTable[tank.arc] * 8),
+    Math.floor(this.miniMapY + sinTable[tank.arc] * 8),
     255, 0, 0, 255);
 }

@@ -5,7 +5,7 @@ const PROJECTIONPLANEHEIGHT = 400;
 const MAPPOSITION = 500;
 
 // Minimum distance from the player position to the wall
-const MINDISTANCETOWALL = 20;
+const MINDISTANCETOWALL = 32;
 
 // Half of screen height
 const PROJECTIONPLANECENTERHEIGHT = PROJECTIONPLANEHEIGHT / 2;
@@ -51,15 +51,63 @@ let visibleEnemies = [];
 
 var enemyTypes = [{
   img: './images/tank-front.png',
-  moveSpeed: 5,
+  moveSpeed: -3,
   rotSpeed: 3,
-  totalStates: 1
+  totalStates: 1,
+  holdTime: 100
+},
+{
+  img: './images/tank-front.png',
+  moveSpeed: 0,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 20
+},
+{
+  img: './images/tank-left.png',
+  moveSpeed: 0,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 20,
+},
+{
+  img: './images/tank-left.png',
+  moveSpeed: 0,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 20,
+},
+{
+  img: './images/tank-back.png',
+  moveSpeed: 3,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 100,
+},
+{
+  img: './images/tank-back.png',
+  moveSpeed: 0,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 20,
+},
+{
+  img: './images/tank-right.png',
+  moveSpeed: 0,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 20
+},
+{
+  img: './images/tank-right.png',
+  moveSpeed: 0,
+  rotSpeed: 3,
+  totalStates: 1,
+  holdTime: 20
 }
 ]
 
-var mapEnemies = [
-  { type: 0, x: 416, y: 128, offset: 0.55, visible: false, maxDx: 10, maxDy: 3 }
-]
+
 
 var enemies = [];
 
@@ -72,6 +120,13 @@ function checkEnemyTank(ycell, xcell) {
     if (xcell == enemyX && ycell == enemyY) {
       return true;
     }
+  }
+  return false;
+}
+
+function checkWall(ycell, xcell) {
+  if (game.currentMap[ycell][xcell] != 0) {
+    return true;
   }
   return false;
 }

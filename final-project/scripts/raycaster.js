@@ -92,7 +92,6 @@ export function castRays() {
 
         // Check if the grid is opening or wall
         else if (this.currentMap[yGridIndex][xGridIndex] != 0) {
-
           distToHorizontalGridBeingHit =
             (xIntersection - this.player.x) * cosITable[castArc];
           break;
@@ -100,25 +99,7 @@ export function castRays() {
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
-          // Check if there is an obstacle in the current grid
-          if (spriteMap[yGridIndex][xGridIndex] > 1) {
-            // Get position of obstacle from spriteMap
-            var mapIndex = spriteMap[yGridIndex][xGridIndex];
-            // If obstacle is not already visivle set visibilty to true and push to visiblesprites array
-            if (!mapItems[mapIndex - 2].visible) {
-              mapItems[mapIndex - 2].visible = true;
-              visibleSprites.push(mapItems[mapIndex - 2]);
-            }
-          }
-          for (i = 0; i < mapEnemies.length; i++) {
-            let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
-            let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
-            if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
-              mapEnemies[i].visible = true;
-              visibleEnemies.push(mapEnemies[i]);
-            }
-
-          }
+          checkObjects(yGridIndex, xGridIndex);
           xIntersection += distToNextXIntersection;
           horizontalGrid += distToNextHorizontalGrid;
         }
@@ -186,25 +167,7 @@ export function castRays() {
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
-          if (spriteMap[yGridIndex][xGridIndex] > 1) {
-            // Find the mapIndex position to look at
-            var mapIndex = spriteMap[yGridIndex][xGridIndex];
-            // this.renderSprites(mapIndex - 2);
-            if (!mapItems[mapIndex - 2].visible) {
-              mapItems[mapIndex - 2].visible = true;
-              visibleSprites.push(mapItems[mapIndex - 2]);
-            }
-          }
-
-          for (i = 0; i < mapEnemies.length; i++) {
-            let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
-            let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
-            if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
-              mapEnemies[i].visible = true;
-              visibleEnemies.push(mapEnemies[i]);
-            }
-
-          }
+          checkObjects(yGridIndex, xGridIndex);
           yIntersection += distToNextYIntersection;
           verticalGrid += distToNextVerticalGrid;
         }
@@ -251,5 +214,27 @@ export function castRays() {
     castArc += 1;
     // Wrap around the ray if necessary
     if (castArc >= ANGLE360) castArc -= ANGLE360;
+  }
+}
+
+function checkObjects(yGridIndex, xGridIndex) {
+  // Check if there is an obstacle in the current grid
+  if (spriteMap[yGridIndex][xGridIndex] > 1) {
+    // Get position of obstacle from spriteMap
+    var mapIndex = spriteMap[yGridIndex][xGridIndex];
+    // If obstacle is not already visivle set visibilty to true and push to visiblesprites array
+    if (!mapItems[mapIndex - 2].visible) {
+      mapItems[mapIndex - 2].visible = true;
+      visibleSprites.push(mapItems[mapIndex - 2]);
+    }
+  }
+  for (i = 0; i < mapEnemies.length; i++) {
+    let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
+    let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+    if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
+      mapEnemies[i].visible = true;
+      visibleEnemies.push(mapEnemies[i]);
+    }
+
   }
 }
