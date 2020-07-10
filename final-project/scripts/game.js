@@ -282,9 +282,12 @@ export class Game {
       var dx = ((enemy.x - player.x) / BLOCK_SIZE);
       var dy = ((enemy.y - player.y) / BLOCK_SIZE);
 
-      if (dy < -1) {
+      if (dy < -2) {
         enemyType = (enemyType + 2) % 7;
-      } else if (dx < 0) {
+      } else if (dy > 2) {
+        enemyType = (enemyType + 6) % 7;
+      }
+      else if (dx < 0) {
         enemyType = (enemyType + 4) % 7;
       }
 
