@@ -66,6 +66,10 @@ export class Game {
 
     this.initSprites();
     this.initEnemies();
+
+
+    this.canonImage = new Image();
+    this.canonImage.src = "./images/canon.png";
   }
 
   /**
@@ -102,21 +106,10 @@ export class Game {
   }
 
   initEnemies() {
-    for (i = 0; i < mapEnemies.length; i++) {
-      var enemy = mapEnemies[i];
-      var type = enemyTypes[enemy.type];
-
-      var img = new Image();
-      img.src = type.img;
-
-      enemy.state = 0;
-      enemy.deg = 0;
-      enemy.speed = type.moveSpeed;
-      enemy.rotSpeed = type.rotSpeed;
-      enemy.totalStates = type.totalStates;
-      enemy.img = img;
-
-      enemies.push(enemy);
+    for (i = 0; i < enemyTypes.length; i++) {
+      let img = new Image();
+      img.src = enemyTypes[i].img;
+      enemies.push(img);
     }
   }
 
@@ -167,6 +160,7 @@ export class Game {
     this.canvasContext.putImageData(this.hiddenCanvasPixels, 0, 0);
     this.renderSprites();
     this.renderEnemies();
+    this.drawCanon();
   };
 
   /**
@@ -198,6 +192,39 @@ export class Game {
    * Cast rays from hte user to create a 3D simulation
    */
   raycast = castRays;
+
+  drawCanon() {
+    this.canvasContext.drawImage(this.canonImage, PROJECTIONPLANEWIDTH / 2 - 20, PROJECTIONPLANEHEIGHT - 80);
+  }
+
+  moveTanks() {
+    // console.log('tank moved');
+    for (i = 0; i < mapEnemies.length; i++) {
+      let enemy = mapEnemies[i];
+      if (Math.abs(enemy.x - player.x) < 256 && Math.abs(enemy.y - player.y) < 256) {
+        continue;
+      }
+      let moveStepX = enemy.speedX * enemyTypes[enemy.type].moveSpeed;
+      let moveStepY = enemy.speedY * enemyTypes[enemy.type].moveSpeed;
+
+      enemy.x += moveStepX;
+      enemy.y += moveStepY;
+
+      let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
+      let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
+
+      enemy.moved++;
+      if (enemy.moved > enemyTypes[enemy.type].holdTime || checkWall(tankYcell, tankXcell)) {
+        enemy.x -= moveStepX;
+        enemy.y -= moveStepY;
+        enemy.type++;
+        if (enemy.type > 7) {
+          enemy.type = 0;
+        }
+        enemy.moved = 0;
+      }
+    }
+  }
 
   /**
    * Display all obstacles that are currently visible on the screen
@@ -246,12 +273,30 @@ export class Game {
 
   renderEnemies() {
     for (var i = 0; i < visibleEnemies.length; i++) {
-      var enemy = enemies[i];
-      var img = enemy.img;
+      var enemy = visibleEnemies[i];
+      var enemyType = enemy.type;
+
+      // console.log(img);
 
       // Calculate distance to the sprite in both co-ordinates
       var dx = ((enemy.x - player.x) / BLOCK_SIZE);
       var dy = ((enemy.y - player.y) / BLOCK_SIZE);
+
+      if (dy < -1) {
+        enemyType = (enemyType + 2) % 7;
+      } else if (dx < 0) {
+        enemyType = (enemyType + 4) % 7;
+      }
+
+
+
+      // if (dy >= 0) {
+      //   enemyType = (enemyType + 2) % 7;
+      // }
+
+
+      var img = enemies[enemyType];
+
 
       // Return if the sprite is out of the visibility range
       if (dx > visibleEnemies[i].maxDx || dy > visibleEnemies[i].maxDy || dx < -visibleEnemies[i].maxDx || dy < -visibleEnemies[i].maxDy) {
@@ -300,7 +345,8 @@ export class Game {
     this.drawBackground();
     this.raycast();
     this.drawMiniMap();
-    this.drawPlayerOnMiniMap();
+    this.drawPlayerOnMiniMap(this.player);
+    this.moveTanks();
     this.updateMainCanvas();
     this.clearSprites();
     this.clearEnemies();
@@ -375,19 +421,17 @@ function handlePlayerMovement() {
   if (dx > 0) {
     // Player is moving right
     if (
-      game.currentMap[playerYCell][playerXCell + 1] !=
-      0 && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
-      || spriteMap[playerYCell][playerXCell + 1] > 1 || checkEnemyTank(playerYCell, playerXCell + 1)
+      (checkWall(playerYCell, playerXCell + 1)
+        || spriteMap[playerYCell][playerXCell + 1] > 1 || checkEnemyTank(playerYCell, playerXCell + 1)) && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
       game.player.x -= playerXCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
     }
   } else {
     // Player is moving left
-    if (
-      game.currentMap[playerYCell][playerXCell - 1] !=
-      0 && playerXCellOffset < MINDISTANCETOWALL ||
-      spriteMap[playerYCell][playerXCell - 1] > 1 || checkEnemyTank(playerYCell, playerXCell - 1)
+    if ((
+      checkWall(playerYCell, playerXCell - 1) ||
+      spriteMap[playerYCell][playerXCell - 1] > 1 || checkEnemyTank(playerYCell, playerXCell - 1)) && playerXCellOffset < MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
       game.player.x += MINDISTANCETOWALL - playerXCellOffset;
@@ -396,20 +440,20 @@ function handlePlayerMovement() {
 
   if (dy < 0) {
     // Player is moving up
-    if (
-      game.currentMap[playerYCell - 1][playerXCell] != 0 &&
-      playerYCellOffset < MINDISTANCETOWALL ||
-      spriteMap[playerYCell - 1][playerXCell] > 1 || checkEnemyTank(playerYCell - 1, playerXCell)
+    if ((
+      checkWall(playerYCell - 1, playerXCell) ||
+      spriteMap[playerYCell - 1][playerXCell] > 1 || checkEnemyTank(playerYCell - 1, playerXCell)) &&
+      playerYCellOffset < MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
       game.player.y += MINDISTANCETOWALL - playerYCellOffset;
     }
   } else {
     // Player is moving down
-    if (
-      game.currentMap[playerYCell + 1][playerXCell] != 0 &&
-      playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL ||
-      spriteMap[playerYCell + 1][playerXCell] > 1 || checkEnemyTank(playerYCell + 1, playerXCell)
+    if ((
+      checkWall(playerYCell + 1, playerXCell) ||
+      spriteMap[playerYCell + 1][playerXCell] > 1 || checkEnemyTank(playerYCell + 1, playerXCell)) &&
+      playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
       game.player.y -= playerYCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
