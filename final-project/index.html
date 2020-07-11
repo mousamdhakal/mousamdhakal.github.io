@@ -10,13 +10,14 @@
 <body>
   <div class="main">
     <h1>3D Tank Battle</h1>
-    <p>Use a,w,s,d for controls</p>
+    <p>Use a,w,s,d for controls and space to shoot.(You can only fire after an interval)</p>
+    <button onclick="game.init()">Start Game</button>
     <canvas id="gameCanvas" width="640" height="400">
       Loading ....
     </canvas>
   </div>
 
-  <!-- <button onclick="game.init()">Start Game</button> -->
+  
 
   <div id="minimapcontainer">
     <canvas id="minimap"></canvas>
@@ -29,6 +30,9 @@
   <script src="./scripts/maps.js"></script>
   <script src="./scripts/player.js"></script>
   <script src="./scripts/keyhandlers.js"></script>
+  <script type="module" src="./scripts/initializers.js"></script>
+  <script type="module" src="./scripts/moves.js"></script>
+  <script type="module" src="./scripts/render.js"></script>
   <script type="module" src="./scripts/draw.js"></script>
   <script type="module" src="./scripts/raycaster.js"></script>
   <script type="module" src="./scripts/miniMap.js"></script>

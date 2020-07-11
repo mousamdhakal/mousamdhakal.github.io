@@ -30,7 +30,7 @@ const BYTESPERPIXEL = 4;
 const BLOCK_SIZE = 64;
 const WALL_HEIGHT = 64;
 
-// main game object
+// main game object to be referenced in different parts of the game
 let game;
 
 // Obstacles in front of player
@@ -110,6 +110,8 @@ var enemyTypes = [{
 
 
 var enemies = [];
+var bulletList = [];
 
-let someAngle;
+const FIRINGSPEED = 100;
+
 

@@ -17,6 +17,25 @@ export function checkEnemyTank(ycell, xcell) {
 }
 
 /**
+ * Checks for the presence of enemy tank in given cell position
+ * @param {Number} ycell - Y cell position to check for presence of enemy tank
+ * @param {Number} xcell - X cell position to check for presence of enemy tank
+ * @returns {Boolean} - true if tank is present in the cell , false otherwise
+ */
+
+export function checkBullet(ycell, xcell) {
+  for (i = 0; i < bulletList.length; i++) {
+    let buleltX = Math.floor(bulletList[i].x / BLOCK_SIZE);
+    let bulletY = Math.floor(bulletList[i].y / BLOCK_SIZE);
+    if (xcell == buleltX && ycell == bulletY) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+/**
  * Checks for presence of wall in given cell position 
  * @param {Number} ycell - Y cell position to check for presence of wall
  * @param {Number} xcell - X cell position ot check for presence of wall

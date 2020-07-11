@@ -4,4 +4,3 @@ import { Game } from './game.js';
 let canvas = document.getElementById("gameCanvas");
 
 game = new Game(canvas);
-game.init();

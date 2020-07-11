@@ -1,5 +1,5 @@
 import { drawFillRectangle, drawLine } from './draw.js';
-import { checkEnemyTank } from './check.js';
+import { checkEnemyTank, checkBullet } from './check.js';
 /**
  * Draws minimap for navigation on the right side of the main game screen
  */
@@ -17,9 +17,14 @@ export function drawMiniMap() {
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 200, 255);
       }
       else if (checkEnemyTank(r, c)) {
-        // Draw blue square if there is an obstacle
+        // Draw black square if there is an enemy tank
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 0, 255);
+      }
+      else if (checkBullet(r, c)) {
+        // Draw orange square if there is a bullet
+        drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
+          (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 255, 0, 0, 255);
       }
       else {
         // Draw white square if there is a blank space

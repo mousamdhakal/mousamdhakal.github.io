@@ -19,6 +19,10 @@ function handleKeyDown() {
   else if (e.keyCode == '68') {
     game.keyRightPressed = true;
   }
+  // If 'Spacebar key is pressed, set the corresponding flag
+  else if (e.keyCode == '32') {
+    game.player.keySpacePressed = true;
+  }
 
 }
 
@@ -32,15 +36,20 @@ function handleKeyUp() {
 
   }
   // If 'S' key is released, clear the corresponding flag
-  if (e.keyCode == '83') {
+  else if (e.keyCode == '83') {
     game.keyDownPressed = false;
   }
   // If 'A' key is released, clear the corresponding flag
-  if (e.keyCode == '65') {
+  else if (e.keyCode == '65') {
     game.keyLeftPressed = false;
   }
   // If 'D' key is released, clear the corresponding flag
-  if (e.keyCode == '68') {
+  else if (e.keyCode == '68') {
     game.keyRightPressed = false;
+  }
+  // If 'Spacebar' key is released, clear the corresponding flag
+
+  else if (e.keyCode == '32') {
+    game.player.keySpacePressed = false;
   }
 }
