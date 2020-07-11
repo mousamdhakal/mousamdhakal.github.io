@@ -2,6 +2,9 @@ import { drawBackground } from "./draw.js";
 import { drawMiniMap, drawPlayerOnMiniMap } from "./miniMap.js";
 import { castRays } from "./raycaster.js";
 import { checkEnemyTank, checkWall, checkWallBetween } from './check.js';
+import { renderSprites, renderEnemies, renderBullets, drawCanon } from "./render.js";
+import { initSprites, initEnemies, clearSprites, clearEnemies, loadWallImage } from "./initializers.js";
+import { fireBullet, moveTanks, moveBullets } from './moves.js'
 
 /**
  * Game class which contains all methods and properties of our game
@@ -50,6 +53,9 @@ export class Game {
     this.keyDownPressed = false;
     this.keyLeftPressed = false;
     this.keyRightPressed = false;
+    // this.keySpacePressed = false;
+
+    // this.timeSinceLastBullet = 100;
 
     // Set width and height of the map
     this.currentMap = [];
@@ -76,76 +82,24 @@ export class Game {
   /**
    * Create a map to represent position of obstacles
    */
-  initSprites() {
-    spriteMap = [];
-    for (var i = 0; i < this.MAP_WIDTH; i++) {
-      spriteMap[i] = [];
-    }
-    for (var j = 0; j < mapItems.length; j++) {
-      spriteMap[mapItems[j].y][mapItems[j].x] = j + 2;
-    }
-  }
+  initSprites = initSprites;
 
   /**
    * Clear the list of visible obstacles and set visibility of all obstacles to false
    */
-  clearSprites() {
-    for (var i = 0; i < mapItems.length; i++) {
-      mapItems[i].visible = false;
-    }
-    visibleSprites = [];
-  }
+  clearSprites = clearSprites;
 
   /**
    * Clear the list of visible obstacles and set visibility of all obstacles to false
    */
-  clearEnemies() {
-    for (var i = 0; i < mapEnemies.length; i++) {
-      mapEnemies[i].visible = false;
-    }
-    visibleEnemies = [];
-  }
+  clearEnemies = clearEnemies;
 
-  initEnemies() {
-    for (i = 0; i < enemyTypes.length; i++) {
-      let img = new Image();
-      img.src = enemyTypes[i].img;
-      enemies.push(img);
-    }
-  }
+  initEnemies = initEnemies;
 
   /**
    * Load image of wall and get it's data from a buffer canvas
    */
-  loadWallImage() {
-    // Load the image of the wall
-    this.wallImage = new Image();
-    this.wallImage.src = "./images/mapSmall.png";
-
-    // After the image loads,
-    this.wallImage.onload = function () {
-      // Create a buffer canvas which is not shown on screen for drawing image of wall
-      this.wallImageBuffer = document.createElement("canvas");
-
-      // Set dimensions of the buffer canvas equal to that of the image so that data of all the image pixels are stored , no more no less
-      this.wallImageBuffer.width = this.wallImage.width;
-      this.wallImageBuffer.height = this.wallImage.height;
-
-      // Draw the image of wall on the canvas, the image covers exactly the entire dimension of the canvas
-      this.wallImageBuffer.getContext("2d").drawImage(this.wallImage, 0, 0);
-
-      // Get rgba value of each pixel from the wallbuffer , so that we can recreate part of the image by drawing those color values
-      let imageData = this.wallImageBuffer
-        .getContext("2d")
-        .getImageData(
-          0,
-          0,
-          this.wallImageBuffer.width,
-          this.wallImageBuffer.height
-        );
-      this.wallPixels = imageData.data;
-    }.bind(this);
-  }
+  loadWallImage = loadWallImage;
 
   /**
    * Clears the hidden canvas
@@ -161,7 +115,11 @@ export class Game {
     this.canvasContext.putImageData(this.hiddenCanvasPixels, 0, 0);
     this.renderSprites();
     this.renderEnemies();
+    this.renderBullets();
     this.drawCanon();
+    if (player.keySpacePressed) {
+      this.fireBullet(player);
+    }
   };
 
   /**
@@ -194,155 +152,20 @@ export class Game {
    */
   raycast = castRays;
 
-  drawCanon() {
-    this.canvasContext.drawImage(this.canonImage, PROJECTIONPLANEWIDTH / 2 - 20, PROJECTIONPLANEHEIGHT - 80);
-  }
+  fireBullet = fireBullet;
 
-  moveTanks() {
-    // console.log('tank moved');
-    for (i = 0; i < mapEnemies.length; i++) {
-      let enemy = mapEnemies[i];
-      if (Math.abs(enemy.x - player.x) < 256 && Math.abs(enemy.y - player.y) < 256) {
-        continue;
-      }
-      let moveStepX = enemy.speedX * enemyTypes[enemy.type].moveSpeed;
-      let moveStepY = enemy.speedY * enemyTypes[enemy.type].moveSpeed;
+  drawCanon = drawCanon;
 
-      enemy.x += moveStepX;
-      enemy.y += moveStepY;
+  moveTanks = moveTanks;
 
-      let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
-      let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
+  moveBullets = moveBullets;
 
-      enemy.moved++;
-      if (enemy.moved > enemyTypes[enemy.type].holdTime || checkWall(tankYcell, tankXcell)) {
-        enemy.x -= moveStepX;
-        enemy.y -= moveStepY;
-        enemy.type++;
-        if (enemy.type > 7) {
-          enemy.type = 0;
-        }
-        enemy.moved = 0;
-      }
-    }
-  }
+  renderSprites = renderSprites;
 
-  /**
-   * Display all obstacles that are currently visible on the screen
-   */
-  renderSprites() {
-    for (var i = 0; i < visibleSprites.length; i++) {
-      var sprite = visibleSprites[i];
+  renderEnemies = renderEnemies;
 
-      var playerXCell = Math.floor(player.x / BLOCK_SIZE);
-      var playerYCell = Math.floor(player.y / BLOCK_SIZE);
+  renderBullets = renderBullets;
 
-      if (!checkWallBetween(playerXCell, playerYCell, sprite.x, sprite.y)) {
-        // Get the image of the obstacle
-        var img = new Image();
-        img.src = visibleSprites[i].img;
-
-        // Calculate distance to the sprite in both co-ordinates
-        var dx = ((sprite.x * BLOCK_SIZE - player.x) / BLOCK_SIZE);
-        var dy = ((sprite.y * BLOCK_SIZE - player.y) / BLOCK_SIZE);
-
-        var dist = Math.sqrt(dx * dx + dy * dy);
-
-        // Calculate angle of the sprite relative to the player angle
-        var spriteAngle = Math.atan2(dy, dx) - player.deg;
-
-        // Calculate size of the sprite to be drawn
-        var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
-        if (size <= 0) {
-          continue;
-        }
-
-        // x position on the screen
-        var x = Math.tan(spriteAngle) * VIEWDIST;
-        x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
-
-        // y position on the screen
-        var y = (PROJECTIONPLANEHEIGHT - size) / 2;
-
-        // Offset value to make up for error in calculations
-        var xOffset = visibleSprites[i].offset * size / 2;
-
-        // Draw obstacle on the canvas
-        this.canvasContext.drawImage(img, x + xOffset, y, size, size);
-      }
-    }
-  }
-
-  renderEnemies() {
-    for (var i = 0; i < visibleEnemies.length; i++) {
-      var enemy = visibleEnemies[i];
-      var enemyType = enemy.type;
-
-      var enemyXCell = Math.floor(enemy.x / BLOCK_SIZE);
-      var enemyYCell = Math.floor(enemy.y / BLOCK_SIZE);
-      var playerXCell = Math.floor(player.x / BLOCK_SIZE);
-      var playerYCell = Math.floor(player.y / BLOCK_SIZE);
-      if (!checkWallBetween(playerXCell, playerYCell, enemyXCell, enemyYCell)) {
-
-        // Calculate distance to the sprite in both co-ordinates
-        var dx = ((enemy.x - player.x) / BLOCK_SIZE);
-        var dy = ((enemy.y - player.y) / BLOCK_SIZE);
-
-        if (dy < -2) {
-          enemyType = (enemyType + 2) % 7;
-        } else if (dy > 2) {
-          enemyType = (enemyType + 6) % 7;
-        }
-        else if (dx < 0) {
-          enemyType = (enemyType + 4) % 7;
-        }
-
-
-
-        // if (dy >= 0) {
-        //   enemyType = (enemyType + 2) % 7;
-        // }
-
-
-        var img = enemies[enemyType];
-
-        // Angle relative to player direction
-        var angle = Math.atan2(dy, dx) - player.deg;
-
-
-        // Make angle from +/- PI
-        if (angle < -Math.PI) angle += 2 * Math.PI;
-        if (angle >= Math.PI) angle -= 2 * Math.PI;
-
-        if (angle > - Math.PI * 0.5 && angle < Math.PI * 0.5) {
-          var distSquared = dx * dx + dy * dy;
-          var dist = Math.sqrt(distSquared);
-          var size = VIEWDIST / (Math.cos(angle) * dist);
-
-          if (size <= 0) {
-            continue;
-          }
-
-          // x position on the screen
-          var x = Math.tan(angle) * VIEWDIST;
-          x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
-
-          var xOffset = enemy.offset * size / 2;
-
-          if (dx < 0) {
-            xOffset *= -1;
-          }
-
-          // y position on the screen
-          var y = (PROJECTIONPLANEHEIGHT - size) / 2;
-
-          this.canvasContext.drawImage(img, x + xOffset, y, size, size);
-        }
-        // console.log(img);
-
-      }
-    }
-  }
 
   /**
    * Recursive function that gets called FRAMERATE number of times every second
@@ -354,11 +177,17 @@ export class Game {
     this.drawMiniMap();
     this.drawPlayerOnMiniMap(this.player);
     this.moveTanks();
+    this.moveBullets();
     this.updateMainCanvas();
     this.clearSprites();
     this.clearEnemies();
 
     handlePlayerMovement();
+
+    player.timeSinceLastBullet++;
+    for (i = 0; i < mapEnemies.length; i++) {
+      mapEnemies[i].timeSinceLastBullet++;
+    }
 
     // Render next frame after 1000/FRAMERATE miliseconds
     setTimeout(function () {

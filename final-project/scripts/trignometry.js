@@ -23,7 +23,7 @@ const ANGLE45 = Math.floor(ANGLE15 * 3);
 let i;
 let radian;
 
-// Initialize lookup tables for size  1 to 360 degrees and 0 degree ,i.e- total of 361 degrees
+// Initialize lookup tables for size  1 to 360 degrees and 0 degree ,i.e- total of 361 degrees but the number of values to be generated depends on projection plane width
 
 const sinTable = new Array(ANGLE360 + 1); // Table for sine angles values
 const sinITable = new Array(ANGLE360 + 1); // Table for sine inverse angles values

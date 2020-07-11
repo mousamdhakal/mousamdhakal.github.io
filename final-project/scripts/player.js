@@ -7,6 +7,8 @@ let player = {
   distanceToProjectionPlane: VIEWDIST,
   height: 64,
   speed: MOVEMENTSPEED,
+  timeSinceLastBullet: 100,
+  keySpacePressed: false
 };
 
 var mapEnemies = [
@@ -22,7 +24,10 @@ var mapEnemies = [
     maxDy: 15,
     speedX: 1,
     speedY: 0,
-    moved: 0
+    moved: 0,
+    timeSinceLastBullet: 100,
+    keySpacePressed: true
+
   },
   {
     type: 4,
@@ -36,6 +41,17 @@ var mapEnemies = [
     maxDy: 2,
     speedX: 1,
     speedY: 0,
-    moved: 0
+    moved: 0,
+    timeSinceLastBullet: 100,
+    keySpacePressed: true
+
   }
 ]
+
+function createNewBullet() {
+  return {
+    x: 200,
+    y: 160,
+    speed: MOVEMENTSPEED * 4
+  };
+}
