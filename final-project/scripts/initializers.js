@@ -1,6 +1,6 @@
 /**
-   * Create a map to represent position of obstacles
-   */
+ * Create a map to represent position of obstacles
+ */
 export function initSprites() {
   spriteMap = [];
   for (var i = 0; i < this.MAP_WIDTH; i++) {
@@ -11,6 +11,9 @@ export function initSprites() {
   }
 }
 
+/**
+ * Load image of enemy tanks and push them in an array
+ */
 export function initEnemies() {
   for (i = 0; i < enemyTypes.length; i++) {
     let img = new Image();
@@ -20,8 +23,8 @@ export function initEnemies() {
 }
 
 /**
-   * Clear the list of visible obstacles and set visibility of all obstacles to false
-   */
+ * Clear the list of visible obstacles and set visibility of all obstacles to false
+ */
 export function clearSprites() {
   for (var i = 0; i < mapItems.length; i++) {
     mapItems[i].visible = false;
@@ -30,8 +33,8 @@ export function clearSprites() {
 }
 
 /**
-   * Clear the list of visible obstacles and set visibility of all obstacles to false
-   */
+ * Clear the list of visible obstacles and set visibility of all obstacles to false
+ */
 export function clearEnemies() {
   for (var i = 0; i < mapEnemies.length; i++) {
     mapEnemies[i].visible = false;
@@ -40,8 +43,8 @@ export function clearEnemies() {
 }
 
 /**
-   * Load image of wall and get it's data from a buffer canvas
-   */
+ * Load image of wall and get it's data from a buffer canvas
+ */
 export function loadWallImage() {
   // Load the image of the wall
   this.wallImage = new Image();

@@ -59,7 +59,8 @@ export function checkWall(ycell, xcell) {
 export function checkWallBetween(playerX, playerY, objectX, objectY) {
   let xDiff = objectX - playerX;
   let yDiff = objectY - playerY;
-  // console.log(xDiff, yDiff);
+
+  // Do for second cell on the first quadrant relative to first cell
   if (xDiff >= 0 && yDiff >= 0) {
     while (xDiff > 0 || yDiff > 0) {
       if (xDiff >= yDiff) {
@@ -77,6 +78,7 @@ export function checkWallBetween(playerX, playerY, objectX, objectY) {
       }
     }
   }
+  // Do for second cell on second quadrant relative to first cell
   else if (xDiff >= 0 && yDiff < 0) {
     while (xDiff > 0 || yDiff < 0) {
       if (Math.abs(xDiff) >= Math.abs(yDiff)) {
@@ -94,6 +96,7 @@ export function checkWallBetween(playerX, playerY, objectX, objectY) {
       }
     }
   }
+  // Do for second cell on fourth quadrant relative to first cell
   else if (xDiff < 0 && yDiff >= 0) {
     while (xDiff < 0 || yDiff > 0) {
       if (Math.abs(xDiff) >= Math.abs(yDiff)) {
@@ -111,6 +114,7 @@ export function checkWallBetween(playerX, playerY, objectX, objectY) {
       }
     }
   }
+  // Do for second quadrant on third quadrant relative to first cell
   else if (xDiff < 0 && yDiff < 0) {
     while (xDiff < 0 || yDiff < 0) {
       if (Math.abs(xDiff) >= Math.abs(yDiff)) {

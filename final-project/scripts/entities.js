@@ -1,7 +1,7 @@
 // Information regarding the player
 let player = {
-  x: 160,
-  y: 160,
+  x: 100,
+  y: 300,
   arc: 0,
   deg: 0,
   distanceToProjectionPlane: VIEWDIST,
@@ -11,6 +11,7 @@ let player = {
   keySpacePressed: false
 };
 
+// Information regarding enemies on the map
 var mapEnemies = [
   {
     type: 4,
@@ -48,6 +49,10 @@ var mapEnemies = [
   }
 ]
 
+/**
+ * Creates a bullet object
+ * @returns {Object} - bullet object with x and y position and speed
+ */
 function createNewBullet() {
   return {
     x: 200,

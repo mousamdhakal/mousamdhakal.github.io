@@ -9,26 +9,33 @@
 </head>
 <body>
   <div class="main">
-    <h1>3D Tank Battle</h1>
-    <p>Use a,w,s,d for controls and space to shoot.(You can only fire after an interval)</p>
-    <button onclick="game.init()">Start Game</button>
-    <canvas id="gameCanvas" width="640" height="400">
-      Loading ....
-    </canvas>
+    <div id="start-screen">
+      <h1>3D Tank Battle</h1>
+      <p>Use a,w,s,d for controls and space to shoot.(You can only fire after an interval)</p>
+      <button onclick="game.init()">Start Game</button>
+    </div>
+    <div id="game-screen">
+      <canvas id="gameCanvas" width="640" height="400">
+        Loading ....
+      </canvas>
+    </div>
+    <div id="end-screen">
+      <p>Game over</p>
+    </div>
   </div>
 
   
 
-  <div id="minimapcontainer">
+  <!-- <div id="minimapcontainer">
     <canvas id="minimap"></canvas>
-    <!-- <canvas id="minimapcomponents"></canvas> -->
-  </div>
+   <canvas id="minimapcomponents"></canvas> -->
+  <!-- </div> -->
   
   <script src="./scripts/globals.js"></script>
   <script type="module" src="./scripts/check.js"></script>
   <script src="./scripts/trignometry.js"></script>
   <script src="./scripts/maps.js"></script>
-  <script src="./scripts/player.js"></script>
+  <script src="./scripts/entities.js"></script>
   <script src="./scripts/keyhandlers.js"></script>
   <script type="module" src="./scripts/initializers.js"></script>
   <script type="module" src="./scripts/moves.js"></script>

@@ -24,8 +24,8 @@ export class Game {
     this.canvasContext = this.canvas.getContext("2d");
 
     // Create offscreen canvas(buffer) which will be used to increase the performance and reduce visual lag
-    // All the drawing will take place on the hiddenCanvas at first and later the hiddenCanvas will be
-    // cleared in each update of the screen and the data of the entire image of
+    // All the drawing for the walls and miniMap will take place on the hiddenCanvas at first and later the hiddenCanvas will be
+    // cleared in each update of the screen and the data of the entire image of hiddenCanvas will be copied to main canvas of same dimensions.
     this.hiddenCanvas = document.createElement("canvas");
 
     // Set the dimensions equal to that of onscreen canvas
@@ -33,7 +33,7 @@ export class Game {
     this.hiddenCanvas.height = this.height;
     this.hiddenCanvasContext = this.hiddenCanvas.getContext("2d");
 
-    // Get imagedata, i.e- the rgba value of all the pixels  of offscreen canvas
+    // Get imagedata, i.e- the rgba value of all the pixels of offscreen canvas
     this.hiddenCanvasPixels = this.hiddenCanvasContext.getImageData(
       0,
       0,
@@ -53,14 +53,13 @@ export class Game {
     this.keyDownPressed = false;
     this.keyLeftPressed = false;
     this.keyRightPressed = false;
-    // this.keySpacePressed = false;
-
-    // this.timeSinceLastBullet = 100;
 
     // Set width and height of the map
     this.currentMap = [];
-    this.MAP_WIDTH = 28;
-    this.MAP_HEIGHT = 28;
+    // Set the current map
+    this.currentMap = map;
+    this.MAP_WIDTH = this.currentMap.length;
+    this.MAP_HEIGHT = this.currentMap.length;
 
     // Pixel information for the wall
     this.wallPixels;
@@ -68,13 +67,11 @@ export class Game {
     // Load image of the wall
     this.loadWallImage();
 
-    // Set the current map
-    this.currentMap = map;
-
+    // Initialize static objects and enemy tanks for rendering
     this.initSprites();
     this.initEnemies();
 
-
+    // Load image of canon of user tank
     this.canonImage = new Image();
     this.canonImage.src = "./images/canon.png";
   }
@@ -94,6 +91,9 @@ export class Game {
    */
   clearEnemies = clearEnemies;
 
+  /**
+   * Load image of enemy tanks and push them in an array
+   */
   initEnemies = initEnemies;
 
   /**
@@ -108,29 +108,6 @@ export class Game {
     this.hiddenCanvasContext.clearRect(0, 0, this.width, this.height);
   };
 
-  /**
-   * Updates the game canvas with all the pixel data from hidden canvas
-   */
-  updateMainCanvas = function () {
-    this.canvasContext.putImageData(this.hiddenCanvasPixels, 0, 0);
-    this.renderSprites();
-    this.renderEnemies();
-    this.renderBullets();
-    this.drawCanon();
-    if (player.keySpacePressed) {
-      this.fireBullet(player);
-    }
-  };
-
-  /**
-   * Initializes the game by adding event listeners and starting the update cycle
-   */
-  init() {
-    window.addEventListener("keydown", handleKeyDown.bind(this), false);
-    window.addEventListener("keyup", handleKeyUp.bind(this), false);
-
-    requestAnimationFrame(this.update.bind(this));
-  }
 
   /**
    * Draw Minimap
@@ -152,25 +129,79 @@ export class Game {
    */
   raycast = castRays;
 
+  /**
+   * Fires bullet from a tank 
+   * @param {Object} tank -  The tank from which bullet is to be fired
+   */
   fireBullet = fireBullet;
 
+  /**
+   * Draw the user canon on the screen
+   */
   drawCanon = drawCanon;
 
+  /**
+   * Move around the enemy tank and fire bullet if the tank is facing towards player and there are no blocking walls between user and enemy tank
+   */
   moveTanks = moveTanks;
 
+  /**
+   * Moves the bullet according to it's direction
+   */
   moveBullets = moveBullets;
 
+  /**
+   * Display all the obstacles that are currently visible on the screen
+   */
   renderSprites = renderSprites;
 
+  /**
+   * Display all the enemies that are currently visible on the screen
+   */
   renderEnemies = renderEnemies;
 
+  /**
+   * Display all the bullets on screen if visible
+   */
   renderBullets = renderBullets;
 
+  showGameOver() {
+    gameContainer.style.display = 'none';
+    endContainer.style.display = 'block';
+  }
+
+  /**
+   * Updates the game canvas with all the pixel data from hidden canvas
+   */
+  updateMainCanvas = function () {
+    this.canvasContext.putImageData(this.hiddenCanvasPixels, 0, 0);
+    this.renderSprites();
+    this.renderEnemies();
+    this.renderBullets();
+    this.drawCanon();
+    if (player.keySpacePressed) {
+      this.fireBullet(player);
+    }
+  };
+
+  /**
+   * Initializes the game by adding event listeners and starting the update cycle
+   */
+  init = function () {
+    window.addEventListener("keydown", handleKeyDown.bind(this), false);
+    window.addEventListener("keyup", handleKeyUp.bind(this), false);
+
+    // Hide startscreen and show gamescreen
+    startContainer.style.display = "none";
+    gameContainer.style.display = "block";
+
+    requestAnimationFrame(this.update.bind(this));
+  }
 
   /**
    * Recursive function that gets called FRAMERATE number of times every second
    */
-  update() {
+  update = function () {
     this.clearhiddenCanvas();
     this.drawBackground();
     this.raycast();

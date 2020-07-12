@@ -30,8 +30,25 @@ const BYTESPERPIXEL = 4;
 const BLOCK_SIZE = 64;
 const WALL_HEIGHT = 64;
 
-// main game object to be referenced in different parts of the game
+// Main game object to be referenced in different parts of the game
 let game;
+
+// Map to represent the obstacles
+let spriteMap;
+
+// Obstacles that are currently visible to the user
+let visibleSprites = [];
+// Enemies that are currently visible to the user
+let visibleEnemies = [];
+
+// Image of the differnet enemy types,i.e- different sides of the tank
+let enemies = [];
+
+// Array of bullets that are currnetly fired 
+let bulletList = [];
+
+// The duration between two bullets fired in number of frames, (90 corresponds to 3 seonds as we are running on 30FPS)
+const FIRINGSPEED = 90;
 
 // Obstacles in front of player
 let mapItems = [
@@ -41,77 +58,51 @@ let mapItems = [
   { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1 }
 ];
 
-
-//Map to represent the obstacles
-let spriteMap;
-
-// Obstacles that are currently visible to the user
-let visibleSprites = [];
-let visibleEnemies = [];
-
-var enemyTypes = [{
+// Types of enemy, i.e- different states of the tank
+let enemyTypes = [{
   img: './images/tank-front.png',
   moveSpeed: -3,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 100
 },
 {
   img: './images/tank-front.png',
   moveSpeed: 0,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 20
 },
 {
   img: './images/tank-left.png',
   moveSpeed: 0,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 20,
 },
 {
   img: './images/tank-left.png',
   moveSpeed: 0,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 20,
 },
 {
   img: './images/tank-back.png',
   moveSpeed: 3,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 100,
 },
 {
   img: './images/tank-back.png',
   moveSpeed: 0,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 20,
 },
 {
   img: './images/tank-right.png',
   moveSpeed: 0,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 20
 },
 {
   img: './images/tank-right.png',
   moveSpeed: 0,
-  rotSpeed: 3,
-  totalStates: 1,
   holdTime: 20
 }
 ]
 
-
-
-var enemies = [];
-var bulletList = [];
-
-const FIRINGSPEED = 100;
-
+// Get containers for the start screen, game screen and end screen
+let startContainer = document.getElementById("start-screen");
+let gameContainer = document.getElementById("game-screen");
+let endContainer = document.getElementById("end-screen");
 
