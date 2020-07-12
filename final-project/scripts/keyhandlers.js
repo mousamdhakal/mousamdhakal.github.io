@@ -1,4 +1,6 @@
-// On keydown event
+/**
+ * Responds to keydown event
+ */
 function handleKeyDown() {
   e = window.event;
 
@@ -26,7 +28,9 @@ function handleKeyDown() {
 
 }
 
-
+/**
+ * Responds to keyup event
+ */
 function handleKeyUp() {
   e = window.event;
 

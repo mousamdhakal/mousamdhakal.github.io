@@ -99,6 +99,7 @@ export function castRays() {
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
+          // Check for presence of static sprites and enemy tanks in the current position
           checkObjects(yGridIndex, xGridIndex);
           xIntersection += distToNextXIntersection;
           horizontalGrid += distToNextHorizontalGrid;
@@ -167,6 +168,7 @@ export function castRays() {
 
         // Else, keep looking.The ray is not blocked at this point as the ckecking for wall is already passed, so extend the ray to the next grid
         else {
+          // Check for presence of static sprites and tank in the current position
           checkObjects(yGridIndex, xGridIndex);
           yIntersection += distToNextYIntersection;
           verticalGrid += distToNextVerticalGrid;
@@ -217,20 +219,27 @@ export function castRays() {
   }
 }
 
+/**
+ * 
+ * @param {Number} yGridIndex - y Grid index to check
+ * @param {Number} xGridIndex - x Grid index to check
+ */
 function checkObjects(yGridIndex, xGridIndex) {
   // Check if there is an obstacle in the current grid
   if (spriteMap[yGridIndex][xGridIndex] > 1) {
     // Get position of obstacle from spriteMap
     var mapIndex = spriteMap[yGridIndex][xGridIndex];
-    // If obstacle is not already visivle set visibilty to true and push to visiblesprites array
+    // If obstacle is not already visible set visibilty to true and push to visiblesprites array
     if (!mapItems[mapIndex - 2].visible) {
       mapItems[mapIndex - 2].visible = true;
       visibleSprites.push(mapItems[mapIndex - 2]);
     }
   }
+  // Check if there is an enemy tank in the given position
   for (i = 0; i < mapEnemies.length; i++) {
     let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
     let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+    // If enemy tank is found and visibility flag is down, set the visibility to true and push in visibleEnemies array
     if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
       mapEnemies[i].visible = true;
       visibleEnemies.push(mapEnemies[i]);

@@ -9,10 +9,10 @@ body {
   background-color: #555555;
 }
 
-#minimap {
-  position: absolute;
+#game-screen {
+  display: none;
 }
 
-#minimapcomponents {
-  position: absolute;
+#end-screen {
+  display: none;
 }

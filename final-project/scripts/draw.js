@@ -230,7 +230,7 @@ export function drawFillRectangle(x, y, width, height, red, green, blue, alpha) 
       // Select the next target pixel in current row
       targetIndex += BYTESPERPIXEL;
     }
-    // Select the next target pixel by moving to next column
+    // Select the next target pixel by moving to next row
     targetIndex += (BYTESPERPIXEL * (game.hiddenCanvasPixels.width - width));
   }
 }
