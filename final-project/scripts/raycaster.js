@@ -230,19 +230,19 @@ function checkObjects(yGridIndex, xGridIndex) {
     // Get position of obstacle from spriteMap
     var mapIndex = spriteMap[yGridIndex][xGridIndex];
     // If obstacle is not already visible set visibilty to true and push to visiblesprites array
-    if (!mapItems[mapIndex - 2].visible) {
-      mapItems[mapIndex - 2].visible = true;
-      visibleSprites.push(mapItems[mapIndex - 2]);
+    if (!game.mapItems[mapIndex - 2].visible) {
+      game.mapItems[mapIndex - 2].visible = true;
+      visibleSprites.push(game.mapItems[mapIndex - 2]);
     }
   }
   // Check if there is an enemy tank in the given position
-  for (i = 0; i < mapEnemies.length; i++) {
-    let xGrid = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
-    let yGrid = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+  for (i = 0; i < game.mapEnemies.length; i++) {
+    let xGrid = Math.floor(game.mapEnemies[i].x / BLOCK_SIZE);
+    let yGrid = Math.floor(game.mapEnemies[i].y / BLOCK_SIZE);
     // If enemy tank is found and visibility flag is down, set the visibility to true and push in visibleEnemies array
-    if (xGrid == xGridIndex && yGrid == yGridIndex && !mapEnemies[i].visible) {
-      mapEnemies[i].visible = true;
-      visibleEnemies.push(mapEnemies[i]);
+    if (xGrid == xGridIndex && yGrid == yGridIndex && !game.mapEnemies[i].visible) {
+      game.mapEnemies[i].visible = true;
+      visibleEnemies.push(game.mapEnemies[i]);
     }
 
   }

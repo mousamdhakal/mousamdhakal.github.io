@@ -3,16 +3,64 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  text-align: center;
 }
 
 body {
   background-color: #555555;
+  font-family: 'Exo 2', sans-serif;
 }
 
 #game-screen {
   display: none;
 }
 
+#control-screen {
+  display: none;
+}
+
 #end-screen {
   display: none;
+}
+
+.levels {
+  width: 640px;
+}
+
+.easy__level {
+  width: 50%;
+  float: left;
+}
+
+.classic__level{
+  width: 50%;
+  float: right;
+}
+
+.levels button {
+  width: 175px;
+  height: 175px;
+  border: none;
+  cursor: pointer;
+}
+
+#easy {
+  background: url("/images/easy-map.png");
+}
+
+#classic {
+  background: url("/images/classic-map.png");
+}
+
+#start {
+  width: 414px;
+  height: 140px;
+  background: url("/images/start.png");
+  border: none;
+  cursor: pointer;
+}
+
+#game_over--img {
+  display: block;
+  margin: auto;
 }
