@@ -81,6 +81,6 @@ function createNewBullet() {
   return {
     x: 200,
     y: 160,
-    speed: MOVEMENTSPEED * 6
+    speed: MOVEMENTSPEED * 4
   };
 }

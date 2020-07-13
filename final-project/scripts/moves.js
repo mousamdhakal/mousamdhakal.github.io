@@ -124,5 +124,7 @@ export function moveBullets() {
       bullet.y -= dy;
     }
 
+    // console.log(bullet.x, bullet.y);
+
   }
 }
