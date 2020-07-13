@@ -97,6 +97,8 @@ export function renderBullets() {
     if (checkWall(yCell, xCell)) {
       // Destroy bullet after collision with wall
       bulletList.splice(i, 1);
+      // Play collision sound 
+      this.wallSound.play();
 
       // If the wall is not in boundary destroy the wall on collision with bullet
       if ((yCell != 0 && xCell != 0 && yCell != this.currentMap.length - 1 && xCell != this.currentMap.length - 1)) {
@@ -124,6 +126,8 @@ export function renderBullets() {
 
         // If hits other tanks, destroy that tank and the buller
         if (xCell == enemyXcell && yCell == enemyYcell) {
+          // Play collision sound
+          this.wallSound.play();
           bulletList.splice(i, 1);
           this.mapEnemies.splice(j, 1);
         }
