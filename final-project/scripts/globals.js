@@ -45,7 +45,6 @@ let bulletList = [];
 // The duration between two bullets fired in number of frames, (90 corresponds to 3 seonds as we are running on 30FPS)
 const FIRINGSPEED = 90;
 
-let wallsArray = ["./images/mapSmall.png", "./images/wallSecondSmall.png"];
 // Types of enemy, i.e- different states of the tank
 let enemyTypes = [{
   img: './images/tank-front.png',
