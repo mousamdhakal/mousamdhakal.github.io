@@ -1,17 +1,4 @@
 /**
- * Create a map to represent position of obstacles
- */
-export function initSprites() {
-  spriteMap = [];
-  for (var i = 0; i < this.MAP_WIDTH; i++) {
-    spriteMap[i] = [];
-  }
-  for (var j = 0; j < this.mapItems.length; j++) {
-    spriteMap[this.mapItems[j].y][this.mapItems[j].x] = j + 2;
-  }
-}
-
-/**
  * Load image of enemy tanks and push them in an array
  */
 export function initEnemies() {
@@ -22,15 +9,6 @@ export function initEnemies() {
   }
 }
 
-/**
- * Clear the list of visible obstacles and set visibility of all obstacles to false
- */
-export function clearSprites() {
-  for (var i = 0; i < this.mapItems.length; i++) {
-    this.mapItems[i].visible = false;
-  }
-  visibleSprites = [];
-}
 
 /**
  * Clear the list of visible obstacles and set visibility of all obstacles to false
@@ -45,32 +23,36 @@ export function clearEnemies() {
 /**
  * Load image of wall and get it's data from a buffer canvas
  */
-export function loadWallImage() {
-  // Load the image of the wall
-  this.wallImage = new Image();
-  this.wallImage.src = "./images/mapSmall.png";
+export function loadWallImages() {
+  for (let i = 0; i < wallsArray.length; i++) {
+    // Load the image of the wall
+    let wallImage = new Image();
+    wallImage.src = wallsArray[i];
 
-  // After the image loads,
-  this.wallImage.onload = function () {
-    // Create a buffer canvas which is not shown on screen for drawing image of wall
-    this.wallImageBuffer = document.createElement("canvas");
+    // After the image loads,
+    wallImage.onload = function () {
+      // Create a buffer canvas which is not shown on screen for drawing image of wall
+      this.wallImageBuffer = document.createElement("canvas");
 
-    // Set dimensions of the buffer canvas equal to that of the image so that data of all the image pixels are stored , no more no less
-    this.wallImageBuffer.width = this.wallImage.width;
-    this.wallImageBuffer.height = this.wallImage.height;
+      // Set dimensions of the buffer canvas equal to that of the image so that data of all the image pixels are stored , no more no less
+      this.wallImageBuffer.width = wallImage.width;
+      this.wallImageBuffer.height = wallImage.height;
 
-    // Draw the image of wall on the canvas, the image covers exactly the entire dimension of the canvas
-    this.wallImageBuffer.getContext("2d").drawImage(this.wallImage, 0, 0);
+      // Draw the image of wall on the canvas, the image covers exactly the entire dimension of the canvas
+      this.wallImageBuffer.getContext("2d").drawImage(wallImage, 0, 0);
 
-    // Get rgba value of each pixel from the wallbuffer , so that we can recreate part of the image by drawing those color values
-    let imageData = this.wallImageBuffer
-      .getContext("2d")
-      .getImageData(
-        0,
-        0,
-        this.wallImageBuffer.width,
-        this.wallImageBuffer.height
-      );
-    this.wallPixels = imageData.data;
-  }.bind(this);
+      // Get rgba value of each pixel from the wallbuffer , so that we can recreate part of the image by drawing those color values
+      let imageData = this.wallImageBuffer
+        .getContext("2d")
+        .getImageData(
+          0,
+          0,
+          this.wallImageBuffer.width,
+          this.wallImageBuffer.height
+        );
+      let pixelData = imageData.data;
+      this.wallPixels.push(pixelData);
+    }.bind(this);
+  }
+
 }

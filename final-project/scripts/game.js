@@ -2,8 +2,8 @@ import { drawBackground } from "./draw.js";
 import { drawMiniMap, drawPlayerOnMiniMap } from "./miniMap.js";
 import { castRays } from "./raycaster.js";
 import { checkEnemyTank, checkWall, checkWallBetween } from './check.js';
-import { renderSprites, renderEnemies, renderBullets, drawCanon } from "./render.js";
-import { initSprites, initEnemies, clearSprites, clearEnemies, loadWallImage } from "./initializers.js";
+import { renderEnemies, renderBullets, drawCanon } from "./render.js";
+import { initEnemies, clearEnemies, loadWallImages } from "./initializers.js";
 import { fireBullet, moveTanks, moveBullets } from './moves.js'
 
 /**
@@ -66,16 +66,13 @@ export class Game {
     this.MAP_HEIGHT = this.currentMap.length;
 
     // Pixel information for the wall
-    this.wallPixels;
+    this.wallPixels = [];
 
-    this.mapItems = getMapItems(this.mapIndex);
     this.mapEnemies = getEnemies();
 
     // Load image of the wall
-    this.loadWallImage();
+    this.loadWallImages();
 
-    // Initialize static objects and enemy tanks for rendering
-    this.initSprites();
     this.initEnemies();
 
     // Load image of canon of user tank
@@ -88,24 +85,13 @@ export class Game {
     endContainer.style.display = 'none';
     this.currentMap = getMap(this.mapIndex);
     this.player = getPlayer();
-    this.mapItems = getMapItems(this.mapIndex);
     this.mapEnemies = getEnemies();
     bulletList = [];
-    this.initSprites();
     this.initEnemies();
     this.callTimeOut = true;
     this.update();
   }
 
-  /**
-   * Create a map to represent position of obstacles
-   */
-  initSprites = initSprites;
-
-  /**
-   * Clear the list of visible obstacles and set visibility of all obstacles to false
-   */
-  clearSprites = clearSprites;
 
   /**
    * Clear the list of visible obstacles and set visibility of all obstacles to false
@@ -120,7 +106,7 @@ export class Game {
   /**
    * Load image of wall and get it's data from a buffer canvas
    */
-  loadWallImage = loadWallImage;
+  loadWallImages = loadWallImages;
 
   /**
    * Clears the hidden canvas
@@ -172,11 +158,6 @@ export class Game {
   moveBullets = moveBullets;
 
   /**
-   * Display all the obstacles that are currently visible on the screen
-   */
-  renderSprites = renderSprites;
-
-  /**
    * Display all the enemies that are currently visible on the screen
    */
   renderEnemies = renderEnemies;
@@ -197,7 +178,6 @@ export class Game {
    */
   updateMainCanvas = function () {
     this.canvasContext.putImageData(this.hiddenCanvasPixels, 0, 0);
-    this.renderSprites();
     this.renderEnemies();
     this.renderBullets();
     this.drawCanon();
@@ -232,7 +212,6 @@ export class Game {
     this.moveTanks();
     this.moveBullets();
     this.updateMainCanvas();
-    this.clearSprites();
     this.clearEnemies();
 
     handlePlayerMovement();
@@ -313,8 +292,7 @@ function handlePlayerMovement() {
   if (dx > 0) {
     // Player is moving right
     if (
-      (checkWall(playerYCell, playerXCell + 1)
-        || spriteMap[playerYCell][playerXCell + 1] > 1 || checkEnemyTank(playerYCell, playerXCell + 1)) && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      (checkWall(playerYCell, playerXCell + 1) || checkEnemyTank(playerYCell, playerXCell + 1)) && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
       game.player.x -= playerXCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
@@ -322,8 +300,7 @@ function handlePlayerMovement() {
   } else {
     // Player is moving left
     if ((
-      checkWall(playerYCell, playerXCell - 1) ||
-      spriteMap[playerYCell][playerXCell - 1] > 1 || checkEnemyTank(playerYCell, playerXCell - 1)) && playerXCellOffset < MINDISTANCETOWALL
+      checkWall(playerYCell, playerXCell - 1) || checkEnemyTank(playerYCell, playerXCell - 1)) && playerXCellOffset < MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
       game.player.x += MINDISTANCETOWALL - playerXCellOffset;
@@ -333,8 +310,7 @@ function handlePlayerMovement() {
   if (dy < 0) {
     // Player is moving up
     if ((
-      checkWall(playerYCell - 1, playerXCell) ||
-      spriteMap[playerYCell - 1][playerXCell] > 1 || checkEnemyTank(playerYCell - 1, playerXCell)) &&
+      checkWall(playerYCell - 1, playerXCell) || checkEnemyTank(playerYCell - 1, playerXCell)) &&
       playerYCellOffset < MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed
@@ -343,8 +319,7 @@ function handlePlayerMovement() {
   } else {
     // Player is moving down
     if ((
-      checkWall(playerYCell + 1, playerXCell) ||
-      spriteMap[playerYCell + 1][playerXCell] > 1 || checkEnemyTank(playerYCell + 1, playerXCell)) &&
+      checkWall(playerYCell + 1, playerXCell) || checkEnemyTank(playerYCell + 1, playerXCell)) &&
       playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
     ) {
       // Move player back if wall crossed

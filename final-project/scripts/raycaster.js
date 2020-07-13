@@ -15,6 +15,8 @@ export function castRays() {
   var distToNextXIntersection;
   var distToNextYIntersection;
 
+  let wallType = 0;
+
   // Current block/tile of the map that the ray is in
   var xGridIndex;
   var yGridIndex;
@@ -94,6 +96,7 @@ export function castRays() {
         else if (this.currentMap[yGridIndex][xGridIndex] != 0) {
           distToHorizontalGridBeingHit =
             (xIntersection - this.player.x) * cosITable[castArc];
+          wallType = this.currentMap[yGridIndex][xGridIndex];
           break;
         }
 
@@ -163,6 +166,8 @@ export function castRays() {
         else if (this.currentMap[yGridIndex][xGridIndex] != 0) {
           distToVerticalGridBeingHit =
             (yIntersection - this.player.y) * sinITable[castArc];
+          wallType = this.currentMap[yGridIndex][xGridIndex];
+
           break;
         }
 
@@ -209,7 +214,8 @@ export function castRays() {
       topOfWall,
       1,
       bottomOfWall - topOfWall + 1,
-      xOffset
+      xOffset,
+      wallType - 1
     );
 
     // Trace the next ray
@@ -225,16 +231,6 @@ export function castRays() {
  * @param {Number} xGridIndex - x Grid index to check
  */
 function checkObjects(yGridIndex, xGridIndex) {
-  // Check if there is an obstacle in the current grid
-  if (spriteMap[yGridIndex][xGridIndex] > 1) {
-    // Get position of obstacle from spriteMap
-    var mapIndex = spriteMap[yGridIndex][xGridIndex];
-    // If obstacle is not already visible set visibilty to true and push to visiblesprites array
-    if (!game.mapItems[mapIndex - 2].visible) {
-      game.mapItems[mapIndex - 2].visible = true;
-      visibleSprites.push(game.mapItems[mapIndex - 2]);
-    }
-  }
   // Check if there is an enemy tank in the given position
   for (i = 0; i < game.mapEnemies.length; i++) {
     let xGrid = Math.floor(game.mapEnemies[i].x / BLOCK_SIZE);

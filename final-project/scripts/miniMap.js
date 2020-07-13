@@ -11,18 +11,13 @@ export function drawMiniMap() {
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 100, 100, 100, 255);
       }
-      else if (spriteMap[r][c] > 1) {
-        // Draw blue square if there is an obstacle
-        drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
-          (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 200, 255);
-      }
       else if (checkEnemyTank(r, c)) {
         // Draw black square if there is an enemy tank
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 0, 255);
       }
       else if (checkBullet(r, c)) {
-        // Draw orange square if there is a bullet
+        // Draw red square if there is a bullet
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 255, 0, 0, 255);
       }

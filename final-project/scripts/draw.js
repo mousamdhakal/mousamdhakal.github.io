@@ -135,7 +135,7 @@ export function drawLine(startX, startY, endX, endY, red, green, blue, alpha) {
  * @param {Number} height 
  * @param {Number} xOffset 
  */
-export function drawWallSliceRectangle(x, y, width, height, xOffset) {
+export function drawWallSliceRectangle(x, y, width, height, xOffset, wallType) {
 
   // Wait until the image loads
   if (game.wallImageBuffer == undefined)
@@ -166,17 +166,20 @@ export function drawWallSliceRectangle(x, y, width, height, xOffset) {
   while (true) {
 
     // This error term is used to check if we need to copy some pixels multiple times or skip some pixels
+    // If the height to draw is less than the actual height of image this will cause some rows to be skipped 
+    // while if height to draw is more than the actual height of image , this will cause some rows to be drawn repeatedly
     // Add height to the errorterm
     yError += height;
 
 
     // Get r,g,b,a values from the source pixel
-    let red = Math.floor(game.wallPixels[sourceIndex]);
-    let green = Math.floor(game.wallPixels[sourceIndex + 1]);
-    let blue = Math.floor(game.wallPixels[sourceIndex + 2]);
-    let alpha = Math.floor(game.wallPixels[sourceIndex + 3]);
+    let red = Math.floor(game.wallPixels[wallType][sourceIndex]);
+    let green = Math.floor(game.wallPixels[wallType][sourceIndex + 1]);
+    let blue = Math.floor(game.wallPixels[wallType][sourceIndex + 2]);
+    let alpha = Math.floor(game.wallPixels[wallType][sourceIndex + 3]);
 
     // For this column , keep drawing each row , until the end of drawing area, or all rows finished
+    // Note that the width and height of the buffer or the image is same, so we are checking if the height to draw is greater than actual height of image or not
     while (yError >= game.wallImageBuffer.width) {
       // Reduce the actial image width from the buffer from error term 
       yError -= game.wallImageBuffer.width;
