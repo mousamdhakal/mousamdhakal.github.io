@@ -17,7 +17,7 @@ const FRAMERATE = 30;
 const MINIMAPSCALE = 5;
 
 // Speed at which player movement occurs on moving forward and backward
-const MOVEMENTSPEED = 8;
+const MOVEMENTSPEED = 6;
 
 // Calculated as (PROJECTIONPLSNEWIDTH/2) / Math.tan((fov / 2))
 const VIEWDIST = 554;

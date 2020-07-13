@@ -49,7 +49,7 @@ export class Game {
     this.miniMapY;
 
     // Settimeout method called to create animation
-    this.timeOut;
+    this.callTimeOut = true;
 
     // Set flags to handle keyboard input
     this.keyUpPressed = false;
@@ -84,7 +84,6 @@ export class Game {
   }
 
   restartGame() {
-    clearTimeout(this.timeOut);
     gameContainer.style.display = 'block';
     endContainer.style.display = 'none';
     this.currentMap = getMap(this.mapIndex);
@@ -94,9 +93,8 @@ export class Game {
     bulletList = [];
     this.initSprites();
     this.initEnemies();
-    this.timeOut = setTimeout(function () {
-      requestAnimationFrame(game.update.bind(game));
-    }, 1000 / FRAMERATE);
+    this.callTimeOut = true;
+    this.update();
   }
 
   /**
@@ -189,6 +187,7 @@ export class Game {
   renderBullets = renderBullets;
 
   showGameOver() {
+    this.callTimeOut = false;
     gameContainer.style.display = 'none';
     endContainer.style.display = 'block';
   }
@@ -244,9 +243,12 @@ export class Game {
     }
 
     // Render next frame after 1000/FRAMERATE miliseconds
-    this.timeOut = setTimeout(function () {
-      requestAnimationFrame(game.update.bind(game));
-    }, 1000 / FRAMERATE);
+    if (this.callTimeOut) {
+      this.timeOut = setTimeout(function () {
+        requestAnimationFrame(game.update.bind(game));
+      }, 1000 / FRAMERATE);
+    }
+
   }
 }
 
