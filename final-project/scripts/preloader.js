@@ -24,12 +24,13 @@ preload(startImages,
   "../images/start.png"
 )
 
-// Load tank images which will be used via caching as well
+// Load tank images and canon image which will be used via caching as well
 preload(tankImages,
   './images/tank-front.png',
   './images/tank-left.png',
   './images/tank-back.png',
-  './images/tank-back.png'
+  './images/tank-back.png',
+  './images/canon.png'
 )
 
 onLoadFinish();

@@ -78,6 +78,9 @@ export class Game {
     // Load image of canon of user tank
     this.canonImage = new Image();
     this.canonImage.src = "./images/canon.png";
+
+    this.wallSound = this.sound('./sounds/hit-sound.wav');
+    this.tankSound = this.sound('./sounds/explode.wav');
   }
 
   restartGame() {
@@ -166,6 +169,16 @@ export class Game {
    * Display all the bullets on screen if visible
    */
   renderBullets = renderBullets;
+
+  sound(src) {
+    let sound = document.createElement("audio");
+    sound.src = src;
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    return sound;
+  }
 
   showGameOver() {
     this.callTimeOut = false;

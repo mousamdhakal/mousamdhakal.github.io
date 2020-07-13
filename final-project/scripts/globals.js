@@ -45,6 +45,9 @@ let bulletList = [];
 // The duration between two bullets fired in number of frames, (90 corresponds to 3 seonds as we are running on 30FPS)
 const FIRINGSPEED = 90;
 
+// Sound of the tank canon hitting obstacles
+let gameSound;
+
 // Types of enemy, i.e- different states of the tank
 let enemyTypes = [{
   img: './images/tank-front.png',

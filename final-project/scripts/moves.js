@@ -73,6 +73,8 @@ export function fireBullet(tank) {
   // if it is above the minimum time between two bullets
   if (tank.timeSinceLastBullet > FIRINGSPEED && tank.keySpacePressed) {
 
+    // Play firing sound
+    game.tankSound.play();
     // Create new bullet object
     let bullet = createNewBullet();
 
