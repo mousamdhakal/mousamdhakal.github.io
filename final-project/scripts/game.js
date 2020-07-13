@@ -186,6 +186,13 @@ export class Game {
     endContainer.style.display = 'block';
   }
 
+  showWon() {
+    this.callTimeOut = false;
+    gameContainer.style.display = 'none';
+    winContainer.style.display = 'block';
+    startContainer.style.display = 'block';
+  }
+
   /**
    * Updates the game canvas with all the pixel data from hidden canvas
    */
@@ -217,6 +224,9 @@ export class Game {
    * Recursive function that gets called FRAMERATE number of times every second
    */
   update = function () {
+    if (this.mapEnemies.length < 1) {
+      this.showWon();
+    }
     this.clearhiddenCanvas();
     this.drawBackground();
     this.raycast();

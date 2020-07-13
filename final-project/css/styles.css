@@ -68,3 +68,7 @@ body {
   display: block;
   margin: auto;
 }
+
+#won {
+  display: none;
+}
