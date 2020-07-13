@@ -8,6 +8,7 @@ function startEasy() {
   game = new Game(canvas, 1);
   startContainer.style.display = "none";
   controlContainer.style.display = "block";
+  winContainer.style.display = "none";
 }
 
 function startClassic() {
@@ -15,6 +16,7 @@ function startClassic() {
   game = new Game(canvas, 2);
   startContainer.style.display = "none";
   controlContainer.style.display = "block";
+  winContainer.style.display = "none";
 }
 
 document.getElementById('easy').addEventListener('click', startEasy);
