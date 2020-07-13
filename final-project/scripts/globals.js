@@ -33,11 +33,6 @@ const WALL_HEIGHT = 64;
 // Main game object to be referenced in different parts of the game
 let game;
 
-// Map to represent the obstacles
-let spriteMap;
-
-// Obstacles that are currently visible to the user
-let visibleSprites = [];
 // Enemies that are currently visible to the user
 let visibleEnemies = [];
 
@@ -50,6 +45,7 @@ let bulletList = [];
 // The duration between two bullets fired in number of frames, (90 corresponds to 3 seonds as we are running on 30FPS)
 const FIRINGSPEED = 90;
 
+let wallsArray = ["./images/mapSmall.png", "./images/wallSecondSmall.png"];
 // Types of enemy, i.e- different states of the tank
 let enemyTypes = [{
   img: './images/tank-front.png',

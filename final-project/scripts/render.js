@@ -1,56 +1,5 @@
 import { checkWallBetween, checkWall } from './check.js';
 
-
-/**
- * Display all obstacles that are currently visible on the screen
- */
-export function renderSprites() {
-  for (var i = 0; i < visibleSprites.length; i++) {
-    // Store current obstacle in sprite variable
-    var sprite = visibleSprites[i];
-
-    // Caclulate x and y cell for the player
-    var playerXCell = Math.floor(this.player.x / BLOCK_SIZE);
-    var playerYCell = Math.floor(this.player.y / BLOCK_SIZE);
-
-    // If there is no wall from player's cell to the cell of the obstacle/sprite
-    if (!checkWallBetween(playerXCell, playerYCell, sprite.x, sprite.y)) {
-      // Get the image of the obstacle
-      var img = new Image();
-      img.src = visibleSprites[i].img;
-
-      // Calculate distance to the sprite in both co-ordinates
-      var dx = ((sprite.x * BLOCK_SIZE - this.player.x) / BLOCK_SIZE);
-      var dy = ((sprite.y * BLOCK_SIZE - this.player.y) / BLOCK_SIZE);
-
-      // Calculate the exact distance from the user to the sprite
-      var dist = Math.sqrt(dx * dx + dy * dy);
-
-      // Calculate angle of the sprite relative to the player angle
-      var spriteAngle = Math.atan2(dy, dx) - this.player.deg;
-
-      // Calculate size of the sprite to be drawn
-      var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
-      if (size <= 0) {
-        continue;
-      }
-
-      // x position on the screen
-      var x = Math.tan(spriteAngle) * VIEWDIST;
-      x = PROJECTIONPLANEWIDTH / 2 + x - size / 2;
-
-      // y position on the screen
-      var y = (PROJECTIONPLANEHEIGHT - size) / 2;
-
-      // Offset value to make up for error in calculations
-      var xOffset = visibleSprites[i].offset * size / 2;
-
-      // Draw obstacle on the canvas
-      this.canvasContext.drawImage(img, x + xOffset, y, size, size);
-    }
-  }
-}
-
 /**
  * Display all the enemies that are currently visible on the screen
  */
@@ -144,12 +93,6 @@ export function renderBullets() {
     let xCell = Math.floor(bullet.x / BLOCK_SIZE);
     let yCell = Math.floor(bullet.y / BLOCK_SIZE);
 
-    // If there is an static object on the current cell of bullet, destroy both bullet and the static object and continue to next iteration
-    if (spriteMap[yCell][xCell] > 1) {
-      bulletList.splice(i, 1);
-      spriteMap[yCell][xCell] = 0;
-      continue;
-    }
     // Check for bullet collision with walls
     if (checkWall(yCell, xCell)) {
       // Destroy bullet after collision with wall

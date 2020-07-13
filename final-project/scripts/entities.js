@@ -54,25 +54,6 @@ function getEnemies() {
   return mapEnemies;
 }
 
-function getMapItems(index) {
-
-  if (index == 1) {
-    return [
-      { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1 },
-      { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1 },
-      { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1 },
-      { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1 }
-    ];
-  } else if (index == 2) {
-    return [
-      { x: 14, y: 16, img: "./images/armor.png", visible: false, offset: -1 },
-      { x: 14, y: 6, img: "./images/armor.png", visible: false, offset: -1 },
-      { x: 13, y: 16, img: "./images/dog-small.png", visible: false, offset: -1 },
-      { x: 13, y: 6, img: "./images/dog-small.png", visible: false, offset: -1 }
-    ];
-  }
-}
-
 /**
  * Creates a bullet object
  * @returns {Object} - bullet object with x and y position and speed
