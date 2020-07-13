@@ -10,8 +10,8 @@ export function renderSprites() {
     var sprite = visibleSprites[i];
 
     // Caclulate x and y cell for the player
-    var playerXCell = Math.floor(player.x / BLOCK_SIZE);
-    var playerYCell = Math.floor(player.y / BLOCK_SIZE);
+    var playerXCell = Math.floor(this.player.x / BLOCK_SIZE);
+    var playerYCell = Math.floor(this.player.y / BLOCK_SIZE);
 
     // If there is no wall from player's cell to the cell of the obstacle/sprite
     if (!checkWallBetween(playerXCell, playerYCell, sprite.x, sprite.y)) {
@@ -20,14 +20,14 @@ export function renderSprites() {
       img.src = visibleSprites[i].img;
 
       // Calculate distance to the sprite in both co-ordinates
-      var dx = ((sprite.x * BLOCK_SIZE - player.x) / BLOCK_SIZE);
-      var dy = ((sprite.y * BLOCK_SIZE - player.y) / BLOCK_SIZE);
+      var dx = ((sprite.x * BLOCK_SIZE - this.player.x) / BLOCK_SIZE);
+      var dy = ((sprite.y * BLOCK_SIZE - this.player.y) / BLOCK_SIZE);
 
       // Calculate the exact distance from the user to the sprite
       var dist = Math.sqrt(dx * dx + dy * dy);
 
       // Calculate angle of the sprite relative to the player angle
-      var spriteAngle = Math.atan2(dy, dx) - player.deg;
+      var spriteAngle = Math.atan2(dy, dx) - this.player.deg;
 
       // Calculate size of the sprite to be drawn
       var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
@@ -65,15 +65,15 @@ export function renderEnemies() {
     // Calculate x and y cell of enemy and player
     var enemyXCell = Math.floor(enemy.x / BLOCK_SIZE);
     var enemyYCell = Math.floor(enemy.y / BLOCK_SIZE);
-    var playerXCell = Math.floor(player.x / BLOCK_SIZE);
-    var playerYCell = Math.floor(player.y / BLOCK_SIZE);
+    var playerXCell = Math.floor(this.player.x / BLOCK_SIZE);
+    var playerYCell = Math.floor(this.player.y / BLOCK_SIZE);
 
     // If there is no wall from player's cell position to the cell position of the enemy tank
     if (!checkWallBetween(playerXCell, playerYCell, enemyXCell, enemyYCell)) {
 
       // Calculate distance to the enemy tank in both co-ordinates
-      var dx = ((enemy.x - player.x) / BLOCK_SIZE);
-      var dy = ((enemy.y - player.y) / BLOCK_SIZE);
+      var dx = ((enemy.x - this.player.x) / BLOCK_SIZE);
+      var dy = ((enemy.y - this.player.y) / BLOCK_SIZE);
 
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
       if (dy < -2) {
@@ -89,7 +89,7 @@ export function renderEnemies() {
       var img = enemies[enemyType];
 
       // Angle relative to player direction
-      var angle = Math.atan2(dy, dx) - player.deg;
+      var angle = Math.atan2(dy, dx) - this.player.deg;
 
 
       // Make angle from +/- PI
@@ -137,8 +137,8 @@ export function renderBullets() {
     var bullet = bulletList[i];
 
     // Calculate distance to the bullet from player in both co-ordinates
-    var dx = ((bullet.x - player.x) / BLOCK_SIZE);
-    var dy = ((bullet.y - player.y) / BLOCK_SIZE);
+    var dx = ((bullet.x - this.player.x) / BLOCK_SIZE);
+    var dy = ((bullet.y - this.player.y) / BLOCK_SIZE);
 
     // Calculate x and y cell of the bullet
     let xCell = Math.floor(bullet.x / BLOCK_SIZE);
@@ -165,7 +165,7 @@ export function renderBullets() {
     var dist = Math.sqrt(dx * dx + dy * dy);
 
     // Calculate angle of the sprite relative to the player angle
-    var spriteAngle = Math.atan2(dy, dx) - player.deg;
+    var spriteAngle = Math.atan2(dy, dx) - this.player.deg;
 
     // Calculate size of the sprite to be drawn
     var size = VIEWDIST / (Math.cos(spriteAngle) * dist);
@@ -174,15 +174,15 @@ export function renderBullets() {
     }
 
     // Check for bullet collision with enemy tanks if fired by player
-    if (bullet.fired == player) {
-      for (let j = 0; j < mapEnemies.length; j++) {
-        let enemyXcell = Math.floor(mapEnemies[j].x / BLOCK_SIZE);
-        let enemyYcell = Math.floor(mapEnemies[j].y / BLOCK_SIZE);
+    if (bullet.fired == this.player) {
+      for (let j = 0; j < this.mapEnemies.length; j++) {
+        let enemyXcell = Math.floor(this.mapEnemies[j].x / BLOCK_SIZE);
+        let enemyYcell = Math.floor(this.mapEnemies[j].y / BLOCK_SIZE);
 
         // If hits other tanks, destroy that tank and the buller
         if (xCell == enemyXcell && yCell == enemyYcell) {
           bulletList.splice(i, 1);
-          mapEnemies.splice(j, 1);
+          this.mapEnemies.splice(j, 1);
         }
       }
       // X position on the screen
@@ -193,8 +193,8 @@ export function renderBullets() {
       var y = (PROJECTIONPLANEHEIGHT - size) / 2;
     } else {
       // Calculate difference in distance between bullet and player if fired by enemy tank in number of cells
-      var diffX = ((bullet.fired.x - player.x) / BLOCK_SIZE);
-      var diffY = ((bullet.fired.y - player.y) / BLOCK_SIZE);
+      var diffX = ((bullet.fired.x - this.player.x) / BLOCK_SIZE);
+      var diffY = ((bullet.fired.y - this.player.y) / BLOCK_SIZE);
 
       // TODO: (Checking to be done for left and right position of tank)
       // if (diffY < -2) {

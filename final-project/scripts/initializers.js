@@ -6,8 +6,8 @@ export function initSprites() {
   for (var i = 0; i < this.MAP_WIDTH; i++) {
     spriteMap[i] = [];
   }
-  for (var j = 0; j < mapItems.length; j++) {
-    spriteMap[mapItems[j].y][mapItems[j].x] = j + 2;
+  for (var j = 0; j < this.mapItems.length; j++) {
+    spriteMap[this.mapItems[j].y][this.mapItems[j].x] = j + 2;
   }
 }
 
@@ -26,8 +26,8 @@ export function initEnemies() {
  * Clear the list of visible obstacles and set visibility of all obstacles to false
  */
 export function clearSprites() {
-  for (var i = 0; i < mapItems.length; i++) {
-    mapItems[i].visible = false;
+  for (var i = 0; i < this.mapItems.length; i++) {
+    this.mapItems[i].visible = false;
   }
   visibleSprites = [];
 }
@@ -36,8 +36,8 @@ export function clearSprites() {
  * Clear the list of visible obstacles and set visibility of all obstacles to false
  */
 export function clearEnemies() {
-  for (var i = 0; i < mapEnemies.length; i++) {
-    mapEnemies[i].visible = false;
+  for (var i = 0; i < this.mapEnemies.length; i++) {
+    this.mapEnemies[i].visible = false;
   }
   visibleEnemies = [];
 }

@@ -4,11 +4,11 @@ import { checkWall, checkWallBetween } from './check.js';
  * Move around the enemy tank and fire bullet if the tank is facing towards player and there are no blocking walls between user and enemy tank
  */
 export function moveTanks() {
-  for (i = 0; i < mapEnemies.length; i++) {
-    let enemy = mapEnemies[i];
+  for (i = 0; i < this.mapEnemies.length; i++) {
+    let enemy = this.mapEnemies[i];
     var enemyType = enemy.type;
-    var diffX = ((enemy.x - player.x) / BLOCK_SIZE);
-    var diffY = ((enemy.y - player.y) / BLOCK_SIZE);
+    var diffX = ((enemy.x - this.player.x) / BLOCK_SIZE);
+    var diffY = ((enemy.y - this.player.y) / BLOCK_SIZE);
 
     // Set the type of tank that is which face of tank to show according to it's position from user
     if (diffY < -2) {
@@ -77,14 +77,14 @@ export function fireBullet(tank) {
     let bullet = createNewBullet();
 
     // If bullet is fired from user tank, calculate the direction of bullet according to player's direction
-    if (tank == player) {
+    if (tank == game.player) {
       bullet.bulletXDir = cosTable[game.player.arc];
       bullet.bulletYDir = sinTable[game.player.arc];
     }
     // If the bullet is fired from enemy tank, calculated the direction of bullet according to the angle between the tank and user tank.
     else {
-      var diffX = ((tank.x - player.x) / BLOCK_SIZE);
-      var diffY = ((tank.y - player.y) / BLOCK_SIZE);
+      var diffX = ((tank.x - game.player.x) / BLOCK_SIZE);
+      var diffY = ((tank.y - game.player.y) / BLOCK_SIZE);
 
       let angle = Math.atan2(diffY, diffX);
       bullet.bulletXDir = Math.cos(angle);
@@ -114,7 +114,7 @@ export function moveBullets() {
     let dx = (bullet.bulletXDir * bullet.speed);
     let dy = (bullet.bulletYDir * bullet.speed);
     // If bullet fired from player
-    if (bullet.fired == player) {
+    if (bullet.fired == game.player) {
       // Change x and y position by addition as bullet is to be moved away from player
       bullet.x += dx;
       bullet.y += dy;

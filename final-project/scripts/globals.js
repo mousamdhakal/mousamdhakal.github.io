@@ -50,14 +50,6 @@ let bulletList = [];
 // The duration between two bullets fired in number of frames, (90 corresponds to 3 seonds as we are running on 30FPS)
 const FIRINGSPEED = 90;
 
-// Obstacles in front of player
-let mapItems = [
-  { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1 },
-  { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1 },
-  { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1 },
-  { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1 }
-];
-
 // Types of enemy, i.e- different states of the tank
 let enemyTypes = [{
   img: './images/tank-front.png',
@@ -103,6 +95,7 @@ let enemyTypes = [{
 
 // Get containers for the start screen, game screen and end screen
 let startContainer = document.getElementById("start-screen");
+let controlContainer = document.getElementById("control-screen");
 let gameContainer = document.getElementById("game-screen");
 let endContainer = document.getElementById("end-screen");
 

@@ -6,9 +6,9 @@
  */
 
 export function checkEnemyTank(ycell, xcell) {
-  for (i = 0; i < mapEnemies.length; i++) {
-    let enemyX = Math.floor(mapEnemies[i].x / BLOCK_SIZE);
-    let enemyY = Math.floor(mapEnemies[i].y / BLOCK_SIZE);
+  for (i = 0; i < game.mapEnemies.length; i++) {
+    let enemyX = Math.floor(game.mapEnemies[i].x / BLOCK_SIZE);
+    let enemyY = Math.floor(game.mapEnemies[i].y / BLOCK_SIZE);
     if (xcell == enemyX && ycell == enemyY) {
       return true;
     }

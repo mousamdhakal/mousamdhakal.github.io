@@ -14,7 +14,7 @@ export class Game {
    * Initializes and sets up properties(variables) of the game
    * @param {Object} canvas DOM element canvas which will be used as main game window
    */
-  constructor(canvas) {
+  constructor(canvas, mapIndex) {
     // Set the width and height property to that of canvas element
     this.width = canvas.width;
     this.height = canvas.height;
@@ -42,11 +42,14 @@ export class Game {
     );
 
     // Set player of the game as player object from player.js
-    this.player = player;
+    this.player = getPlayer();
 
     // Initialize vairables to draw player position on the minimap
     this.miniMapX;
     this.miniMapY;
+
+    // Settimeout method called to create animation
+    this.timeOut;
 
     // Set flags to handle keyboard input
     this.keyUpPressed = false;
@@ -56,13 +59,17 @@ export class Game {
 
     // Set width and height of the map
     this.currentMap = [];
+    this.mapIndex = mapIndex;
     // Set the current map
-    this.currentMap = map;
+    this.currentMap = getMap(this.mapIndex);
     this.MAP_WIDTH = this.currentMap.length;
     this.MAP_HEIGHT = this.currentMap.length;
 
     // Pixel information for the wall
     this.wallPixels;
+
+    this.mapItems = getMapItems();
+    this.mapEnemies = getEnemies();
 
     // Load image of the wall
     this.loadWallImage();
@@ -74,6 +81,22 @@ export class Game {
     // Load image of canon of user tank
     this.canonImage = new Image();
     this.canonImage.src = "./images/canon.png";
+  }
+
+  restartGame() {
+    clearTimeout(this.timeOut);
+    gameContainer.style.display = 'block';
+    endContainer.style.display = 'none';
+    this.currentMap = getMap(this.mapIndex);
+    this.player = getPlayer();
+    this.mapItems = getMapItems();
+    this.mapEnemies = getEnemies();
+    bulletList = [];
+    this.initSprites();
+    this.initEnemies();
+    this.timeOut = setTimeout(function () {
+      requestAnimationFrame(game.update.bind(game));
+    }, 1000 / FRAMERATE);
   }
 
   /**
@@ -179,8 +202,8 @@ export class Game {
     this.renderEnemies();
     this.renderBullets();
     this.drawCanon();
-    if (player.keySpacePressed) {
-      this.fireBullet(player);
+    if (this.player.keySpacePressed) {
+      this.fireBullet(this.player);
     }
   };
 
@@ -192,10 +215,10 @@ export class Game {
     window.addEventListener("keyup", handleKeyUp.bind(this), false);
 
     // Hide startscreen and show gamescreen
-    startContainer.style.display = "none";
+    controlContainer.style.display = "none";
     gameContainer.style.display = "block";
 
-    requestAnimationFrame(this.update.bind(this));
+    this.update();
   }
 
   /**
@@ -215,13 +238,13 @@ export class Game {
 
     handlePlayerMovement();
 
-    player.timeSinceLastBullet++;
-    for (i = 0; i < mapEnemies.length; i++) {
-      mapEnemies[i].timeSinceLastBullet++;
+    this.player.timeSinceLastBullet++;
+    for (i = 0; i < this.mapEnemies.length; i++) {
+      this.mapEnemies[i].timeSinceLastBullet++;
     }
 
     // Render next frame after 1000/FRAMERATE miliseconds
-    setTimeout(function () {
+    this.timeOut = setTimeout(function () {
       requestAnimationFrame(game.update.bind(game));
     }, 1000 / FRAMERATE);
   }
