@@ -54,16 +54,23 @@ function getEnemies() {
   return mapEnemies;
 }
 
-function getMapItems() {
-  // Obstacles in front of player
-  let mapItems = [
-    { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1 },
-    { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1 },
-    { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1 },
-    { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1 }
-  ];
+function getMapItems(index) {
 
-  return mapItems;
+  if (index == 1) {
+    return [
+      { x: 10, y: 14, img: "./images/armor.png", visible: false, offset: 1 },
+      { x: 14, y: 10, img: "./images/armor.png", visible: false, offset: -1 },
+      { x: 10, y: 13, img: "./images/dog-small.png", visible: false, offset: 1 },
+      { x: 13, y: 10, img: "./images/dog-small.png", visible: false, offset: -1 }
+    ];
+  } else if (index == 2) {
+    return [
+      { x: 14, y: 16, img: "./images/armor.png", visible: false, offset: -1 },
+      { x: 14, y: 6, img: "./images/armor.png", visible: false, offset: -1 },
+      { x: 13, y: 16, img: "./images/dog-small.png", visible: false, offset: -1 },
+      { x: 13, y: 6, img: "./images/dog-small.png", visible: false, offset: -1 }
+    ];
+  }
 }
 
 /**

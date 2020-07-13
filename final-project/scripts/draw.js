@@ -12,9 +12,9 @@ export function drawBackground() {
     color -= step * 2;
   }
   // Paint the floor
-  color = 22;
+  color = 40;
   for (; row < PROJECTIONPLANEHEIGHT; row += step) {
-    drawFillRectangle(0, row, PROJECTIONPLANEWIDTH, step, color, 100, 100, 255);
+    drawFillRectangle(0, row, PROJECTIONPLANEWIDTH, step, 0, color / 2, 0, 255);
     color += step;
   }
 }
