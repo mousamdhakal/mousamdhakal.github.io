@@ -45,17 +45,17 @@ body {
 }
 
 #easy {
-  background: url("/images/easy-map.png");
+  background: url("./images/easy-map.png");
 }
 
 #classic {
-  background: url("/images/classic-map.png");
+  background: url("./images/classic-map.png");
 }
 
 #start {
   width: 414px;
   height: 140px;
-  background: url("/images/start.png");
+  background: url("./images/start.png");
   border: none;
   cursor: pointer;
 }
