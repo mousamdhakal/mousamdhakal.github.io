@@ -186,6 +186,7 @@ export function castRays() {
     var topOfWall; // used to find bottom of the ceiling
     var bottomOfWall; // used to find starting position of the floor
 
+    let isWallVertical = false;
     // If horizontal wall is closer than vertical wall
     if (distToHorizontalGridBeingHit < distToVerticalGridBeingHit) {
       // Set the distance to be equal to horizontalgridhit
@@ -195,6 +196,7 @@ export function castRays() {
     // else,vertical wall is closer than horizontal wall
     else {
       // Set the distance to be equal to verticalgridhit
+      isWallVertical = true;
       dist = distToVerticalGridBeingHit;
       xOffset = yIntersection % BLOCK_SIZE;
     }
@@ -209,14 +211,29 @@ export function castRays() {
 
     dist = Math.floor(dist);
     // Draw the wall slice in the correct position
-    drawWallSliceRectangle(
-      castColumn,
-      topOfWall,
-      1,
-      bottomOfWall - topOfWall + 1,
-      xOffset,
-      wallType - 1
-    );
+
+    if (isWallVertical) {
+      drawWallSliceRectangle(
+        castColumn,
+        topOfWall,
+        1,
+        bottomOfWall - topOfWall + 1,
+        xOffset,
+        wallType - 1,
+        160 / (dist)
+      );
+    } else {
+      drawWallSliceRectangle(
+        castColumn,
+        topOfWall,
+        1,
+        bottomOfWall - topOfWall + 1,
+        xOffset,
+        wallType - 1,
+        100 / (dist)
+      );
+    }
+
 
     // Trace the next ray
     castArc += 1;

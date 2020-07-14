@@ -54,15 +54,14 @@ export function moveTanks() {
     enemy.y += moveStepY;
 
     // Calculate new position for the tank
-    let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
-    let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
+    let tankXcell = Math.floor((enemy.x + moveStepX * 10) / BLOCK_SIZE);
+    let tankYcell = Math.floor((enemy.y + moveStepY * 10) / BLOCK_SIZE);
 
     // Increase the enemy.moved by one
     enemy.moved++;
 
     // If enemy.moved has crossed the holdtime , or it is in collision with wall then reverse
     // the move and change the state of tank for rotation to move in opposite direction
-
     if (enemy.moved > enemyTypes[enemy.type].holdTime || checkWall(tankYcell, tankXcell)) {
       enemy.x -= moveStepX;
       enemy.y -= moveStepY;

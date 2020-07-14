@@ -2,7 +2,7 @@
 function getPlayer() {
   return {
     x: 100,
-    y: 300,
+    y: 160,
     arc: 0,
     deg: 0,
     distanceToProjectionPlane: VIEWDIST,
@@ -13,9 +13,9 @@ function getPlayer() {
   };
 }
 
-function getEnemies() {
+function getEnemies(index) {
   // Information regarding enemies on the map
-  let mapEnemies = [
+  let mapEnemies = [[
     {
       type: 4,
       x: 64 * 10 + 32,
@@ -46,22 +46,22 @@ function getEnemies() {
       moved: 0,
       timeSinceLastBullet: 100,
       keySpacePressed: true
+    },
+    {
+      type: 4,
+      x: 64 * 7 + 32,
+      y: 64 * 10 + 32,
+      arc: 0,
+      deg: 0,
+      visible: false,
+      maxDx: 2,
+      maxDy: 20,
+      speedX: 0,
+      speedY: 1,
+      moved: 0,
+      timeSinceLastBullet: 100,
+      keySpacePressed: true
     }
-    // {
-    //   type: 4,
-    //   x: 64 * 7 + 32,
-    //   y: 64 * 10 + 32,
-    //   arc: 0,
-    //   deg: 0,
-    //   visible: false,
-    //   maxDx: 2,
-    //   maxDy: 20,
-    //   speedX: 0,
-    //   speedY: 1,
-    //   moved: 0,
-    //   timeSinceLastBullet: 100,
-    //   keySpacePressed: true
-    // }
     // {
     //   type: 4,
     //   x: 64 * 25 + 32,
@@ -77,8 +77,55 @@ function getEnemies() {
     //   timeSinceLastBullet: 100,
     //   keySpacePressed: true
     // }
-  ]
-  return mapEnemies;
+  ]];
+  mapEnemies.push([{
+    type: 4,
+    x: 64 * 10 + 32,
+    y: 64 * 2 + 32,
+    arc: 0,
+    deg: 0,
+    visible: false,
+    maxDx: 20,
+    maxDy: 15,
+    speedX: 1,
+    speedY: 0,
+    moved: 0,
+    timeSinceLastBullet: 100,
+    keySpacePressed: true
+
+  },
+  {
+    type: 4,
+    x: 64 * 4 + 32,
+    y: 64 * 25 + 32,
+    arc: 0,
+    deg: 0,
+    visible: false,
+    maxDx: 20,
+    maxDy: 2,
+    speedX: 1,
+    speedY: 0,
+    moved: 0,
+    timeSinceLastBullet: 100,
+    keySpacePressed: true
+  },
+  {
+    type: 4,
+    x: 64 * 6 + 32,
+    y: 64 * 11 + 32,
+    arc: 0,
+    deg: 0,
+    visible: false,
+    maxDx: 2,
+    maxDy: 20,
+    speedX: 0,
+    speedY: 1,
+    moved: 0,
+    timeSinceLastBullet: 100,
+    keySpacePressed: true
+  }
+  ]);
+  return mapEnemies[index - 1];
 }
 
 /**

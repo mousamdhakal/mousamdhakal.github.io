@@ -135,7 +135,7 @@ export function drawLine(startX, startY, endX, endY, red, green, blue, alpha) {
  * @param {Number} height 
  * @param {Number} xOffset 
  */
-export function drawWallSliceRectangle(x, y, width, height, xOffset, wallType) {
+export function drawWallSliceRectangle(x, y, width, height, xOffset, wallType, brightness) {
 
   // Wait until the image loads
   if (game.wallImageBuffer == undefined)
@@ -163,6 +163,9 @@ export function drawWallSliceRectangle(x, y, width, height, xOffset, wallType) {
 
   let yError = 0;
 
+  // Check to prevent crashing while fetching shade (if  height is less than 0)
+  if (heightToDraw < 0) return;
+
   while (true) {
 
     // This error term is used to check if we need to copy some pixels multiple times or skip some pixels
@@ -173,9 +176,9 @@ export function drawWallSliceRectangle(x, y, width, height, xOffset, wallType) {
 
 
     // Get r,g,b,a values from the source pixel
-    let red = Math.floor(game.wallPixels[wallType][sourceIndex]);
-    let green = Math.floor(game.wallPixels[wallType][sourceIndex + 1]);
-    let blue = Math.floor(game.wallPixels[wallType][sourceIndex + 2]);
+    let red = Math.floor(game.wallPixels[wallType][sourceIndex] * brightness);
+    let green = Math.floor(game.wallPixels[wallType][sourceIndex + 1] * brightness);
+    let blue = Math.floor(game.wallPixels[wallType][sourceIndex + 2] * brightness);
     let alpha = Math.floor(game.wallPixels[wallType][sourceIndex + 3]);
 
     // For this column , keep drawing each row , until the end of drawing area, or all rows finished

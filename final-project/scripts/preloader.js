@@ -39,3 +39,17 @@ function onLoadFinish() {
   document.getElementById('start-screen').style.display = "block";
   document.getElementById('initial-screen').style.display = "none";
 }
+
+// saveFile = function(){
+//   var file = {
+//       map: Game.scene.score,
+//       visits: Game.scene.visits
+//   };
+//   localStorage.setItem('saveFile',JSON.stringify(file));
+// };
+
+// loadFile = function(){
+//   var file = JSON.parse(localStorage.getItem('saveFile'));
+//   Game.scene.score = file.score;
+//   Game.scene.visits = file.visits;
+// };
