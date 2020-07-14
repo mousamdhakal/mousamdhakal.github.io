@@ -175,6 +175,7 @@ export class Game {
     sound.src = src;
     sound.setAttribute("preload", "auto");
     sound.setAttribute("controls", "none");
+    sound.volume = 0.2;
     sound.style.display = "none";
     document.body.appendChild(sound);
     return sound;

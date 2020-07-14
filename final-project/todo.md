@@ -1,3 +1,2 @@
-- Fix enemy bullet positioning issues
-- Make enemy tank movement improvement.
-- Show level completed on destroying all tanks.
+- Build mapbuilder
+- Try to make bullet round

@@ -1,4 +1,4 @@
-import { checkWall, checkAbsWallBetween } from './check.js';
+import { checkWall, checkAbsWallBetween, checkEnemyTank } from './check.js';
 
 /**
  * Move around the enemy tank and fire bullet if the tank is facing towards player and there are no blocking walls between user and enemy tank

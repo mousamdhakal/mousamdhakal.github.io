@@ -31,21 +31,28 @@ body {
   width: 640px;
 }
 
-.easy__level {
-  width: 50%;
+.easy__level, .classic__level, #create__levels {
+  width: 25%;
   float: left;
+  margin-left: 40px;
 }
 
-.classic__level{
-  width: 50%;
-  float: right;
+#custom__levels {
+  display: block;
 }
 
-.levels button {
+.levels button, #custom__levels button{
   width: 175px;
   height: 175px;
   border: none;
   cursor: pointer;
+  background-color: #cccccc;
+}
+
+.levels::after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 #easy {
@@ -71,4 +78,35 @@ body {
 
 #won {
   display: none;
+}
+
+#map-builder {
+  display: none;
+  width: 800px;
+}
+
+#map-builder__canvas {
+  float: left;
+}
+
+#input-group {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translate(0%,-50%);
+}
+
+#input-group button {
+  margin-left: 30px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+#custom__screen {
+  display: none;
+}
+
+#custom__levels {
+  display: none;
+  margin-top: 20px;
 }

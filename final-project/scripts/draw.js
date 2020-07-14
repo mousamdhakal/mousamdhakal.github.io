@@ -129,13 +129,13 @@ export function drawLine(startX, startY, endX, endY, red, green, blue, alpha) {
 
 /**
  * 
- * @param {Number} x 
- * @param {Number} y 
- * @param {Number} width 
- * @param {Number} height 
- * @param {Number} xOffset 
+ * @param {Number} x - x co-ordinate for the slice to be drawn
+ * @param {Number} y - y co-ordinate for the slice to be drawn
+ * @param {Number} height - height of the wall slice to be drawn
+ * @param {Number} xOffset - xoffset value for this slice from the start of the image
+ * @param {Number} brightness - brightness level of the wall slice, which decreases on going farther
  */
-export function drawWallSliceRectangle(x, y, width, height, xOffset, wallType, brightness) {
+export function drawWallSliceRectangle(x, y, height, xOffset, wallType, brightness) {
 
   // Wait until the image loads
   if (game.wallImageBuffer == undefined)
