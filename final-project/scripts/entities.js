@@ -18,11 +18,10 @@ function getEnemies() {
   let mapEnemies = [
     {
       type: 4,
-      x: 916,
-      y: 128,
+      x: 64 * 10 + 32,
+      y: 64 * 2 + 32,
       arc: 0,
       deg: 0,
-      offset: 0.75,
       visible: false,
       maxDx: 20,
       maxDy: 15,
@@ -35,11 +34,10 @@ function getEnemies() {
     },
     {
       type: 4,
-      x: 316,
-      y: 1600,
+      x: 64 * 4 + 32,
+      y: 64 * 25 + 32,
       arc: 0,
       deg: 0,
-      offset: 1,
       visible: false,
       maxDx: 20,
       maxDy: 2,
@@ -48,8 +46,37 @@ function getEnemies() {
       moved: 0,
       timeSinceLastBullet: 100,
       keySpacePressed: true
-
     }
+    // {
+    //   type: 4,
+    //   x: 64 * 7 + 32,
+    //   y: 64 * 10 + 32,
+    //   arc: 0,
+    //   deg: 0,
+    //   visible: false,
+    //   maxDx: 2,
+    //   maxDy: 20,
+    //   speedX: 0,
+    //   speedY: 1,
+    //   moved: 0,
+    //   timeSinceLastBullet: 100,
+    //   keySpacePressed: true
+    // }
+    // {
+    //   type: 4,
+    //   x: 64 * 25 + 32,
+    //   y: 64 * 10 + 32,
+    //   arc: 0,
+    //   deg: 0,
+    //   visible: false,
+    //   maxDx: 2,
+    //   maxDy: 20,
+    //   speedX: 0,
+    //   speedY: 1,
+    //   moved: 0,
+    //   timeSinceLastBullet: 100,
+    //   keySpacePressed: true
+    // }
   ]
   return mapEnemies;
 }

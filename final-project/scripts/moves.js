@@ -1,4 +1,4 @@
-import { checkWall, checkWallBetween } from './check.js';
+import { checkWall, checkAbsWallBetween } from './check.js';
 
 /**
  * Move around the enemy tank and fire bullet if the tank is facing towards player and there are no blocking walls between user and enemy tank
@@ -10,24 +10,37 @@ export function moveTanks() {
     var diffX = ((enemy.x - this.player.x) / BLOCK_SIZE);
     var diffY = ((enemy.y - this.player.y) / BLOCK_SIZE);
 
-    // Set the type of tank that is which face of tank to show according to it's position from user
-    if (diffY < -2) {
-      enemyType = (enemyType + 2) % 7;
-    } else if (diffY > 2) {
-      enemyType = (enemyType + 6) % 7;
-    }
-    else if (diffX < 0) {
-      enemyType = (enemyType + 4) % 7;
+
+    if (enemy.speedX == 1) {
+      // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
+      if (diffY < -2) {
+        enemyType = (enemyType + 2) % 7;
+      } else if (diffY > 2) {
+        enemyType = (enemyType + 6) % 7;
+      }
+      else if (diffX < 0) {
+        enemyType = (enemyType + 4) % 7;
+      }
+    } else if (enemy.speedY == 1) {
+      // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
+      if (diffX < -2) {
+        enemyType = (enemyType + 2) % 7;
+      } else if (diffX > 2) {
+        enemyType = (enemyType + 6) % 7;
+      }
+      else if (diffY < 0) {
+        enemyType = (enemyType + 4) % 7;
+      }
     }
 
-    // Calculate the cell positions for user tank and enemy tank
-    let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
-    let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
-    let playerXcell = Math.floor(game.player.x / BLOCK_SIZE);
-    let playerYCell = Math.floor(game.player.y / BLOCK_SIZE);
+    // // Calculate the cell positions for user tank and enemy tank
+    // let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
+    // let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
+    // let playerXcell = Math.floor(game.player.x / BLOCK_SIZE);
+    // let playerYCell = Math.floor(game.player.y / BLOCK_SIZE);
 
     // If tank is facing towards user and no walls between fire bullet and skip the movement
-    if ((enemyType == 0 || enemyType == 1) && !checkWallBetween(tankXcell, tankYcell, playerXcell, playerYCell)) {
+    if ((enemyType == 0 || enemyType == 1) && !checkAbsWallBetween(enemy.x, enemy.y, game.player.x, game.player.y)) {
       this.fireBullet(enemy);
       continue;
     }
@@ -41,8 +54,8 @@ export function moveTanks() {
     enemy.y += moveStepY;
 
     // Calculate new position for the tank
-    tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
-    tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
+    let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
+    let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
 
     // Increase the enemy.moved by one
     enemy.moved++;

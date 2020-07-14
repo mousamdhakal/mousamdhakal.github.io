@@ -1,7 +1,7 @@
 import { drawBackground } from "./draw.js";
 import { drawMiniMap, drawPlayerOnMiniMap } from "./miniMap.js";
 import { castRays } from "./raycaster.js";
-import { checkEnemyTank, checkWall, checkWallBetween } from './check.js';
+import { checkEnemyTank, checkWall } from './check.js';
 import { renderEnemies, renderBullets, drawCanon } from "./render.js";
 import { initEnemies, clearEnemies, loadWallImages } from "./initializers.js";
 import { fireBullet, moveTanks, moveBullets } from './moves.js'
