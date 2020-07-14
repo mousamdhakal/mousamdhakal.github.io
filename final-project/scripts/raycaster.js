@@ -216,7 +216,6 @@ export function castRays() {
       drawWallSliceRectangle(
         castColumn,
         topOfWall,
-        1,
         bottomOfWall - topOfWall + 1,
         xOffset,
         wallType - 1,
@@ -226,7 +225,6 @@ export function castRays() {
       drawWallSliceRectangle(
         castColumn,
         topOfWall,
-        1,
         bottomOfWall - topOfWall + 1,
         xOffset,
         wallType - 1,

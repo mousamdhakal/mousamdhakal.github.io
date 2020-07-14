@@ -4,6 +4,10 @@ const PROJECTIONPLANEHEIGHT = 400;
 
 const MAPPOSITION = 500;
 
+const MAPSIZE = 28;
+
+const MAPBUILDERSCALE = 20;
+
 // Minimum distance from the player position to the wall
 const MINDISTANCETOWALL = 32;
 
@@ -97,4 +101,6 @@ let controlContainer = document.getElementById("control-screen");
 let gameContainer = document.getElementById("game-screen");
 let endContainer = document.getElementById("end-screen");
 let winContainer = document.getElementById("won");
+let mapBuilderContainer = document.getElementById("map-builder");
+let customContainer = document.getElementById('custom__screen');
 

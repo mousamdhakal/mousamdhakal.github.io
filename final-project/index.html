@@ -25,10 +25,31 @@
         </div>
         <div class="classic__level">
           <button title="Classic" id="classic"></button>
-        </div>      
+        </div>
+        <div id="create__levels">
+          <button title="Map builder" onclick="showMapBuilder()" > Build a level</button>
+        </div>
       </div>
+      <div id="custom__levels">
+        <button onclick="showCustoms()">Select custom levels</button>
       </div>
-      
+    </div>
+    <div id="map-builder">
+        <p>Build your own map</p>
+        <canvas id="map-builder__canvas" width="560" height="560"></canvas>
+        <div id="input-group">
+          <button onclick="fillWall()">Set Wall</button>
+          <button onclick="fillHorizontalTank()">Set Horizontal Patrol Tank</button>
+          <button onclick="fillVerticalTank()">Set Vertical Patrol Tank</button>
+          <button onclick="clearBlock()">Clear Block</button>
+          <button onclick="clearCanvas()">Clear Canvas</button>
+          <button id="save-map">Save Map</button>
+        </div>
+    </div>
+    <div id="custom__screen">
+      <h2>Choose a custom map</h2>
+      <ul id="custom__maps"></ul>
+    </div>
     <div id="control-screen">
       <p>Use a,w,s,d for controls and space to shoot.(You can only fire after an interval)</p>
       <button id="start" title="start" onclick="game.init()"></button>
@@ -50,13 +71,14 @@
     <canvas id="minimap"></canvas>
    <canvas id="minimapcomponents"></canvas> -->
   <!-- </div> -->
+  <script src="./scripts/maps.js"></script>
   <script src="./scripts/preloader.js"></script>
   <script src="./scripts/globals.js"></script>
-  <script type="module" src="./scripts/check.js"></script>
   <script src="./scripts/trignometry.js"></script>
-  <script src="./scripts/maps.js"></script>
   <script src="./scripts/entities.js"></script>
   <script src="./scripts/keyhandlers.js"></script>
+  <script src="./scripts/mapbuilder.js"></script>
+  <script type="module" src="./scripts/check.js"></script>
   <script type="module" src="./scripts/initializers.js"></script>
   <script type="module" src="./scripts/moves.js"></script>
   <script type="module" src="./scripts/render.js"></script>

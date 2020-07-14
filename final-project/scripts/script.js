@@ -19,6 +19,105 @@ function startClassic() {
   winContainer.style.display = "none";
 }
 
+
 document.getElementById('easy').addEventListener('click', startEasy);
 document.getElementById('classic').addEventListener('click', startClassic);
 
+function setCustomScreen() {
+  let customList = document.getElementById('custom__maps');
+  customList.innerHTML = "";
+  if (mapList.length > 2) {
+    document.getElementById('custom__levels').style.display = "block";
+    for (let i = 2; i < mapList.length; i++) {
+      let listElement = document.createElement('li');
+      let button = document.createElement('button');
+      button.innerText = "Custom Map" + (i - 1);
+      button.setAttribute('id', i + 1);
+      button.addEventListener('click', startCustomGame);
+      listElement.appendChild(button);
+      customList.appendChild(listElement);
+    }
+  }
+}
+
+setCustomScreen();
+
+function startCustomGame() {
+  let i = parseInt(this.id);
+  game = new Game(canvas, i);
+  customContainer.style.display = "none";
+  controlContainer.style.display = "block";
+  winContainer.style.display = "none";
+}
+
+
+function saveMap() {
+  let newMap = [];
+  let newEnemeies = [];
+  let mapData = mapCanvasContext.getImageData(0, 0, 640, 640).data;
+  for (let i = 0; i < MAPSIZE; i++) {
+    newMap[i] = [];
+    for (let j = 0; j < MAPSIZE; j++) {
+      let sourceIndex = BYTESPERPIXEL * i * MAPBUILDERSCALE * 640 + BYTESPERPIXEL * MAPBUILDERSCALE * j;
+      // console.log(sourceIndex);
+      let red = mapData[sourceIndex];
+      let green = mapData[sourceIndex + 1];
+      let blue = mapData[sourceIndex + 2];
+      if (red == 100 && green == 100 && blue == 100) {
+        newMap[i][j] = 1;
+      } else if (red == 0 && green == 0 && blue == 0) {
+        newEnemeies.push({
+          type: 4,
+          x: 64 * j + 32,
+          y: 64 * i + 32,
+          arc: 0,
+          deg: 0,
+          visible: false,
+          speedX: 1,
+          speedY: 0,
+          moved: 0,
+          timeSinceLastBullet: 100,
+          keySpacePressed: true
+        });
+        newMap[i][j] = 0;
+      } else if (red == 1 && green == 1 && blue == 1) {
+        newEnemeies.push({
+          type: 4,
+          x: 64 * j + 32,
+          y: 64 * i + 32,
+          arc: 0,
+          deg: 0,
+          visible: false,
+          speedX: 0,
+          speedY: 1,
+          moved: 0,
+          timeSinceLastBullet: 100,
+          keySpacePressed: true
+        });
+        newMap[i][j] = 0;
+      }
+      else {
+        newMap[i][j] = 0;
+      }
+      // newMap[i][j]
+    }
+
+  }
+  mapList.push(newMap);
+  mapEnemies.push(newEnemeies);
+  saveMaps();
+}
+
+document.getElementById('save-map').addEventListener('click', saveMap);
+
+let saveMaps = function () {
+  var maps = {
+    mapList: mapList,
+    mapEnemies: mapEnemies
+  };
+  localStorage.setItem('savedMaps', JSON.stringify(maps));
+  mapBuilderContainer.style.display = "none";
+  startContainer.style.display = "block";
+  loadMaps();
+  setCustomScreen();
+};
