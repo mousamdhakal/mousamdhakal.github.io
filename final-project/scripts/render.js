@@ -1,4 +1,4 @@
-import { checkWallBetween, checkWall } from './check.js';
+import { checkAbsWallBetween, checkWall } from './check.js';
 
 /**
  * Display all the enemies that are currently visible on the screen
@@ -11,28 +11,40 @@ export function renderEnemies() {
     // Get the type of enemy
     var enemyType = enemy.type;
 
-    // Calculate x and y cell of enemy and player
-    var enemyXCell = Math.floor(enemy.x / BLOCK_SIZE);
-    var enemyYCell = Math.floor(enemy.y / BLOCK_SIZE);
-    var playerXCell = Math.floor(this.player.x / BLOCK_SIZE);
-    var playerYCell = Math.floor(this.player.y / BLOCK_SIZE);
+    // // Calculate x and y cell of enemy and player
+    // var enemyXCell = Math.floor(enemy.x / BLOCK_SIZE);
+    // var enemyYCell = Math.floor(enemy.y / BLOCK_SIZE);
+    // var playerXCell = Math.floor(this.player.x / BLOCK_SIZE);
+    // var playerYCell = Math.floor(this.player.y / BLOCK_SIZE);
 
     // If there is no wall from player's cell position to the cell position of the enemy tank
-    if (!checkWallBetween(playerXCell, playerYCell, enemyXCell, enemyYCell)) {
+    if (!checkAbsWallBetween(this.player.x, this.player.y, enemy.x, enemy.y)) {
 
       // Calculate distance to the enemy tank in both co-ordinates
       var dx = ((enemy.x - this.player.x) / BLOCK_SIZE);
       var dy = ((enemy.y - this.player.y) / BLOCK_SIZE);
+      if (enemy.speedX == 1) {
+        // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
+        if (dy < -2) {
+          enemyType = (enemyType + 2) % 7;
+        } else if (dy > 2) {
+          enemyType = (enemyType + 6) % 7;
+        }
+        else if (dx < 0) {
+          enemyType = (enemyType + 4) % 7;
+        }
+      } else if (enemy.speedY == 1) {
+        // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
+        if (dx < -2) {
+          enemyType = (enemyType + 6) % 7;
+        } else if (dx > 2) {
+          enemyType = (enemyType + 2) % 7;
+        }
+        else if (dy < 0) {
+          enemyType = (enemyType + 4) % 7;
+        }
+      }
 
-      // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (dy < -2) {
-        enemyType = (enemyType + 2) % 7;
-      } else if (dy > 2) {
-        enemyType = (enemyType + 6) % 7;
-      }
-      else if (dx < 0) {
-        enemyType = (enemyType + 4) % 7;
-      }
 
       // Get the image to display according to enemy Type
       var img = enemies[enemyType];
@@ -62,16 +74,24 @@ export function renderEnemies() {
         // Offset to account for calculation errors 
         var xOffset = enemy.offset * size / 2;
 
-        // Change offset direction if direction from user to tank changes
-        if (dx < 0) {
-          xOffset *= -1;
-        }
+        // // Change offset direction if direction from user to tank changes
+        // if (enemy.speedX == 1) {
+        //   if (dx < 0) {
+        //     xOffset *= -1;
+        //   }
+        // }
+        // if (enemy.speedY == 1) {
+        //   if (dy < 0) {
+        //     xOffset *= -1;
+        //   }
+        // }
+
 
         // Y position on the screen
         var y = (PROJECTIONPLANEHEIGHT - size) / 2;
 
         // Draw the tank
-        this.canvasContext.drawImage(img, x + xOffset, y, size, size);
+        this.canvasContext.drawImage(img, x, y, size, size);
       }
     }
   }
@@ -150,23 +170,44 @@ export function renderBullets() {
       //   enemyType = (enemyType + 6) % 7;
       // }
 
-      // If tank from which fired is in negative distance
-      if (diffX < 0) {
-        // x position on the screen
-        var x = Math.tan(spriteAngle) * VIEWDIST;
-        x = PROJECTIONPLANEWIDTH / 2 + x - size * 6 / 8 + 200 / diffX;
+      if (bullet.fired.speedX == 1) {
+        // If tank from which fired is in negative distance
+        if (diffX < 0) {
+          // x position on the screen
+          var x = Math.tan(spriteAngle) * VIEWDIST;
+          x = PROJECTIONPLANEWIDTH / 2 + x - size * 5 / 8;
 
-        // y position on the screen
-        var y = (PROJECTIONPLANEHEIGHT - size) / 3 - diffX * 5 / 2;
-      }
-      else {
-        // x position on the screen
-        var x = Math.tan(spriteAngle) * VIEWDIST;
-        x = PROJECTIONPLANEWIDTH / 2 + x - size / 4;
+          // y position on the screen
+          var y = (PROJECTIONPLANEHEIGHT - size) / 3 - diffX * 5 / 2;
+        }
+        else {
+          // x position on the screen
+          var x = Math.tan(spriteAngle) * VIEWDIST;
+          x = PROJECTIONPLANEWIDTH / 2 + x - size / 2.5;
 
-        // y position on the screen
-        var y = (PROJECTIONPLANEHEIGHT - size) / 3 + diffX * 5 / 2;
+          // y position on the screen
+          var y = (PROJECTIONPLANEHEIGHT - size) / 3 + diffX * 5 / 2;
+        }
+      } else {
+        // If tank from which fired is in negative distance
+        if (diffY < 0) {
+          // x position on the screen
+          var x = Math.tan(spriteAngle) * VIEWDIST;
+          x = PROJECTIONPLANEWIDTH / 2 + x - size * 5 / 8;
+
+          // y position on the screen
+          var y = (PROJECTIONPLANEHEIGHT - size) / 3 - diffY * 5 / 2;
+        }
+        else {
+          // x position on the screen
+          var x = Math.tan(spriteAngle) * VIEWDIST;
+          x = PROJECTIONPLANEWIDTH / 2 + x - size / 2.5;
+
+          // y position on the screen
+          var y = (PROJECTIONPLANEHEIGHT - size) / 3 + diffY * 5 / 2;
+        }
       }
+
       // Check for bullet hit with player
       if (Math.abs(bullet.x - game.player.x) < 32 && Math.abs(bullet.y - game.player.y) < 32) {
         this.showGameOver();

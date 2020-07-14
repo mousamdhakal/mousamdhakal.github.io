@@ -50,86 +50,29 @@ export function checkWall(ycell, xcell) {
 
 /**
  * Checks for the presence of wall in between the player and the object
- * @param {Number} playerX - X cell position of the player
- * @param {Number} playerY - Y cell positon of the player
- * @param {Number} objectX - X cell position of the object
- * @param {Number} objectY - Y cell position of the object
+ * @param {Number} playerX - X position of the first object
+ * @param {Number} playerY - Y positon of the first object
+ * @param {Number} objectX - X position of the second object
+ * @param {Number} objectY - Y position of the second object
  * @returns {Boolean} - true if wall is present between the player tank and the object , false otherwise
  */
-export function checkWallBetween(playerX, playerY, objectX, objectY) {
+export function checkAbsWallBetween(playerX, playerY, objectX, objectY) {
   let xDiff = objectX - playerX;
   let yDiff = objectY - playerY;
+  let dist = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+  let xStep = xDiff / dist;
+  let yStep = yDiff / dist;
 
   // Do for second cell on the first quadrant relative to first cell
-  if (xDiff >= 0 && yDiff >= 0) {
-    while (xDiff > 0 || yDiff > 0) {
-      if (xDiff >= yDiff) {
-        playerX++;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        xDiff--;
-      } else {
-        playerY++;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        yDiff--;
-      }
-    }
-  }
-  // Do for second cell on second quadrant relative to first cell
-  else if (xDiff >= 0 && yDiff < 0) {
-    while (xDiff > 0 || yDiff < 0) {
-      if (Math.abs(xDiff) >= Math.abs(yDiff)) {
-        playerX++;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        xDiff--;
-      } else {
-        playerY--;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        yDiff++;
-      }
-    }
-  }
-  // Do for second cell on fourth quadrant relative to first cell
-  else if (xDiff < 0 && yDiff >= 0) {
-    while (xDiff < 0 || yDiff > 0) {
-      if (Math.abs(xDiff) >= Math.abs(yDiff)) {
-        playerX--;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        xDiff++;
-      } else {
-        playerY++;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        yDiff--;
-      }
-    }
-  }
-  // Do for second quadrant on third quadrant relative to first cell
-  else if (xDiff < 0 && yDiff < 0) {
-    while (xDiff < 0 || yDiff < 0) {
-      if (Math.abs(xDiff) >= Math.abs(yDiff)) {
-        playerX--;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        xDiff++;
-      } else {
-        playerY--;
-        if (checkWall(playerY, playerX)) {
-          return true;
-        }
-        yDiff++;
-      }
+  while (Math.abs(xDiff) > BLOCK_SIZE || Math.abs(yDiff) > BLOCK_SIZE) {
+    playerX += xStep;
+    playerY += yStep;
+    xDiff -= xStep;
+    yDiff -= yStep
+    let yCell = Math.floor(playerY / BLOCK_SIZE);
+    let xCell = Math.floor(playerX / BLOCK_SIZE);
+    if (checkWall(yCell, xCell)) {
+      return true;
     }
   }
 
