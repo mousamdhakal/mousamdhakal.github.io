@@ -68,7 +68,7 @@ export class Game {
     // Pixel information for the wall
     this.wallPixels = [];
 
-    this.mapEnemies = getEnemies();
+    this.mapEnemies = getEnemies(mapIndex);
 
     // Load image of the wall
     this.loadWallImages();
@@ -88,7 +88,7 @@ export class Game {
     endContainer.style.display = 'none';
     this.currentMap = getMap(this.mapIndex);
     this.player = getPlayer();
-    this.mapEnemies = getEnemies();
+    this.mapEnemies = getEnemies(this.mapIndex);
     bulletList = [];
     this.initEnemies();
     this.callTimeOut = true;
