@@ -1,4 +1,4 @@
-import { checkWall, checkAbsWallBetween, checkEnemyTank } from './check.js';
+import { checkWall, checkAbsWallBetween, checkEnemyTank, checkRange } from './check.js';
 
 /**
  * Move around the enemy tank and fire bullet if the tank is facing towards player and there are no blocking walls between user and enemy tank
@@ -40,7 +40,7 @@ export function moveTanks() {
     // let playerYCell = Math.floor(game.player.y / BLOCK_SIZE);
 
     // If tank is facing towards user and no walls between fire bullet and skip the movement
-    if ((enemyType == 0 || enemyType == 1) && !checkAbsWallBetween(enemy.x, enemy.y, game.player.x, game.player.y)) {
+    if ((enemyType == 0 || enemyType == 1) && !checkAbsWallBetween(enemy.x, enemy.y, game.player.x, game.player.y) && checkRange(enemy.x, enemy.y, game.player.x, game.player.y, enemy.speedX)) {
       this.fireBullet(enemy);
       continue;
     }
