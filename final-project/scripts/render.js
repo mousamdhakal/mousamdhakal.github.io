@@ -25,9 +25,9 @@ export function renderEnemies() {
       var dy = ((enemy.y - this.player.y) / BLOCK_SIZE);
       if (enemy.speedX == 1) {
         // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-        if (dy < -2) {
+        if (dy < -2 && Math.abs(dy) >= Math.abs(dx)) {
           enemyType = (enemyType + 2) % 7;
-        } else if (dy > 2) {
+        } else if (dy > 2 && Math.abs(dy) >= Math.abs(dx)) {
           enemyType = (enemyType + 6) % 7;
         }
         else if (dx < 0) {
@@ -35,9 +35,9 @@ export function renderEnemies() {
         }
       } else if (enemy.speedY == 1) {
         // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-        if (dx < -2) {
+        if (dx < -2 && Math.abs(dx) >= Math.abs(dy)) {
           enemyType = (enemyType + 6) % 7;
-        } else if (dx > 2) {
+        } else if (dx > 2 && Math.abs(dx) >= Math.abs(dy)) {
           enemyType = (enemyType + 2) % 7;
         }
         else if (dy < 0) {

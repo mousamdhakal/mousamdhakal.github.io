@@ -34,6 +34,10 @@ const BYTESPERPIXEL = 4;
 const BLOCK_SIZE = 64;
 const WALL_HEIGHT = 64;
 
+// Range of fire from the tank
+const FRONTRANGE = 20;
+const SIDERANGE = 5;
+
 // Main game object to be referenced in different parts of the game
 let game;
 

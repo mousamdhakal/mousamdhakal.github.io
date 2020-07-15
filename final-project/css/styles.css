@@ -110,3 +110,15 @@ body {
   display: none;
   margin-top: 20px;
 }
+
+#custom__maps li {
+  margin-bottom: 20px;
+}
+
+#custom__maps button {
+  background: none;
+  cursor: pointer;
+  border: none;
+  color: #000000;
+  font-size: 20px;
+}

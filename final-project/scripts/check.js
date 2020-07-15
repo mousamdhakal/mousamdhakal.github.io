@@ -16,6 +16,20 @@ export function checkEnemyTank(ycell, xcell) {
   return false;
 }
 
+export function checkRange(enemyX, enemyY, playerX, playerY, speedX) {
+  if (speedX == 1) {
+    if ((enemyX - playerX) < (FRONTRANGE * BLOCK_SIZE) && (enemyY - playerY) < (SIDERANGE * BLOCK_SIZE)) {
+      return true;
+    }
+    return false;
+  } else {
+    if ((enemyX - playerX) < (SIDERANGE * BLOCK_SIZE) && (enemyY - playerY) < (FRONTRANGE * BLOCK_SIZE)) {
+      return true;
+    }
+    return false;
+  }
+}
+
 /**
  * Checks for the presence of enemy tank in given cell position
  * @param {Number} ycell - Y cell position to check for presence of enemy tank
