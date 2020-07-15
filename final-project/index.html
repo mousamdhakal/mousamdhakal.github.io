@@ -47,10 +47,12 @@
         </div>
     </div>
     <div id="custom__screen">
+      <button class="back-button" onclick="goLevelsFromCustoms()">    </button>
       <h2>Choose a custom map</h2>
       <ul id="custom__maps"></ul>
     </div>
     <div id="control-screen">
+      <button class="back-button" onclick="goLevelsFromControls()"></button>
       <p>Use a,w,s,d for controls and space to shoot.(You can only fire after an interval)</p>
       <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 5 blocks sidewise from the tank. </p>
       <button id="start" title="start" onclick="game.init()"></button>
@@ -63,6 +65,7 @@
     <div id="end-screen">
       <img id="game_over--img" src="./images/game_over.png" alt="game-over">
       <button id="restart" onclick="game.restartGame()"> Restart Game</button>
+      <button onclick="showLevels()">Play another level</button>
     </div>
   </div>
 
@@ -77,7 +80,7 @@
   <script src="./scripts/globals.js"></script>
   <script src="./scripts/trignometry.js"></script>
   <script src="./scripts/entities.js"></script>
-  <script src="./scripts/keyhandlers.js"></script>
+  <script src="./scripts/eventHandlers.js"></script>
   <script src="./scripts/mapbuilder.js"></script>
   <script type="module" src="./scripts/check.js"></script>
   <script type="module" src="./scripts/initializers.js"></script>

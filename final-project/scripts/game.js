@@ -91,17 +91,26 @@ export class Game {
    * Restart the current game by reinitializing the variables and calling new updatecycle
    */
   restartGame() {
-    gameContainer.style.display = 'block';
-    endContainer.style.display = 'none';
+    this.initializeVariables();
+    this.reDisplayGame();
+
+  }
+
+  initializeVariables() {
     this.currentMap = getMap(this.mapIndex);
     this.player = getPlayer();
     this.mapEnemies = getEnemies(this.mapIndex);
     bulletList = [];
     this.initEnemies();
+  }
+
+  reDisplayGame() {
+    gameContainer.style.display = 'block';
+    endContainer.style.display = 'none';
+
     this.callTimeOut = true;
     this.update();
   }
-
 
   /**
    * Clear the list of visible obstacles and set visibility of all obstacles to false
