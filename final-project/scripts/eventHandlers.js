@@ -57,3 +57,19 @@ function handleKeyUp() {
     game.player.keySpacePressed = false;
   }
 }
+
+function showLevels() {
+  game.initializeVariables();
+  endContainer.style.display = "none";
+  startContainer.style.display = "block";
+}
+
+function goLevelsFromControls() {
+  controlContainer.style.display = "none";
+  startContainer.style.display = "block";
+}
+
+function goLevelsFromCustoms() {
+  customContainer.style.display = "none";
+  startContainer.style.display = "block";
+}
