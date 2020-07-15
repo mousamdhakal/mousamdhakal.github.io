@@ -176,6 +176,7 @@ export function drawWallSliceRectangle(x, y, height, xOffset, wallType, brightne
 
 
     // Get r,g,b,a values from the source pixel
+    // Multiply the pixel value by brightness to adapt the darkness of color to distance
     let red = Math.floor(game.wallPixels[wallType][sourceIndex] * brightness);
     let green = Math.floor(game.wallPixels[wallType][sourceIndex + 1] * brightness);
     let blue = Math.floor(game.wallPixels[wallType][sourceIndex + 2] * brightness);

@@ -60,6 +60,7 @@ export class Game {
     // Set width and height of the map
     this.currentMap = [];
     this.mapIndex = mapIndex;
+
     // Set the current map
     this.currentMap = getMap(this.mapIndex);
     this.MAP_WIDTH = this.currentMap.length;
@@ -68,21 +69,27 @@ export class Game {
     // Pixel information for the wall
     this.wallPixels = [];
 
+    //Get teh enemy tanks for this map
     this.mapEnemies = getEnemies(mapIndex);
 
     // Load image of the wall
     this.loadWallImages();
 
+    // Load enemy tank images
     this.initEnemies();
 
     // Load image of canon of user tank
     this.canonImage = new Image();
     this.canonImage.src = "./images/canon.png";
 
+    // Create sound for collsion of missile with tanks and walls
     this.wallSound = this.sound('./sounds/hit-sound.wav');
     this.tankSound = this.sound('./sounds/explode.wav');
   }
 
+  /**
+   * Restart the current game by reinitializing the variables and calling new updatecycle
+   */
   restartGame() {
     gameContainer.style.display = 'block';
     endContainer.style.display = 'none';
@@ -170,6 +177,10 @@ export class Game {
    */
   renderBullets = renderBullets;
 
+  /**
+   * Create an html audio element and embed to the page as not visible element
+   * @param {String} src - string representing the source of the audio
+   */
   sound(src) {
     let sound = document.createElement("audio");
     sound.src = src;
@@ -181,12 +192,18 @@ export class Game {
     return sound;
   }
 
+  /**
+   * Stop the recurrent update of the page and show game over screen
+   */
   showGameOver() {
     this.callTimeOut = false;
     gameContainer.style.display = 'none';
     endContainer.style.display = 'block';
   }
 
+  /**
+   * Stop the recurrent update of the page and show game won message and level selection choice
+   */
   showWon() {
     this.callTimeOut = false;
     gameContainer.style.display = 'none';
@@ -262,6 +279,7 @@ function handlePlayerMovement() {
   // If left key pressed flag is up, rotate left by 5 degrees
   if (game.keyLeftPressed) {
     game.player.arc -= ANGLE2;
+
     // Track the degree of player and reduce a small value to account for small decrease in angle in radian while creating the tables
     game.player.deg -= Math.PI / 90 - 0.00055;
 
@@ -273,8 +291,10 @@ function handlePlayerMovement() {
   // If right key pressed flag is up, rotate right by 5 degrees
   else if (game.keyRightPressed) {
     game.player.arc += ANGLE2;
+
     // Track the degree of player and reduce a small value to account for small decrease in angle in radian while creating the tables
     game.player.deg += Math.PI / 90 - 0.00055;
+
     // Wrap around the angle if it exceeds 360
     if (game.player.arc >= ANGLE360) game.player.arc -= ANGLE360;
     if (game.player.deg > Math.PI) game.player.deg -= 2 * Math.PI;
@@ -287,6 +307,7 @@ function handlePlayerMovement() {
   // This is the distance to be moved which is 0 if neither keyup or keydown is pressed
   let dx = 0;
   let dy = 0;
+
   // If keyup is pressed then, the direction calculated earlier is multiplied by the speed to find out actual movement in both x and y co-ordinates
   if (game.keyUpPressed) {
     dx = Math.round(playerXDir * game.player.speed);
