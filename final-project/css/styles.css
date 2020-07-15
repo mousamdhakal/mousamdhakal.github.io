@@ -113,6 +113,9 @@ body {
 
 #custom__maps li {
   margin-bottom: 20px;
+  list-style: none;
+  float: left;
+  margin-left: 30px;
 }
 
 #custom__maps button {

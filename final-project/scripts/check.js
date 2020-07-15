@@ -16,13 +16,25 @@ export function checkEnemyTank(ycell, xcell) {
   return false;
 }
 
+/**
+ * Checks if player tank is in the firing range of enemy tank
+ * @param {Number} enemyX - X position in pixels for enemy tank
+ * @param {Number} enemyY - Y position in pixels for enemy tank
+ * @param {Number} playerX - X position in pixels for player tank
+ * @param {Number} playerY - Y position in pixels for player tank
+ * @param {Number} speedX - X speed of the tank to determine if tank is moving horizontal or vertical
+ * @returns {Boolean} - returns true if player tank is in range of enemy tank, false otherwise
+ */
 export function checkRange(enemyX, enemyY, playerX, playerY, speedX) {
+  // If tank is moving horizontal
   if (speedX == 1) {
     if ((enemyX - playerX) < (FRONTRANGE * BLOCK_SIZE) && (enemyY - playerY) < (SIDERANGE * BLOCK_SIZE)) {
       return true;
     }
     return false;
-  } else {
+  }
+  // If tank is moving vertical
+  else {
     if ((enemyX - playerX) < (SIDERANGE * BLOCK_SIZE) && (enemyY - playerY) < (FRONTRANGE * BLOCK_SIZE)) {
       return true;
     }

@@ -20,6 +20,8 @@ const FRAMERATE = 30;
 // Value that scales the size of minimap
 const MINIMAPSCALE = 5;
 
+const CUSTOMMAPSCALE = 6;
+
 // Speed at which player movement occurs on moving forward and backward
 const MOVEMENTSPEED = 6;
 

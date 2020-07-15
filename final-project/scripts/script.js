@@ -30,17 +30,34 @@ function setCustomScreen() {
     document.getElementById('custom__levels').style.display = "block";
     for (let i = 2; i < mapList.length; i++) {
       let listElement = document.createElement('li');
-      let button = document.createElement('button');
-      button.innerText = "Custom Map" + (i - 1);
-      button.setAttribute('id', i + 1);
-      button.addEventListener('click', startCustomGame);
-      listElement.appendChild(button);
+      let canvas = document.createElement('canvas');
+      canvas.setAttribute('width', 168);
+      canvas.setAttribute('height', 168);
+      createCustomCanvas(canvas, i + 1);
+      canvas.setAttribute('id', i + 1);
+      canvas.addEventListener('click', startCustomGame);
+      listElement.appendChild(canvas);
       customList.appendChild(listElement);
     }
   }
 }
 
 setCustomScreen();
+
+function createCustomCanvas(canvas, mapIndex) {
+  let map = getMap(mapIndex);
+  let canvasContext = canvas.getContext('2d');
+  canvasContext.fillStyle = "rgb(256,256,256)";
+  canvasContext.fillRect(0, 0, MAPSIZE * CUSTOMMAPSCALE, MAPSIZE * CUSTOMMAPSCALE);
+  canvasContext.fillStyle = "rgb(100,100,100)";
+  for (let r = 0; r < MAPSIZE; r++) {
+    for (let c = 0; c < MAPSIZE; c++) {
+      if (map[r][c] != 0) {
+        canvasContext.fillRect((c * CUSTOMMAPSCALE), (r * CUSTOMMAPSCALE), CUSTOMMAPSCALE, CUSTOMMAPSCALE);
+      }
+    }
+  }
+}
 
 function startCustomGame() {
   let i = parseInt(this.id);
