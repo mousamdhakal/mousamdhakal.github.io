@@ -196,7 +196,7 @@ export function renderBullets() {
           x = PROJECTIONPLANEWIDTH / 2 + x - size * 5 / 8;
 
           // y position on the screen
-          var y = (PROJECTIONPLANEHEIGHT - size) / 3 - diffY * 5 / 2;
+          var y = (PROJECTIONPLANEHEIGHT - size) / 3 - diffY * 6 / 2;
         }
         else {
           // x position on the screen
