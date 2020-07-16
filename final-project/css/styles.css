@@ -17,6 +17,7 @@ body {
 
 #game-screen {
   display: none;
+  position: relative;
 }
 
 #control-screen {
@@ -56,17 +57,20 @@ body {
 }
 
 #easy {
-  background: url("../images/easy-map.png");
+  /* background: url("../images/easy-map.png"); */
+  background: none;
 }
 
 #classic {
-  background: url("../images/classic-map.png");
+  /* background: url("../images/classic-map.png"); */
+  background: none;
 }
 
 #start {
   width: 414px;
   height: 140px;
-  background: url("../images/start.png");
+  /* background: url("../images/start.png"); */
+  background: none;
   border: none;
   cursor: pointer;
 }
@@ -150,4 +154,25 @@ body {
   border: none;
   cursor: pointer;
   background-color: #cccccc;
+}
+
+#game-controls {
+  position: absolute;
+  left: 20px;
+  top: 0px;
+}
+
+#game-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+#game-play {
+  color: #ff0000;
+}
+
+#game-pause {
+  color: #2e3436;
 }
