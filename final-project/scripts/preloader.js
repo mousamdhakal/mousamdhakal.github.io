@@ -19,12 +19,9 @@ preload(wallsArray,
 
 // Load images for start button which will be used via caching
 preload(startImages,
-  "./images/easy-map.png",
-  "./images/classic-map.png",
   "./images/start.png",
 )
-document.getElementById('easy').style.backgroundImage = 'url("./images/easy-map.png")';
-document.getElementById('classic').style.backgroundImage = 'url("./images/classic-map.png")';
+
 document.getElementById('start').style.backgroundImage = 'url("./images/start.png")';
 
 
@@ -37,7 +34,17 @@ preload(tankImages,
   './images/canon.png'
 )
 
+loadFontAwesome();
 onLoadFinish();
+
+
+
+function loadFontAwesome() {
+  let someContainer = document.createElement('div');
+  someContainer.innerHTML = '<i class="fas fa-home"></i>';
+  someContainer.style.visibility = "hidden";
+  document.body.appendChild(someContainer);
+}
 
 function onLoadFinish() {
   document.getElementById('start-screen').style.display = "block";
