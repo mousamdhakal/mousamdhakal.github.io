@@ -38,7 +38,7 @@ const WALL_HEIGHT = 64;
 
 // Range of fire from the tank
 const FRONTRANGE = 20;
-const SIDERANGE = 5;
+const SIDERANGE = 4;
 
 // Main game object to be referenced in different parts of the game
 let game;
