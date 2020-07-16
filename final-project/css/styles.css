@@ -173,3 +173,11 @@ body {
 #game-home i {
   color: #2e3436;
 }
+
+#map-builder button {
+  width: 215px;
+  height: 40px;
+  background-color: #cccccc;
+  cursor: pointer;
+  border: none;
+}
