@@ -23,18 +23,10 @@
     <div id="start-screen">
       <h2>Choose a level:</h2>
       <div class="levels">
-        <div class="easy__level">
-          <button title="Easy" id="easy"></button>
-        </div>
-        <div class="classic__level">
-          <button title="Classic" id="classic"></button>
-        </div>
+        <ul id="maps__list"></ul>
         <div id="create__levels">
           <button title="Map builder" onclick="showMapBuilder()" > Build a level</button>
         </div>
-      </div>
-      <div id="custom__levels">
-        <button onclick="showCustoms()">Select custom levels</button>
       </div>
     </div>
     <div id="map-builder">
@@ -48,11 +40,6 @@
           <button onclick="clearCanvas()">Clear Canvas</button>
           <button id="save-map">Save Map</button>
         </div>
-    </div>
-    <div id="custom__screen">
-      <button class="back-button" onclick="goLevelsFromCustoms()"><i class="fas fa-home"></i></button>
-      <h2>Choose a custom map</h2>
-      <ul id="custom__maps"></ul>
     </div>
     <div id="control-screen">
       <button class="back-button" onclick="goLevelsFromControls()"><i class="fas fa-home"></i></button>

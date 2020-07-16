@@ -108,5 +108,4 @@ let gameContainer = document.getElementById("game-screen");
 let endContainer = document.getElementById("end-screen");
 let winContainer = document.getElementById("won");
 let mapBuilderContainer = document.getElementById("map-builder");
-let customContainer = document.getElementById('custom__screen');
 

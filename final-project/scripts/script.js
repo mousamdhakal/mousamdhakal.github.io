@@ -20,25 +20,20 @@ function startClassic() {
 }
 
 
-document.getElementById('easy').addEventListener('click', startEasy);
-document.getElementById('classic').addEventListener('click', startClassic);
-
 function setCustomScreen() {
-  let customList = document.getElementById('custom__maps');
-  customList.innerHTML = "";
-  if (mapList.length > 2) {
-    document.getElementById('custom__levels').style.display = "block";
-    for (let i = 2; i < mapList.length; i++) {
-      let listElement = document.createElement('li');
-      let canvas = document.createElement('canvas');
-      canvas.setAttribute('width', 168);
-      canvas.setAttribute('height', 168);
-      createCustomCanvas(canvas, i + 1);
-      canvas.setAttribute('id', i + 1);
-      canvas.addEventListener('click', startCustomGame);
-      listElement.appendChild(canvas);
-      customList.appendChild(listElement);
-    }
+  let list = document.getElementById('maps__list');
+  list.innerHTML = "";
+  document.getElementById('start-screen').style.display = "block";
+  for (let i = 0; i < mapList.length; i++) {
+    let listElement = document.createElement('li');
+    let canvas = document.createElement('canvas');
+    canvas.setAttribute('width', 168);
+    canvas.setAttribute('height', 168);
+    createCustomCanvas(canvas, i + 1);
+    canvas.setAttribute('id', i + 1);
+    canvas.addEventListener('click', startCustomGame);
+    listElement.appendChild(canvas);
+    list.appendChild(listElement);
   }
 }
 
@@ -62,7 +57,7 @@ function createCustomCanvas(canvas, mapIndex) {
 function startCustomGame() {
   let i = parseInt(this.id);
   game = new Game(canvas, i);
-  customContainer.style.display = "none";
+  startContainer.style.display = "none";
   controlContainer.style.display = "block";
   winContainer.style.display = "none";
 }

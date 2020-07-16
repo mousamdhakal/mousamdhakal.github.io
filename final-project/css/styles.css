@@ -1,8 +1,7 @@
 .main {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,0%);
   text-align: center;
 }
 
@@ -32,38 +31,34 @@ body {
   width: 640px;
 }
 
-.easy__level, .classic__level, #create__levels {
-  width: 25%;
-  float: left;
-  margin-left: 40px;
+#create__levels {
+  margin-left: 70px;
 }
 
 #custom__levels {
   display: block;
 }
 
-.levels button, #custom__levels button{
-  width: 175px;
-  height: 175px;
+.levels button{
+  width: 570px;
+  height: 168px;
   border: none;
   cursor: pointer;
   background-color: #cccccc;
 }
 
-.levels::after {
+
+#maps__list li {
+  margin-bottom: 20px;
+  list-style: none;
+  float: left;
+  margin-left: 30px;
+}
+
+#maps__list::after {
   content: '';
-  display: table;
   clear: both;
-}
-
-#easy {
-  /* background: url("../images/easy-map.png"); */
-  background: none;
-}
-
-#classic {
-  /* background: url("../images/classic-map.png"); */
-  background: none;
+  display: table;
 }
 
 #start {
@@ -115,18 +110,6 @@ body {
   margin-top: 20px;
 }
 
-#custom__maps li {
-  margin-bottom: 20px;
-  list-style: none;
-  float: left;
-  margin-left: 30px;
-}
-
-#custom__maps::after {
-  content: '';
-  clear: both;
-  display: table;
-}
 
 #custom__maps button {
   background: none;
