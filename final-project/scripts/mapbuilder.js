@@ -1,6 +1,9 @@
 let mapCanvas;
 let mapCanvasContext;
 let mousedown = false;
+let setTank = false;
+let tankImage = new Image();
+tankImage.src = "./images/tank-mini.png";
 function showMapBuilder() {
   startContainer.style.display = "none";
   mapBuilderContainer.style.display = "block";
@@ -30,6 +33,9 @@ function fillCanvas(position) {
     return;
   }
   mapCanvasContext.fillRect(xCell * MAPBUILDERSCALE, yCell * MAPBUILDERSCALE, MAPBUILDERSCALE, MAPBUILDERSCALE);
+  if (setTank) {
+    mapCanvasContext.drawImage(tankImage, xCell * MAPBUILDERSCALE, yCell * MAPBUILDERSCALE, MAPBUILDERSCALE, MAPBUILDERSCALE);
+  }
 }
 
 function getCursorPosition(canvas, event) {
@@ -47,25 +53,30 @@ function clearCanvas() {
   mapCanvasContext.fillRect(0, 0, MAPBUILDERSCALE, MAPBUILDERSCALE * MAPSIZE);
   mapCanvasContext.fillRect(MAPSIZE * MAPBUILDERSCALE - MAPBUILDERSCALE, 0, MAPBUILDERSCALE, MAPBUILDERSCALE * MAPSIZE);
   mapCanvasContext.fillRect(0, MAPSIZE * MAPBUILDERSCALE - MAPBUILDERSCALE, MAPBUILDERSCALE * MAPSIZE, MAPBUILDERSCALE);
+  setTank = false;
 }
 
 
 function fillWall() {
   mapCanvasContext.fillStyle = "rgb(100,100,100)";
+  setTank = false;
 }
 
 function fillHorizontalTank() {
   mapCanvasContext.fillStyle = "rgb(0,0,0)";
+  setTank = true;
 }
 
 function fillVerticalTank() {
   mapCanvasContext.fillStyle = "rgb(1,1,1)";
+  setTank = true;
 }
 
 function clearBlock() {
   console.log(mapCanvasContext.fillStyle);
   mapCanvasContext.fillStyle = "white";
   console.log(mapCanvasContext.fillStyle);
+  setTank = false;
 }
 
 

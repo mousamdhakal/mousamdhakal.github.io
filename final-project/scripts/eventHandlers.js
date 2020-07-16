@@ -90,3 +90,9 @@ function goLevelsFromGame() {
   gameContainer.style.display = "none";
   startContainer.style.display = "block";
 }
+
+function goLevelsFromMapBuilder() {
+  clearCanvas();
+  mapBuilderContainer.style.display = "none";
+  startContainer.style.display = "block";
+}
