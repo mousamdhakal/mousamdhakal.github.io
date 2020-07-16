@@ -15,7 +15,7 @@ function showMapBuilder() {
     mousedown = true;
   })
   mapCanvas.addEventListener('mousemove', function (e) {
-    if (mousedown) {
+    if (mousedown && !setTank) {
       let position = getCursorPosition(mapCanvas, e);
       fillCanvas(position);
     }
