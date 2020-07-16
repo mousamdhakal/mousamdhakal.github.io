@@ -13,9 +13,9 @@ export function moveTanks() {
 
     if (enemy.speedX == 1) {
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (diffY < -2) {
+      if (diffY < -SIDERANGE && Math.abs(diffY) >= Math.abs(diffX)) {
         enemyType = (enemyType + 2) % 7;
-      } else if (diffY > 2) {
+      } else if (diffY > SIDERANGE && Math.abs(diffY) >= Math.abs(diffX)) {
         enemyType = (enemyType + 6) % 7;
       }
       else if (diffX < 0) {
@@ -23,9 +23,9 @@ export function moveTanks() {
       }
     } else if (enemy.speedY == 1) {
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (diffX < -2) {
+      if (diffX < -SIDERANGE && Math.abs(diffX) >= Math.abs(diffY)) {
         enemyType = (enemyType + 2) % 7;
-      } else if (diffX > 2) {
+      } else if (diffX > SIDERANGE && Math.abs(diffX) >= Math.abs(diffY)) {
         enemyType = (enemyType + 6) % 7;
       }
       else if (diffY < 0) {

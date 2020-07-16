@@ -88,6 +88,10 @@ export class Game {
 
     // Flag to check state of the game
     this.gamePlaying = true;
+
+    // Show the play button as pressed currently
+    document.getElementById('game-play').style.color = '#ff0000';
+    document.getElementById('game-pause').style.color = '#2e3436';
   }
 
   /**
