@@ -33,6 +33,10 @@ function handleKeyDown() {
   else if (e.keyCode == '75') {
     game.pause();
   }
+  // Quit the game on pressing Q key
+  else if (e.keyCode == '81' && gameContainer.style.display == "block") {
+    game.quit();
+  }
 
 }
 
@@ -79,5 +83,10 @@ function goLevelsFromControls() {
 
 function goLevelsFromCustoms() {
   customContainer.style.display = "none";
+  startContainer.style.display = "block";
+}
+
+function goLevelsFromGame() {
+  gameContainer.style.display = "none";
   startContainer.style.display = "block";
 }

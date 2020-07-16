@@ -21,7 +21,7 @@ preload(wallsArray,
 preload(startImages,
   "./images/easy-map.png",
   "./images/classic-map.png",
-  "./images/start.png"
+  "./images/start.png",
 )
 document.getElementById('easy').style.backgroundImage = 'url("./images/easy-map.png")';
 document.getElementById('classic').style.backgroundImage = 'url("./images/classic-map.png")';
