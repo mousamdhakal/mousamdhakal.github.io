@@ -7,9 +7,9 @@ function showMapBuilder() {
   mapCanvas = document.getElementById("map-builder__canvas");
   mapCanvasContext = mapCanvas.getContext("2d");
   mapCanvas.addEventListener('mousedown', function (e) {
-    mousedown = true;
     let position = getCursorPosition(mapCanvas, e);
     fillCanvas(position);
+    mousedown = true;
   })
   mapCanvas.addEventListener('mousemove', function (e) {
     if (mousedown) {

@@ -85,6 +85,9 @@ export class Game {
     // Create sound for collsion of missile with tanks and walls
     this.wallSound = this.sound('./sounds/hit-sound.wav');
     this.tankSound = this.sound('./sounds/explode.wav');
+
+    // Flag to check state of the game
+    this.gamePlaying = true;
   }
 
   /**
@@ -199,6 +202,23 @@ export class Game {
     sound.style.display = "none";
     document.body.appendChild(sound);
     return sound;
+  }
+
+  pause() {
+    this.callTimeOut = false;
+    this.gamePlaying = false;
+    document.getElementById('game-pause').style.color = '#ff0000';
+    document.getElementById('game-play').style.color = '#2e3436';
+  }
+
+  play() {
+    if (!this.gamePlaying) {
+      this.callTimeOut = true;
+      this.update();
+      this.gamePlaying = true;
+      document.getElementById('game-play').style.color = '#ff0000';
+      document.getElementById('game-pause').style.color = '#2e3436';
+    }
   }
 
   /**

@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet"> 
 
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="./css/styles.css">
+
+  <script src="https://kit.fontawesome.com/2b12b7cf45.js" crossorigin="anonymous"></script>
+
   <title>Tank Battle</title>
-</head>
+</head>   
 <body>
   <div class="main">
     <h1>3D Tank Battle</h1>
@@ -53,14 +56,19 @@
     </div>
     <div id="control-screen">
       <button class="back-button" onclick="goLevelsFromControls()"></button>
-      <p>Use a,w,s,d for controls and space to shoot.(You can only fire after an interval)</p>
+      <p>Use 'A','W','S','D' for controls and space to shoot.(You can only fire after an interval)</p>
       <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 5 blocks sidewise from the tank. </p>
+      <p>Press 'J' to pause the game and 'K' to play the game or press the respective buttons</p>
       <button id="start" title="start" onclick="game.init()"></button>
     </div>
     <div id="game-screen">
       <canvas id="gameCanvas" width="640" height="400">
         Loading ....
       </canvas>
+      <div id="game-controls">
+        <button onclick="game.play()"><i id="game-play" class="fas fa-play"></i></button>
+        <button onclick="game.pause()"><i id="game-pause" class="fas fa-pause"></i></button>
+      </div>
     </div>
     <div id="end-screen">
       <img id="game_over--img" src="./images/game_over.png" alt="game-over">

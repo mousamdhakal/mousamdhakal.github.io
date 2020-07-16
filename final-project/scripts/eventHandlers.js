@@ -25,6 +25,14 @@ function handleKeyDown() {
   else if (e.keyCode == '32') {
     game.player.keySpacePressed = true;
   }
+  // Play the game on pressing J key
+  else if (e.keyCode == '74') {
+    game.play();
+  }
+  //Pause the game on pressing K key
+  else if (e.keyCode == '75') {
+    game.pause();
+  }
 
 }
 
