@@ -102,7 +102,7 @@ let enemyTypes = [{
 ]
 
 // Get containers for the start screen, game screen and end screen
-let startContainer = document.getElementById("start-screen");
+let levelContainer = document.getElementById("level-screen");
 let controlContainer = document.getElementById("control-screen");
 let gameContainer = document.getElementById("game-screen");
 let endContainer = document.getElementById("end-screen");

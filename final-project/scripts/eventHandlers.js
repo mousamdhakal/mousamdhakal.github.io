@@ -73,26 +73,26 @@ function handleKeyUp() {
 function showLevels() {
   game.initializeVariables();
   endContainer.style.display = "none";
-  startContainer.style.display = "block";
+  levelContainer.style.display = "block";
 }
 
-function goLevelsFromControls() {
-  controlContainer.style.display = "none";
-  startContainer.style.display = "block";
+function goHomeFromLevels() {
+  controlContainer.style.display = "block";
+  levelContainer.style.display = "none";
 }
 
-function goLevelsFromCustoms() {
-  customContainer.style.display = "none";
-  startContainer.style.display = "block";
-}
-
-function goLevelsFromGame() {
+function goHomeFromGame() {
   gameContainer.style.display = "none";
-  startContainer.style.display = "block";
+  controlContainer.style.display = "block";
 }
 
 function goLevelsFromMapBuilder() {
   clearCanvas();
   mapBuilderContainer.style.display = "none";
-  startContainer.style.display = "block";
+  levelContainer.style.display = "block";
+}
+
+function showMapInfo() {
+  let mapInfo = document.getElementById('map-info');
+  mapInfo.style.display == "none" ? mapInfo.style.display = "block" : mapInfo.style.display = "none";
 }
