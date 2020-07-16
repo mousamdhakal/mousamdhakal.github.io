@@ -19,13 +19,13 @@ preload(wallsArray,
 
 // Load images for start button which will be used via caching
 preload(startImages,
-  "../images/easy-map.png",
-  "../images/classic-map.png",
-  "../images/start.png"
+  "./images/easy-map.png",
+  "./images/classic-map.png",
+  "./images/start.png"
 )
-document.getElementById('easy').style.backgroundImage = 'url("../images/easy-map.png")';
-document.getElementById('classic').style.backgroundImage = 'url("../images/classic-map.png")';
-document.getElementById('start').style.backgroundImage = 'url("../images/start.png")';
+document.getElementById('easy').style.backgroundImage = 'url("./images/easy-map.png")';
+document.getElementById('classic').style.backgroundImage = 'url("./images/classic-map.png")';
+document.getElementById('start').style.backgroundImage = 'url("./images/start.png")';
 
 
 // Load tank images and canon image which will be used via caching as well
