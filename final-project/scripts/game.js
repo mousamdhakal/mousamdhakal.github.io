@@ -221,6 +221,11 @@ export class Game {
     }
   }
 
+  quit() {
+    this.pause();
+    goLevelsFromGame();
+  }
+
   /**
    * Stop the recurrent update of the page and show game over screen
    */

@@ -50,15 +50,15 @@
         </div>
     </div>
     <div id="custom__screen">
-      <button class="back-button" onclick="goLevelsFromCustoms()">    </button>
+      <button class="back-button" onclick="goLevelsFromCustoms()"><i class="fas fa-home"></i></button>
       <h2>Choose a custom map</h2>
       <ul id="custom__maps"></ul>
     </div>
     <div id="control-screen">
-      <button class="back-button" onclick="goLevelsFromControls()"></button>
+      <button class="back-button" onclick="goLevelsFromControls()"><i class="fas fa-home"></i></button>
       <p>Use 'A','W','S','D' for controls and space to shoot.(You can only fire after an interval)</p>
       <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 5 blocks sidewise from the tank. </p>
-      <p>Press 'J' to pause the game and 'K' to play the game or press the respective buttons</p>
+      <p>Press 'J' to Pause,'K' to play and 'Q' to quit the game or press the r espective buttons</p>
       <button id="start" title="start" onclick="game.init()"></button>
     </div>
     <div id="game-screen">
@@ -66,6 +66,7 @@
         Loading ....
       </canvas>
       <div id="game-controls">
+        <button id="game-home" class="back-button" onclick="game.quit()"><i class="fas fa-home"></i></button>
         <button onclick="game.play()"><i id="game-play" class="fas fa-play"></i></button>
         <button onclick="game.pause()"><i id="game-pause" class="fas fa-pause"></i></button>
       </div>
