@@ -3,22 +3,25 @@ import { Game } from './game.js';
 // Get the canvas element and start the game
 let canvas = document.getElementById("gameCanvas");
 
-loadLevels();
+// loadLevels();
+document.getElementById('start').addEventListener('click', loadLevels);
 
 document.getElementById('save-map').addEventListener('click', saveMap);
 
 function startNewGame() {
   let i = parseInt(this.id);
   game = new Game(canvas, i);
-  startContainer.style.display = "none";
-  controlContainer.style.display = "block";
+  game.init();
+  levelContainer.style.display = "none";
   winContainer.style.display = "none";
+  gameContainer.style.display = "block";
 }
 
 function loadLevels() {
+  controlContainer.style.display = "none";
   let list = document.getElementById('maps__list');
   list.innerHTML = "";
-  document.getElementById('start-screen').style.display = "block";
+  document.getElementById('level-screen').style.display = "block";
   for (let i = 0; i < mapList.length; i++) {
     let listElement = document.createElement('li');
     let canvas = document.createElement('canvas');
@@ -111,7 +114,7 @@ function updateMaps() {
   };
   localStorage.setItem('savedMaps', JSON.stringify(maps));
   mapBuilderContainer.style.display = "none";
-  startContainer.style.display = "block";
+  levelContainer.style.display = "block";
   loadMaps();
   loadLevels();
 };

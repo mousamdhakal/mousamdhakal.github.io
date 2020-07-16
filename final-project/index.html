@@ -20,7 +20,14 @@
     <div id="won">
       <h2>Congratulations, you won the game, select a level to play again.</h2>
     </div>
-    <div id="start-screen">
+    <div id="control-screen">
+      <p>Use 'A','W','S','D' for controls and space to shoot.(You can only fire after an interval)</p>
+      <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 4 blocks sidewise from the tank. </p>
+      <p>Press 'J' to Pause,'K' to play and 'Q' to quit the game or press the r espective buttons</p>
+      <button id="start" title="start"></button>
+    </div>
+    <div id="level-screen">
+      <button class="back-button" onclick="goHomeFromLevels()"><i class="fas fa-home"></i></button>
       <h2>Choose a level:</h2>
       <div class="levels">
         <ul id="maps__list"></ul>
@@ -30,8 +37,12 @@
       </div>
     </div>
     <div id="map-builder">
-      <button class="back-button" onclick="goLevelsFromMapBuilder()"><i class="fas fa-home"></i></button>
+      <button class="back-button" onclick="goLevelsFromMapBuilder()"><i class="fas fa-arrow-left"></i></button>
+      <button class="show-info" onclick="showMapInfo()"><i class="fas fa-info-circle"></i></button>
+      <div id="map-info">
         <p>Select the "Wall" button and click and drag to set the walls. Select one of the tank buttons and click on the screen to place the tank</p>
+        <p>Red spot indicates user tank position. Put at least one enemy tank on the map for the game to be playable.</p>
+      </div>
         <canvas id="map-builder__canvas" width="560" height="560"></canvas>
         <div id="input-group">
           <button onclick="fillWall()">Wall</button>
@@ -41,13 +52,6 @@
           <button onclick="clearCanvas()">Clear Canvas</button>
           <button id="save-map">Save Map</button>
         </div>
-    </div>
-    <div id="control-screen">
-      <button class="back-button" onclick="goLevelsFromControls()"><i class="fas fa-home"></i></button>
-      <p>Use 'A','W','S','D' for controls and space to shoot.(You can only fire after an interval)</p>
-      <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 4 blocks sidewise from the tank. </p>
-      <p>Press 'J' to Pause,'K' to play and 'Q' to quit the game or press the r espective buttons</p>
-      <button id="start" title="start" onclick="game.init()"></button>
     </div>
     <div id="game-screen">
       <canvas id="gameCanvas" width="640" height="400">

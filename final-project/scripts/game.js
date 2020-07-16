@@ -227,7 +227,7 @@ export class Game {
 
   quit() {
     this.pause();
-    goLevelsFromGame();
+    goHomeFromGame();
   }
 
   /**
@@ -246,7 +246,7 @@ export class Game {
     this.callTimeOut = false;
     gameContainer.style.display = 'none';
     winContainer.style.display = 'block';
-    startContainer.style.display = 'block';
+    levelContainer.style.display = 'block';
   }
 
   /**

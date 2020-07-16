@@ -4,8 +4,9 @@ let mousedown = false;
 let setTank = false;
 let tankImage = new Image();
 tankImage.src = "./images/tank-mini.png";
+
 function showMapBuilder() {
-  startContainer.style.display = "none";
+  levelContainer.style.display = "none";
   mapBuilderContainer.style.display = "block";
   mapCanvas = document.getElementById("map-builder__canvas");
   mapCanvasContext = mapCanvas.getContext("2d");
@@ -29,7 +30,7 @@ function showMapBuilder() {
 function fillCanvas(position) {
   let xCell = Math.floor(position.x / MAPBUILDERSCALE);
   let yCell = Math.floor(position.y / MAPBUILDERSCALE);
-  if (xCell == 0 || yCell == 0 || xCell == MAPSIZE - 1 || yCell == MAPSIZE - 1) {
+  if (xCell == 0 || yCell == 0 || xCell == MAPSIZE - 1 || yCell == MAPSIZE - 1 || (xCell == 1 && yCell == 1)) {
     return;
   }
   mapCanvasContext.fillRect(xCell * MAPBUILDERSCALE, yCell * MAPBUILDERSCALE, MAPBUILDERSCALE, MAPBUILDERSCALE);
@@ -48,6 +49,8 @@ function getCursorPosition(canvas, event) {
 function clearCanvas() {
   mapCanvasContext.fillStyle = "white";
   mapCanvasContext.fillRect(0, 0, MAPSIZE * MAPBUILDERSCALE, MAPSIZE * MAPBUILDERSCALE);
+  mapCanvasContext.fillStyle = "rgb(256,0,0)";
+  mapCanvasContext.fillRect(MAPBUILDERSCALE, MAPBUILDERSCALE, MAPBUILDERSCALE, MAPBUILDERSCALE);
   mapCanvasContext.fillStyle = "rgb(100,100,100)";
   mapCanvasContext.fillRect(0, 0, MAPBUILDERSCALE * MAPSIZE, MAPBUILDERSCALE);
   mapCanvasContext.fillRect(0, 0, MAPBUILDERSCALE, MAPBUILDERSCALE * MAPSIZE);
@@ -81,7 +84,7 @@ function clearBlock() {
 
 
 function showCustoms() {
-  startContainer.style.display = "none";
+  levelContainer.style.display = "none";
   customContainer.style.display = "block";
 }
 
