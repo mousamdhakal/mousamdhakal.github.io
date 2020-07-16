@@ -31,12 +31,12 @@
     </div>
     <div id="map-builder">
       <button class="back-button" onclick="goLevelsFromMapBuilder()"><i class="fas fa-home"></i></button>
-        <p>Build your own map</p>
+        <p>Select the "Wall" button and click and drag to set the walls. Select one of the tank buttons and click on the screen to place the tank</p>
         <canvas id="map-builder__canvas" width="560" height="560"></canvas>
         <div id="input-group">
-          <button onclick="fillWall()">Set Wall</button>
-          <button onclick="fillHorizontalTank()">Set Horizontal Patrol Tank</button>
-          <button onclick="fillVerticalTank()">Set Vertical Patrol Tank</button>
+          <button onclick="fillWall()">Wall</button>
+          <button onclick="fillHorizontalTank()">Horizontal Patrol Tank</button>
+          <button onclick="fillVerticalTank()">Vertical Patrol Tank</button>
           <button onclick="clearBlock()">Clear Block</button>
           <button onclick="clearCanvas()">Clear Canvas</button>
           <button id="save-map">Save Map</button>

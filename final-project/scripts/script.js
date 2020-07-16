@@ -3,24 +3,19 @@ import { Game } from './game.js';
 // Get the canvas element and start the game
 let canvas = document.getElementById("gameCanvas");
 
-function startEasy() {
-  // Create new object of class Game calling it's constructor function
-  game = new Game(canvas, 1);
+loadLevels();
+
+document.getElementById('save-map').addEventListener('click', saveMap);
+
+function startNewGame() {
+  let i = parseInt(this.id);
+  game = new Game(canvas, i);
   startContainer.style.display = "none";
   controlContainer.style.display = "block";
   winContainer.style.display = "none";
 }
 
-function startClassic() {
-  // Create new object of class Game calling it's constructor function
-  game = new Game(canvas, 2);
-  startContainer.style.display = "none";
-  controlContainer.style.display = "block";
-  winContainer.style.display = "none";
-}
-
-
-function setCustomScreen() {
+function loadLevels() {
   let list = document.getElementById('maps__list');
   list.innerHTML = "";
   document.getElementById('start-screen').style.display = "block";
@@ -29,17 +24,15 @@ function setCustomScreen() {
     let canvas = document.createElement('canvas');
     canvas.setAttribute('width', 168);
     canvas.setAttribute('height', 168);
-    createCustomCanvas(canvas, i + 1);
+    loadLevelCanvas(canvas, i + 1);
     canvas.setAttribute('id', i + 1);
-    canvas.addEventListener('click', startCustomGame);
+    canvas.addEventListener('click', startNewGame);
     listElement.appendChild(canvas);
     list.appendChild(listElement);
   }
 }
 
-setCustomScreen();
-
-function createCustomCanvas(canvas, mapIndex) {
+function loadLevelCanvas(canvas, mapIndex) {
   let map = getMap(mapIndex);
   let canvasContext = canvas.getContext('2d');
   canvasContext.fillStyle = "rgb(256,256,256)";
@@ -53,15 +46,6 @@ function createCustomCanvas(canvas, mapIndex) {
     }
   }
 }
-
-function startCustomGame() {
-  let i = parseInt(this.id);
-  game = new Game(canvas, i);
-  startContainer.style.display = "none";
-  controlContainer.style.display = "block";
-  winContainer.style.display = "none";
-}
-
 
 function saveMap() {
   let newMap = [];
@@ -117,12 +101,10 @@ function saveMap() {
   }
   mapList.push(newMap);
   mapEnemies.push(newEnemeies);
-  saveMaps();
+  updateMaps();
 }
 
-document.getElementById('save-map').addEventListener('click', saveMap);
-
-let saveMaps = function () {
+function updateMaps() {
   var maps = {
     mapList: mapList,
     mapEnemies: mapEnemies
@@ -131,5 +113,5 @@ let saveMaps = function () {
   mapBuilderContainer.style.display = "none";
   startContainer.style.display = "block";
   loadMaps();
-  setCustomScreen();
+  loadLevels();
 };
