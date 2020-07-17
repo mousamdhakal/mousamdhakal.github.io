@@ -20,10 +20,10 @@ preload(wallsArray,
 // Load images for start button which will be used via caching
 preload(startImages,
   "./images/start.png",
+  "./images/game-poster.png"
 )
 
 document.getElementById('start').style.backgroundImage = 'url("./images/start.png")';
-
 
 // Load tank images and canon image which will be used via caching as well
 preload(tankImages,
@@ -47,9 +47,8 @@ function loadFontAwesome() {
 }
 
 function onLoadFinish() {
-  document.getElementById('control-screen').style.display = "block";
+  document.getElementById('start-screen').style.display = "block";
   document.getElementById('initial-screen').style.display = "none";
-  document.getElementById('map-info').style.display = "none";
 }
 
 

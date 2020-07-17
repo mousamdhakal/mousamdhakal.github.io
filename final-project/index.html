@@ -14,16 +14,22 @@
 <body>
   <div class="main">
     <h1>3D Tank Battle</h1>
+    <div id="controls">
+      <button id="control-button">Controls</button>
+      <div id="controls-div">
+        <p>Use 'A','W','S','D' for controls and space to shoot.(You can only fire once every 3 seconds)</p>
+        <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 4 blocks sidewise from the tank. </p>
+        <p>Press 'J' to Pause,'K' to play and 'Q' to quit the game or press the r espective buttons</p>
+      </div>
+    </div>
     <div id="initial-screen">
       <p>Loading .....</p> 
     </div>
     <div id="won">
       <h2>Congratulations, you won the game, select a level to play again.</h2>
     </div>
-    <div id="control-screen">
-      <p>Use 'A','W','S','D' for controls and space to shoot.(You can only fire after an interval)</p>
-      <p>Enemy tanks fire at you if it sees you and you are within the area of 20 blocks forward and 4 blocks sidewise from the tank. </p>
-      <p>Press 'J' to Pause,'K' to play and 'Q' to quit the game or press the r espective buttons</p>
+    <div id="start-screen">
+      <img src="./images/game-poster.png" alt="Main game poster">
       <button id="start" title="start"></button>
     </div>
     <div id="level-screen">
@@ -38,10 +44,12 @@
     </div>
     <div id="map-builder">
       <button class="back-button" onclick="goLevelsFromMapBuilder()"><i class="fas fa-arrow-left"></i></button>
-      <button class="show-info" onclick="showMapInfo()"><i class="fas fa-info-circle"></i></button>
-      <div id="map-info">
-        <p>Select the "Wall" button and click and drag to set the walls. Select one of the tank buttons and click on the screen to place the tank</p>
-        <p>Red spot indicates user tank position. Put at least one enemy tank on the map for the game to be playable.</p>
+      <div>
+        <button id="show-info"><i class="fas fa-info-circle"></i></button>
+        <div id="map-info">
+          <p>Select the "Wall" button and click and drag to set the walls. Select one of the tank buttons and click on the screen to place the tank</p>
+          <p>Red spot indicates user tank position. Put at least one enemy tank on the map for the game to be playable.</p>
+        </div>
       </div>
         <canvas id="map-builder__canvas" width="560" height="560"></canvas>
         <div id="input-group">
@@ -69,6 +77,9 @@
       <button onclick="showLevels()">Play another level</button>
     </div>
   </div>
+  <!-- <div class="footer">
+    <p>Created with &hearts; at Leapfrog Technologies.</p>
+  </div> -->
 
   
 

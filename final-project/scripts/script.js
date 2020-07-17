@@ -11,14 +11,15 @@ document.getElementById('save-map').addEventListener('click', saveMap);
 function startNewGame() {
   let i = parseInt(this.id);
   game = new Game(canvas, i);
-  game.init();
   levelContainer.style.display = "none";
   winContainer.style.display = "none";
   gameContainer.style.display = "block";
+  game.init();
+
 }
 
 function loadLevels() {
-  controlContainer.style.display = "none";
+  startContainer.style.display = "none";
   let list = document.getElementById('maps__list');
   list.innerHTML = "";
   document.getElementById('level-screen').style.display = "block";
@@ -64,7 +65,7 @@ function saveMap() {
       let blue = mapData[sourceIndex + 2];
       if (red == 100 && green == 100 && blue == 100) {
         newMap[i][j] = 1;
-      } else if (red == 0 && green == 0 && blue == 0) {
+      } else if (red == 254 && green == 254 && blue == 254) {
         newEnemeies.push({
           type: 4,
           x: 64 * j + 32,
@@ -79,7 +80,7 @@ function saveMap() {
           keySpacePressed: true
         });
         newMap[i][j] = 0;
-      } else if (red == 1 && green == 1 && blue == 1) {
+      } else if (red == 253 && green == 253 && blue == 253) {
         newEnemeies.push({
           type: 4,
           x: 64 * j + 32,
@@ -115,6 +116,7 @@ function updateMaps() {
   localStorage.setItem('savedMaps', JSON.stringify(maps));
   mapBuilderContainer.style.display = "none";
   levelContainer.style.display = "block";
+  controlsButton.style.display = "inline";
   loadMaps();
   loadLevels();
 };

@@ -19,8 +19,9 @@ body {
   position: relative;
 }
 
-#control-screen {
+#start-screen {
   display: none;
+  position: relative;
 }
 
 #end-screen {
@@ -62,12 +63,16 @@ body {
 }
 
 #start {
-  width: 414px;
-  height: 140px;
+  width: 296px;
+  height: 100px;
   /* background: url("../images/start.png"); */
   background: none;
   border: none;
   cursor: pointer;
+  position: absolute;
+  left: 274px;
+  top: 281px;
+  background-size: cover;
 }
 
 #game_over--img {
@@ -131,6 +136,10 @@ body {
   font-size: 30px;
 }
 
+.back-button {
+  left: 60px;
+}
+
 .back-button i {
   color: white;
 }
@@ -182,7 +191,7 @@ body {
   border: none;
 }
 
-#map-builder .show-info {
+#map-builder #show-info {
   position: absolute;
   right: 0;
   top: 0;
@@ -194,10 +203,37 @@ body {
   font-size: 30px;
 }
 
-.show-info i{
+#show-info i{
   color: white;
 }
 
 #level-screen canvas {
   cursor: pointer;
+}
+
+#control-button {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  padding: 10px;
+  background-color: #817777;
+  border: none;
+  cursor: pointer;
+  color: #eeeeee;
+}
+
+#controls-div, #map-info {
+  display: none;
+  position: absolute;
+  top: 67px;
+  z-index: 2;
+  background-color: rgba(200, 200, 200, 0.99);
+}
+
+#control-button:hover+#controls-div {
+  display: block;
+}
+
+#show-info:hover+#map-info {
+  display: block;
 }

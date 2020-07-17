@@ -77,22 +77,18 @@ function showLevels() {
 }
 
 function goHomeFromLevels() {
-  controlContainer.style.display = "block";
+  startContainer.style.display = "block";
   levelContainer.style.display = "none";
 }
 
 function goHomeFromGame() {
   gameContainer.style.display = "none";
-  controlContainer.style.display = "block";
+  startContainer.style.display = "block";
 }
 
 function goLevelsFromMapBuilder() {
   clearCanvas();
   mapBuilderContainer.style.display = "none";
+  controlsButton.style.display = "inline";
   levelContainer.style.display = "block";
-}
-
-function showMapInfo() {
-  let mapInfo = document.getElementById('map-info');
-  mapInfo.style.display == "none" ? mapInfo.style.display = "block" : mapInfo.style.display = "none";
 }
