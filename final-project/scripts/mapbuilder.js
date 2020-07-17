@@ -7,6 +7,7 @@ tankImage.src = "./images/tank-mini.png";
 
 function showMapBuilder() {
   levelContainer.style.display = "none";
+  controlsButton.style.display = "none";
   mapBuilderContainer.style.display = "block";
   mapCanvas = document.getElementById("map-builder__canvas");
   mapCanvasContext = mapCanvas.getContext("2d");
@@ -66,12 +67,12 @@ function fillWall() {
 }
 
 function fillHorizontalTank() {
-  mapCanvasContext.fillStyle = "rgb(0,0,0)";
+  mapCanvasContext.fillStyle = "rgb(254,254,254)";
   setTank = true;
 }
 
 function fillVerticalTank() {
-  mapCanvasContext.fillStyle = "rgb(1,1,1)";
+  mapCanvasContext.fillStyle = "rgb(253,253,253)";
   setTank = true;
 }
 

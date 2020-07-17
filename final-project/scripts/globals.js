@@ -103,9 +103,10 @@ let enemyTypes = [{
 
 // Get containers for the start screen, game screen and end screen
 let levelContainer = document.getElementById("level-screen");
-let controlContainer = document.getElementById("control-screen");
+let startContainer = document.getElementById("start-screen");
 let gameContainer = document.getElementById("game-screen");
 let endContainer = document.getElementById("end-screen");
 let winContainer = document.getElementById("won");
 let mapBuilderContainer = document.getElementById("map-builder");
+let controlsButton = document.getElementById("control-button");
 

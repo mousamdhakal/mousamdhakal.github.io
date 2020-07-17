@@ -235,6 +235,7 @@ export class Game {
    */
   showGameOver() {
     this.callTimeOut = false;
+    this.gamePlaying = false;
     gameContainer.style.display = 'none';
     endContainer.style.display = 'block';
   }
@@ -244,6 +245,7 @@ export class Game {
    */
   showWon() {
     this.callTimeOut = false;
+    this.gamePlaying = false;
     gameContainer.style.display = 'none';
     winContainer.style.display = 'block';
     levelContainer.style.display = 'block';
@@ -268,11 +270,6 @@ export class Game {
   init = function () {
     window.addEventListener("keydown", handleKeyDown.bind(this), false);
     window.addEventListener("keyup", handleKeyUp.bind(this), false);
-
-    // Hide startscreen and show gamescreen
-    controlContainer.style.display = "none";
-    gameContainer.style.display = "block";
-
     this.update();
   }
 
