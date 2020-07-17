@@ -32,28 +32,27 @@ body {
   width: 640px;
 }
 
-#create__levels {
-  margin-left: 70px;
-}
-
 #custom__levels {
   display: block;
 }
 
 .levels button{
-  width: 570px;
-  height: 168px;
+  width: 600px;
+  height: 80px;
   border: none;
   cursor: pointer;
   background-color: #cccccc;
 }
 
+#maps__list {
+  padding-left: 0px;
+}
+
 
 #maps__list li {
-  margin-bottom: 20px;
   list-style: none;
   float: left;
-  margin-left: 30px;
+  margin: 15px 22.5px;
 }
 
 #maps__list::after {
@@ -136,10 +135,6 @@ body {
   font-size: 30px;
 }
 
-.back-button {
-  left: 60px;
-}
-
 .back-button i {
   color: white;
 }
@@ -213,7 +208,7 @@ body {
 
 #control-button {
   position: absolute;
-  right: 0;
+  right: 20px;
   top: 20px;
   padding: 10px;
   background-color: #817777;
