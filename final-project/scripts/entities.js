@@ -1,4 +1,7 @@
-// Information regarding the player
+/**
+ * Get information regarding the player
+ * @returns {Object} -Object where the properties are the properties of the user tank
+ */
 function getPlayer() {
   return {
     x: 64 * 1 + 32,

@@ -5,47 +5,53 @@ let startImages = [];
 
 let tankImages = [];
 
-function preload() {
+let noOfImageLoaded = 0;
+
+/**
+ * Loads the image for the give number of arguments after first in the first argument
+ * @param {Array} -Collector array where the image objects will be stored
+ */
+function preload(collector) {
   for (var i = 0; i < arguments.length - 1; i++) {
-    preload.arguments[0][i] = new Image();
-    preload.arguments[0][i].src = preload.arguments[i + 1];
+    collector[i] = new Image();
+    collector[i].src = preload.arguments[i + 1];
+    collector[i].onload = imageLoaded;
   }
 }
+
+// Load images for start button, poster, tanks and canon
+// Once these are loaded when they are used via caching when the same source for image is encountered
+preload(startImages,
+  "./images/start.png",
+  "./images/game-poster.png",
+  './images/tank-front.png',
+  './images/tank-left.png',
+  './images/tank-right.png',
+  './images/tank-back.png',
+  './images/canon.png'
+);
 
 // Load walls image
 preload(wallsArray,
   "./images/mapSmall.png"
-)
+);
 
-// Load images for start button which will be used via caching
-preload(startImages,
-  "./images/start.png",
-  "./images/game-poster.png"
-)
-
-document.getElementById('start').style.backgroundImage = 'url("./images/start.png")';
-
-// Load tank images and canon image which will be used via caching as well
-preload(tankImages,
-  './images/tank-front.png',
-  './images/tank-left.png',
-  './images/tank-back.png',
-  './images/tank-back.png',
-  './images/canon.png'
-)
-
-loadFontAwesome();
-onLoadFinish();
-
-
-
-function loadFontAwesome() {
-  let someContainer = document.createElement('div');
-  someContainer.innerHTML = '<i class="fas fa-home"></i>';
-  someContainer.style.visibility = "hidden";
-  document.body.appendChild(someContainer);
+/**
+ * Checks for number of images loaded and once all images are loaded , calls the onLoadFinish function
+ */
+function imageLoaded() {
+  noOfImageLoaded++;
+  if (noOfImageLoaded == 8) {
+    onLoadFinish();
+  }
 }
 
+// Set the start button
+document.getElementById('start').style.backgroundImage = 'url("./images/start.png")';
+
+/**
+ * Shows the start screen hiding the loading text
+ */
 function onLoadFinish() {
   document.getElementById('start-screen').style.display = "block";
   document.getElementById('initial-screen').style.display = "none";

@@ -100,9 +100,11 @@ export class Game {
   restartGame() {
     this.initializeVariables();
     this.reDisplayGame();
-
   }
 
+  /**
+   * Get and set the essential variables of the game: map, player and enemies
+   */
   initializeVariables() {
     this.currentMap = getMap(this.mapIndex);
     this.player = getPlayer();
@@ -111,6 +113,9 @@ export class Game {
     this.initEnemies();
   }
 
+  /**
+   * Display the game again from end screen due to restart
+   */
   reDisplayGame() {
     gameContainer.style.display = 'block';
     endContainer.style.display = 'none';
@@ -208,6 +213,9 @@ export class Game {
     return sound;
   }
 
+  /**
+   * Pause the game and change the style of play and pause buttons
+   */
   pause() {
     this.callTimeOut = false;
     this.gamePlaying = false;
@@ -215,7 +223,11 @@ export class Game {
     document.getElementById('game-play').style.color = '#2e3436';
   }
 
+  /**
+   * Play the game and change the style of play and pause buttons
+   */
   play() {
+    // Only do if the game is already paused, (increases the number of times update is called otherwise messing up game speed)
     if (!this.gamePlaying) {
       this.callTimeOut = true;
       this.update();
@@ -225,6 +237,9 @@ export class Game {
     }
   }
 
+  /**
+   * Pause the game and go back to the home screen
+   */
   quit() {
     this.pause();
     goHomeFromGame();
@@ -241,7 +256,7 @@ export class Game {
   }
 
   /**
-   * Stop the recurrent update of the page and show game won message and level selection choice
+   * Stop the recurrent update of the page and show game won message and level selection choice 
    */
   showWon() {
     this.callTimeOut = false;
@@ -251,9 +266,17 @@ export class Game {
     levelContainer.style.display = 'block';
   }
 
+  /**
+   * Shows the time after which User can fire weapon from the tank
+   */
   showBulletCoolDown() {
+    // Calculate the time remaining in floating value with one digit after decimal symbol and remove other trailing zeroes if found
     let time = (3 - (this.player.timeSinceLastBullet / 30)).toFixed(1).replace(/\.?0*$/, '');
+
+    // If the time is less than zero that means user can fire , so set it to be 0 to be minimum
     if (time <= 0) time = 0;
+
+    // Display the cooldown time on the screen
     let cooldown = "Cooldown:" + time;
     this.canvasContext.font = "18px Consolas";
     this.canvasContext.fillStyle = "black";
@@ -302,6 +325,8 @@ export class Game {
 
     handlePlayerMovement();
 
+    // Increase the timesince last bullet fired for all tanks on the map
+    // Note that this happens FRAMERATE number of times
     this.player.timeSinceLastBullet++;
     for (i = 0; i < this.mapEnemies.length; i++) {
       this.mapEnemies[i].timeSinceLastBullet++;

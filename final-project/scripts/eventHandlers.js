@@ -70,24 +70,45 @@ function handleKeyUp() {
   }
 }
 
+// Response function to different button clicks
+
+/**
+ * Go back to level screen to select another level after game ends
+ */
 function showLevels() {
+  // Re-initialize variables for this map
   game.initializeVariables();
+
+  // Hide end screen and show level screen
   endContainer.style.display = "none";
   levelContainer.style.display = "block";
 }
 
+/**
+ * Go back to the home screen from levels screen on pressing home button
+ */
 function goHomeFromLevels() {
   startContainer.style.display = "block";
   levelContainer.style.display = "none";
 }
 
+/**
+ * Go back to the home screen while playing the game
+ * Can be called by either clicking the button or pressing the key 'Q'
+ */
 function goHomeFromGame() {
   gameContainer.style.display = "none";
   startContainer.style.display = "block";
 }
 
+/**
+ * Go back to levels from mapbuilder screen without saving the map
+ */
 function goLevelsFromMapBuilder() {
+  // Clear this canvas
   clearCanvas();
+
+  // Hide mapbuilder screen and show levels screen and the controls button
   mapBuilderContainer.style.display = "none";
   controlsButton.style.display = "inline";
   levelContainer.style.display = "block";
