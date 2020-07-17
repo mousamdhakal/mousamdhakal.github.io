@@ -49,6 +49,7 @@ function loadFontAwesome() {
 function onLoadFinish() {
   document.getElementById('start-screen').style.display = "block";
   document.getElementById('initial-screen').style.display = "none";
+  document.getElementById('control-button').style.display = "block";
 }
 
 

@@ -215,6 +215,13 @@ body {
   border: none;
   cursor: pointer;
   color: #eeeeee;
+  display: none;
+  border-radius: 5px;
+}
+
+#control-button:hover {
+  color: #413939;
+  background-color: #dddddd;
 }
 
 #controls-div, #map-info {
@@ -223,6 +230,7 @@ body {
   top: 67px;
   z-index: 2;
   background-color: rgba(200, 200, 200, 0.99);
+  border-radius: 10px;
 }
 
 #control-button:hover+#controls-div {

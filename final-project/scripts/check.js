@@ -85,12 +85,17 @@ export function checkWall(ycell, xcell) {
 export function checkAbsWallBetween(playerX, playerY, objectX, objectY) {
   let xDiff = objectX - playerX;
   let yDiff = objectY - playerY;
+
+  // Calculate the straight(absolute) distance from the player to the enemy
   let dist = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+  // Amount of distance covered in each step moving from posiiton of first object to second object
   let xStep = xDiff / dist;
   let yStep = yDiff / dist;
 
-  // Do for second cell on the first quadrant relative to first cell
+  // Do as long as player has not reached the position of the another object
   while (Math.abs(xDiff) > BLOCK_SIZE || Math.abs(yDiff) > BLOCK_SIZE) {
+    // Move the player by the required step
     playerX += xStep;
     playerY += yStep;
     xDiff -= xStep;
