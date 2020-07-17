@@ -251,6 +251,15 @@ export class Game {
     levelContainer.style.display = 'block';
   }
 
+  showBulletCoolDown() {
+    let time = (3 - (this.player.timeSinceLastBullet / 30)).toFixed(1).replace(/\.?0*$/, '');
+    if (time <= 0) time = 0;
+    let cooldown = "Cooldown:" + time;
+    this.canvasContext.font = "18px Consolas";
+    this.canvasContext.fillStyle = "black";
+    this.canvasContext.fillText(cooldown, 200, 20);
+  }
+
   /**
    * Updates the game canvas with all the pixel data from hidden canvas
    */
@@ -259,6 +268,7 @@ export class Game {
     this.renderEnemies();
     this.renderBullets();
     this.drawCanon();
+    this.showBulletCoolDown();
     if (this.player.keySpacePressed) {
       this.fireBullet(this.player);
     }
