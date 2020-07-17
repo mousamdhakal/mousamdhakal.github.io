@@ -63,7 +63,7 @@ let game;
 let visibleEnemies = [];
 
 // Image of the different enemy types,i.e- different sides of the tank
-// let enemies = [];
+let enemies = [];
 
 // Array of bullets that are currnetly fired 
 let bulletList = [];
