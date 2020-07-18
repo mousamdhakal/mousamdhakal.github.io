@@ -1,10 +1,10 @@
 // Array for images of the wall
 let wallsArray = [];
 
+// Array for other images to load during startup
 let startImages = [];
 
-let tankImages = [];
-
+// variable to check if all the images are completely loaded
 let noOfImageLoaded = 0;
 
 /**
@@ -21,9 +21,10 @@ function preload(collector) {
 
 // Load images for start button, poster, tanks and canon
 // Once these are loaded when they are used via caching when the same source for image is encountered
-preload(startImages,
-  "./images/start.png",
-  "./images/game-poster.png",
+preload(
+  startImages,
+  './images/start.png',
+  './images/game-poster.png',
   './images/tank-front.png',
   './images/tank-left.png',
   './images/tank-right.png',
@@ -32,9 +33,7 @@ preload(startImages,
 );
 
 // Load walls image
-preload(wallsArray,
-  "./images/mapSmall.png"
-);
+preload(wallsArray, './images/mapSmall.png');
 
 /**
  * Checks for number of images loaded and once all images are loaded , calls the onLoadFinish function
@@ -47,17 +46,14 @@ function imageLoaded() {
 }
 
 // Set the start button
-document.getElementById('start').style.backgroundImage = 'url("./images/start.png")';
+document.getElementById('start').style.backgroundImage =
+  'url("./images/start.png")';
 
 /**
  * Shows the start screen hiding the loading text
  */
 function onLoadFinish() {
-  document.getElementById('start-screen').style.display = "block";
-  document.getElementById('initial-screen').style.display = "none";
-  document.getElementById('control-button').style.display = "block";
+  document.getElementById('start-screen').style.display = 'block';
+  document.getElementById('initial-screen').style.display = 'none';
+  document.getElementById('control-button').style.display = 'block';
 }
-
-
-
-

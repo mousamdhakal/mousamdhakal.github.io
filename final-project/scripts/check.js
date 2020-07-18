@@ -28,14 +28,20 @@ export function checkEnemyTank(ycell, xcell) {
 export function checkRange(enemyX, enemyY, playerX, playerY, speedX) {
   // If tank is moving horizontal
   if (speedX == 1) {
-    if ((enemyX - playerX) < (FRONTRANGE * BLOCK_SIZE) && (enemyY - playerY) < (SIDERANGE * BLOCK_SIZE)) {
+    if (
+      enemyX - playerX < FRONTRANGE * BLOCK_SIZE &&
+      enemyY - playerY < SIDERANGE * BLOCK_SIZE
+    ) {
       return true;
     }
     return false;
   }
   // If tank is moving vertical
   else {
-    if ((enemyX - playerX) < (SIDERANGE * BLOCK_SIZE) && (enemyY - playerY) < (FRONTRANGE * BLOCK_SIZE)) {
+    if (
+      enemyX - playerX < SIDERANGE * BLOCK_SIZE &&
+      enemyY - playerY < FRONTRANGE * BLOCK_SIZE
+    ) {
       return true;
     }
     return false;
@@ -60,9 +66,8 @@ export function checkBullet(ycell, xcell) {
   return false;
 }
 
-
 /**
- * Checks for presence of wall in given cell position 
+ * Checks for presence of wall in given cell position
  * @param {Number} ycell - Y cell position to check for presence of wall
  * @param {Number} xcell - X cell position ot check for presence of wall
  * @returns {Boolean} - true if wall is present in the cell false otherwise
@@ -99,7 +104,7 @@ export function checkAbsWallBetween(playerX, playerY, objectX, objectY) {
     playerX += xStep;
     playerY += yStep;
     xDiff -= xStep;
-    yDiff -= yStep
+    yDiff -= yStep;
     let yCell = Math.floor(playerY / BLOCK_SIZE);
     let xCell = Math.floor(playerX / BLOCK_SIZE);
     if (checkWall(yCell, xCell)) {

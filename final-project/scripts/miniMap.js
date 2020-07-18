@@ -6,21 +6,25 @@ import { checkEnemyTank, checkBullet } from './check.js';
 export function drawMiniMap() {
   for (let r = 0; r < this.MAP_HEIGHT; r++) {
     for (let c = 0; c < this.MAP_WIDTH; c++) {
+
       if (this.currentMap[r][c] != 0) {
         // Draw grey square if there is a wall
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 100, 100, 100, 255);
       }
+
       else if (checkEnemyTank(r, c)) {
         // Draw black square if there is an enemy tank
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 0, 0, 0, 255);
       }
+
       else if (checkBullet(r, c)) {
         // Draw red square if there is a bullet
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),
           (r * MINIMAPSCALE), MINIMAPSCALE, MINIMAPSCALE, 255, 0, 0, 255);
       }
+
       else {
         // Draw white square if there is a blank space
         drawFillRectangle(MAPPOSITION + (c * MINIMAPSCALE),

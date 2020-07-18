@@ -1,4 +1,4 @@
-import { drawWallSliceRectangle } from "./draw.js";
+import { drawWallSliceRectangle } from './draw.js';
 
 export function castRays() {
   // Horizontal or vertical co-ordinate of intersection
@@ -149,8 +149,6 @@ export function castRays() {
         xGridIndex = Math.floor(verticalGrid / BLOCK_SIZE);
         yGridIndex = Math.floor(yIntersection / BLOCK_SIZE);
 
-
-
         // Stop if we've looked as far as outside the map index
         if (
           xGridIndex >= this.MAP_WIDTH ||
@@ -219,7 +217,7 @@ export function castRays() {
         bottomOfWall - topOfWall + 1,
         xOffset,
         wallType - 1,
-        160 / (dist)
+        160 / dist
       );
     } else {
       drawWallSliceRectangle(
@@ -228,10 +226,9 @@ export function castRays() {
         bottomOfWall - topOfWall + 1,
         xOffset,
         wallType - 1,
-        100 / (dist)
+        100 / dist
       );
     }
-
 
     // Trace the next ray
     castArc += 1;
@@ -241,7 +238,7 @@ export function castRays() {
 }
 
 /**
- * 
+ *
  * @param {Number} yGridIndex - y Grid index to check
  * @param {Number} xGridIndex - x Grid index to check
  */
@@ -251,10 +248,13 @@ function checkObjects(yGridIndex, xGridIndex) {
     let xGrid = Math.floor(game.mapEnemies[i].x / BLOCK_SIZE);
     let yGrid = Math.floor(game.mapEnemies[i].y / BLOCK_SIZE);
     // If enemy tank is found and visibility flag is down, set the visibility to true and push in visibleEnemies array
-    if (xGrid == xGridIndex && yGrid == yGridIndex && !game.mapEnemies[i].visible) {
+    if (
+      xGrid == xGridIndex &&
+      yGrid == yGridIndex &&
+      !game.mapEnemies[i].visible
+    ) {
       game.mapEnemies[i].visible = true;
       visibleEnemies.push(game.mapEnemies[i]);
     }
-
   }
 }

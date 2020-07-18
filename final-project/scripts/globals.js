@@ -65,62 +65,61 @@ let visibleEnemies = [];
 // Image of the different enemy types,i.e- different sides of the tank
 let enemies = [];
 
-// Array of bullets that are currnetly fired 
+// Array of bullets that are currnetly fired
 let bulletList = [];
 
 // Sound of the tank canon hitting obstacles
 let gameSound;
 
 // Store different DOM elements that are frequently referenced in variables
-let levelContainer = document.getElementById("level-screen");
-let startContainer = document.getElementById("start-screen");
-let gameContainer = document.getElementById("game-screen");
-let endContainer = document.getElementById("end-screen");
-let winContainer = document.getElementById("won");
-let mapBuilderContainer = document.getElementById("map-builder");
-let controlsButton = document.getElementById("control-button");
+let levelContainer = document.getElementById('level-screen');
+let startContainer = document.getElementById('start-screen');
+let gameContainer = document.getElementById('game-screen');
+let endContainer = document.getElementById('end-screen');
+let winContainer = document.getElementById('won');
+let mapBuilderContainer = document.getElementById('map-builder');
+let controlsButton = document.getElementById('control-button');
 
 // Types of enemy, i.e- different states of the tank
-let enemyTypes = [{
-  img: './images/tank-front.png',
-  moveSpeed: -3,
-  holdTime: 100
-},
-{
-  img: './images/tank-front.png',
-  moveSpeed: 0,
-  holdTime: 20
-},
-{
-  img: './images/tank-left.png',
-  moveSpeed: 0,
-  holdTime: 20,
-},
-{
-  img: './images/tank-left.png',
-  moveSpeed: 0,
-  holdTime: 20,
-},
-{
-  img: './images/tank-back.png',
-  moveSpeed: 3,
-  holdTime: 100,
-},
-{
-  img: './images/tank-back.png',
-  moveSpeed: 0,
-  holdTime: 20,
-},
-{
-  img: './images/tank-right.png',
-  moveSpeed: 0,
-  holdTime: 20
-},
-{
-  img: './images/tank-right.png',
-  moveSpeed: 0,
-  holdTime: 20
-}
+let enemyTypes = [
+  {
+    img: './images/tank-front.png',
+    moveSpeed: -3,
+    holdTime: 100,
+  },
+  {
+    img: './images/tank-front.png',
+    moveSpeed: 0,
+    holdTime: 20,
+  },
+  {
+    img: './images/tank-left.png',
+    moveSpeed: 0,
+    holdTime: 20,
+  },
+  {
+    img: './images/tank-left.png',
+    moveSpeed: 0,
+    holdTime: 20,
+  },
+  {
+    img: './images/tank-back.png',
+    moveSpeed: 3,
+    holdTime: 100,
+  },
+  {
+    img: './images/tank-back.png',
+    moveSpeed: 0,
+    holdTime: 20,
+  },
+  {
+    img: './images/tank-right.png',
+    moveSpeed: 0,
+    holdTime: 20,
+  },
+  {
+    img: './images/tank-right.png',
+    moveSpeed: 0,
+    holdTime: 20,
+  },
 ];
-
-

@@ -12,12 +12,12 @@ function getPlayer() {
     height: 64,
     speed: MOVEMENTSPEED,
     timeSinceLastBullet: 100,
-    keySpacePressed: false
+    keySpacePressed: false,
   };
 }
 
 /**
- * 
+ *
  * @param {Number} index - Index number of the map
  * @returns {Array} - array containing enemy tank objects
  */
@@ -35,6 +35,6 @@ function createNewBullet() {
   return {
     x: 200,
     y: 160,
-    speed: MOVEMENTSPEED * 4
+    speed: MOVEMENTSPEED * 4,
   };
 }
