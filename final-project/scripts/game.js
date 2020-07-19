@@ -48,7 +48,7 @@ export class Game {
     this.miniMapX;
     this.miniMapY;
 
-    // Settimeout method called to create animation
+    // Set flag to check whether to keep updating the game or to pause/quit the game stopping the update cycle
     this.callTimeOut = true;
 
     // Set flags to handle keyboard input
@@ -69,7 +69,7 @@ export class Game {
     // Pixel information for the wall
     this.wallPixels = [];
 
-    //Get teh enemy tanks for this map
+    //Get the enemy tanks for this map
     this.mapEnemies = getEnemies(mapIndex);
 
     // Load image of the wall
@@ -95,36 +95,6 @@ export class Game {
   }
 
   /**
-   * Restart the current game by reinitializing the variables and calling new updatecycle
-   */
-  restartGame() {
-    this.initializeVariables();
-    this.reDisplayGame();
-  }
-
-  /**
-   * Get and set the essential variables of the game: map, player and enemies
-   */
-  initializeVariables() {
-    this.currentMap = getMap(this.mapIndex);
-    this.player = getPlayer();
-    this.mapEnemies = getEnemies(this.mapIndex);
-    bulletList = [];
-    this.initEnemies();
-  }
-
-  /**
-   * Display the game again from end screen due to restart
-   */
-  reDisplayGame() {
-    gameContainer.style.display = 'block';
-    endContainer.style.display = 'none';
-
-    this.callTimeOut = true;
-    this.update();
-  }
-
-  /**
    * Clear the list of visible obstacles and set visibility of all obstacles to false
    */
   clearEnemies = clearEnemies;
@@ -138,13 +108,6 @@ export class Game {
    * Load image of wall and get it's data from a buffer canvas
    */
   loadWallImages = loadWallImages;
-
-  /**
-   * Clears the hidden canvas
-   */
-  clearhiddenCanvas = function () {
-    this.hiddenCanvasContext.clearRect(0, 0, this.width, this.height);
-  };
 
   /**
    * Draw Minimap
@@ -198,10 +161,40 @@ export class Game {
   renderBullets = renderBullets;
 
   /**
+   * Restart the current game by reinitializing the variables and calling new updatecycle
+   */
+  restartGame = function () {
+    this.initializeVariables();
+    this.reDisplayGame();
+  };
+
+  /**
+   * Get and set the essential variables of the game: map, player and enemies
+   */
+  initializeVariables = function () {
+    this.currentMap = getMap(this.mapIndex);
+    this.player = getPlayer();
+    this.mapEnemies = getEnemies(this.mapIndex);
+    bulletList = [];
+    this.initEnemies();
+  };
+
+  /**
+   * Display the game again from end screen due to restart
+   */
+  reDisplayGame = function () {
+    gameContainer.style.display = 'block';
+    endContainer.style.display = 'none';
+
+    this.callTimeOut = true;
+    this.update();
+  };
+
+  /**
    * Create an html audio element and embed to the page as not visible element
    * @param {String} src - string representing the source of the audio
    */
-  sound(src) {
+  sound = function (src) {
     let sound = document.createElement('audio');
     sound.src = src;
     sound.setAttribute('preload', 'auto');
@@ -210,22 +203,22 @@ export class Game {
     sound.style.display = 'none';
     document.body.appendChild(sound);
     return sound;
-  }
+  };
 
   /**
    * Pause the game and change the style of play and pause buttons
    */
-  pause() {
+  pause = function () {
     this.callTimeOut = false;
     this.gamePlaying = false;
     document.getElementById('game-pause').style.color = '#ff0000';
     document.getElementById('game-play').style.color = '#2e3436';
-  }
+  };
 
   /**
    * Play the game and change the style of play and pause buttons
    */
-  play() {
+  play = function () {
     // Only do if the game is already paused, (increases the number of times update is called otherwise messing up game speed)
     if (!this.gamePlaying) {
       this.callTimeOut = true;
@@ -234,40 +227,40 @@ export class Game {
       document.getElementById('game-play').style.color = '#ff0000';
       document.getElementById('game-pause').style.color = '#2e3436';
     }
-  }
+  };
 
   /**
    * Pause the game and go back to the home screen
    */
-  quit() {
+  quit = function () {
     this.pause();
     goHomeFromGame();
-  }
+  };
 
   /**
    * Stop the recurrent update of the page and show game over screen
    */
-  showGameOver() {
+  showGameOver = function () {
     this.callTimeOut = false;
     this.gamePlaying = false;
     gameContainer.style.display = 'none';
     endContainer.style.display = 'block';
-  }
+  };
 
   /**
    * Stop the recurrent update of the page and show game won message and level selection choice
    */
-  showWon() {
+  showWon = function () {
     this.callTimeOut = false;
     this.gamePlaying = false;
     gameContainer.style.display = 'none';
     winContainer.style.display = 'block';
-  }
+  };
 
   /**
    * Shows the time after which User can fire weapon from the tank
    */
-  showBulletCoolDown() {
+  showBulletCoolDown = function () {
     // Calculate the time remaining in floating value with one digit after decimal symbol and remove other trailing zeroes if found
     let time = (3 - this.player.timeSinceLastBullet / 30)
       .toFixed(1)
@@ -281,7 +274,7 @@ export class Game {
     this.canvasContext.font = '18px Consolas';
     this.canvasContext.fillStyle = 'black';
     this.canvasContext.fillText(cooldown, 200, 20);
-  }
+  };
 
   /**
    * Updates the game canvas with all the pixel data from hidden canvas
@@ -313,7 +306,7 @@ export class Game {
     if (this.mapEnemies.length < 1) {
       this.showWon();
     }
-    this.clearhiddenCanvas();
+    this.hiddenCanvasContext.clearRect(0, 0, this.width, this.height);
     this.drawBackground();
     this.raycast();
     this.drawMiniMap();
@@ -402,7 +395,7 @@ function handlePlayerMovement() {
   let playerXCellOffset = game.player.x % BLOCK_SIZE;
   let playerYCellOffset = game.player.y % BLOCK_SIZE;
 
-  // make sure the player don't bump into walls
+  // Make sure the player doesn't bump into walls
   if (dx > 0) {
     // Player is moving right
     if (
