@@ -7,7 +7,6 @@ function handleKeyDown() {
   // If 'W' key is pressed, set the corresponding flag
   if (e.keyCode == '87') {
     game.keyUpPressed = true;
-
   }
   // If 'S' key is pressed, set the corresponding flag
   else if (e.keyCode == '83') {
@@ -34,10 +33,9 @@ function handleKeyDown() {
     game.pause();
   }
   // Quit the game on pressing Q key
-  else if (e.keyCode == '81' && gameContainer.style.display == "block") {
+  else if (e.keyCode == '81' && gameContainer.style.display == 'block') {
     game.quit();
   }
-
 }
 
 /**
@@ -49,7 +47,6 @@ function handleKeyUp() {
   // If 'W' key is released, clear the corresponding flag
   if (e.keyCode == '87') {
     game.keyUpPressed = false;
-
   }
   // If 'S' key is released, clear the corresponding flag
   else if (e.keyCode == '83') {
@@ -64,7 +61,6 @@ function handleKeyUp() {
     game.keyRightPressed = false;
   }
   // If 'Spacebar' key is released, clear the corresponding flag
-
   else if (e.keyCode == '32') {
     game.player.keySpacePressed = false;
   }
@@ -80,16 +76,17 @@ function showLevels() {
   game.initializeVariables();
 
   // Hide end screen and show level screen
-  endContainer.style.display = "none";
-  levelContainer.style.display = "block";
+  endContainer.style.display = 'none';
+  winContainer.style.display = 'none';
+  levelContainer.style.display = 'block';
 }
 
 /**
  * Go back to the home screen from levels screen on pressing home button
  */
 function goHomeFromLevels() {
-  startContainer.style.display = "block";
-  levelContainer.style.display = "none";
+  startContainer.style.display = 'block';
+  levelContainer.style.display = 'none';
 }
 
 /**
@@ -97,8 +94,8 @@ function goHomeFromLevels() {
  * Can be called by either clicking the button or pressing the key 'Q'
  */
 function goHomeFromGame() {
-  gameContainer.style.display = "none";
-  startContainer.style.display = "block";
+  gameContainer.style.display = 'none';
+  startContainer.style.display = 'block';
 }
 
 /**
@@ -109,7 +106,7 @@ function goLevelsFromMapBuilder() {
   clearCanvas();
 
   // Hide mapbuilder screen and show levels screen and the controls button
-  mapBuilderContainer.style.display = "none";
-  controlsButton.style.display = "inline";
-  levelContainer.style.display = "block";
+  mapBuilderContainer.style.display = 'none';
+  controlsButton.style.display = 'inline';
+  levelContainer.style.display = 'block';
 }

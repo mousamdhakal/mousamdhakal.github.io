@@ -1,31 +1,31 @@
-import { drawWallSliceRectangle } from "./draw.js";
+import { drawWallSliceRectangle } from './draw.js';
 
 export function castRays() {
   // Horizontal or vertical co-ordinate of intersection
-  var verticalGrid;
-  var horizontalGrid;
+  let verticalGrid;
+  let horizontalGrid;
 
   // distance to next grid , needed to account for different direction in which rays move
-  var distToNextVerticalGrid;
-  var distToNextHorizontalGrid;
+  let distToNextVerticalGrid;
+  let distToNextHorizontalGrid;
 
   // x and y intersection points
-  var xIntersection;
-  var yIntersection;
-  var distToNextXIntersection;
-  var distToNextYIntersection;
+  let xIntersection;
+  let yIntersection;
+  let distToNextXIntersection;
+  let distToNextYIntersection;
 
   let wallType = 0;
 
   // Current block/tile of the map that the ray is in
-  var xGridIndex;
-  var yGridIndex;
+  let xGridIndex;
+  let yGridIndex;
 
   // Distance of x and y ray intersections from the viewpoint
-  var distToVerticalGridBeingHit;
-  var distToHorizontalGridBeingHit;
+  let distToVerticalGridBeingHit;
+  let distToHorizontalGridBeingHit;
 
-  var castArc, castColumn;
+  let castArc, castColumn;
 
   // Get the angle the player is facing towards
   castArc = this.player.arc;
@@ -37,7 +37,7 @@ export function castRays() {
     castArc = ANGLE360 + castArc;
   }
 
-  for (castColumn = 0; castColumn < PROJECTIONPLANEWIDTH; castColumn += 1) {
+  for (castColumn = 0; castColumn < PROJECTION_PLANE_WIDTH; castColumn += 1) {
     // If the ray is between 0 and 180 degrees, ray is facing down
     if (castArc > ANGLE0 && castArc < ANGLE180) {
       // Get co-ordinate of first grid in front of player in pixel unit rounded down
@@ -48,7 +48,7 @@ export function castRays() {
       distToNextHorizontalGrid = BLOCK_SIZE;
 
       // This is the horizontal distance to grid which is found by 1/tan(arc) * verticalDistance
-      var xtemp = tanITable[castArc] * (horizontalGrid - this.player.y);
+      let xtemp = tanITable[castArc] * (horizontalGrid - this.player.y);
 
       // X point of intersection to the grid
       xIntersection = xtemp + this.player.x;
@@ -59,7 +59,7 @@ export function castRays() {
       horizontalGrid = Math.floor(this.player.y / BLOCK_SIZE) * BLOCK_SIZE;
       distToNextHorizontalGrid = -BLOCK_SIZE;
 
-      var xtemp = tanITable[castArc] * (horizontalGrid - this.player.y);
+      let xtemp = tanITable[castArc] * (horizontalGrid - this.player.y);
       xIntersection = xtemp + this.player.x;
 
       // Reduce the horizontalGrid by 1 as the intersection is taking place on lower part of the wall and not the upper part
@@ -121,7 +121,7 @@ export function castRays() {
       distToNextVerticalGrid = BLOCK_SIZE;
 
       // This is the vertical distance to grid which is found by 1/tan(arc) * horizontalDistance
-      var ytemp = tanTable[castArc] * (verticalGrid - this.player.x);
+      let ytemp = tanTable[castArc] * (verticalGrid - this.player.x);
       yIntersection = ytemp + this.player.y;
     }
     // Ray is facing left
@@ -130,7 +130,7 @@ export function castRays() {
       verticalGrid = Math.floor(this.player.x / BLOCK_SIZE) * BLOCK_SIZE;
       distToNextVerticalGrid = -BLOCK_SIZE;
 
-      var ytemp = tanTable[castArc] * (verticalGrid - this.player.x);
+      let ytemp = tanTable[castArc] * (verticalGrid - this.player.x);
       yIntersection = ytemp + this.player.y;
 
       // Reduce the verticalGrid by 1 as the intersection is taking place on left part of the grid and not on the right part
@@ -148,8 +148,6 @@ export function castRays() {
         // Calculate the grid where the ray currently hits to look in the map
         xGridIndex = Math.floor(verticalGrid / BLOCK_SIZE);
         yGridIndex = Math.floor(yIntersection / BLOCK_SIZE);
-
-
 
         // Stop if we've looked as far as outside the map index
         if (
@@ -181,10 +179,10 @@ export function castRays() {
       }
     }
     // Draw the part of the wall
-    var dist;
-    var xOffset;
-    var topOfWall; // used to find bottom of the ceiling
-    var bottomOfWall; // used to find starting position of the floor
+    let dist;
+    let xOffset;
+    let topOfWall; // used to find bottom of the ceiling
+    let bottomOfWall; // used to find starting position of the floor
 
     let isWallVertical = false;
     // If horizontal wall is closer than vertical wall
@@ -204,10 +202,10 @@ export function castRays() {
     // correct distance (compensate for the fishbowl effect) by correction from constant value for each angle extracted from generated table
     dist /= fishEyeCorrectionTable[castColumn];
     // projected_wall_height/wall_height = fPlayerDistToProjectionPlane/dist;
-    var projectedWallHeight =
+    let projectedWallHeight =
       (WALL_HEIGHT * this.player.distanceToProjectionPlane) / dist;
-    bottomOfWall = PROJECTIONPLANECENTERHEIGHT + projectedWallHeight * 0.5;
-    topOfWall = PROJECTIONPLANECENTERHEIGHT - projectedWallHeight * 0.5;
+    bottomOfWall = PROJECTION_PLANE_CENTER_HEIGHT + projectedWallHeight * 0.5;
+    topOfWall = PROJECTION_PLANE_CENTER_HEIGHT - projectedWallHeight * 0.5;
 
     dist = Math.floor(dist);
     // Draw the wall slice in the correct position
@@ -219,7 +217,7 @@ export function castRays() {
         bottomOfWall - topOfWall + 1,
         xOffset,
         wallType - 1,
-        160 / (dist)
+        160 / dist
       );
     } else {
       drawWallSliceRectangle(
@@ -228,10 +226,9 @@ export function castRays() {
         bottomOfWall - topOfWall + 1,
         xOffset,
         wallType - 1,
-        100 / (dist)
+        100 / dist
       );
     }
-
 
     // Trace the next ray
     castArc += 1;
@@ -241,7 +238,7 @@ export function castRays() {
 }
 
 /**
- * 
+ *
  * @param {Number} yGridIndex - y Grid index to check
  * @param {Number} xGridIndex - x Grid index to check
  */
@@ -251,10 +248,13 @@ function checkObjects(yGridIndex, xGridIndex) {
     let xGrid = Math.floor(game.mapEnemies[i].x / BLOCK_SIZE);
     let yGrid = Math.floor(game.mapEnemies[i].y / BLOCK_SIZE);
     // If enemy tank is found and visibility flag is down, set the visibility to true and push in visibleEnemies array
-    if (xGrid == xGridIndex && yGrid == yGridIndex && !game.mapEnemies[i].visible) {
+    if (
+      xGrid == xGridIndex &&
+      yGrid == yGridIndex &&
+      !game.mapEnemies[i].visible
+    ) {
       game.mapEnemies[i].visible = true;
       visibleEnemies.push(game.mapEnemies[i]);
     }
-
   }
 }

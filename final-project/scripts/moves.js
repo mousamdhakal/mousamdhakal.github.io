@@ -1,4 +1,4 @@
-import { checkWall, checkAbsWallBetween, checkEnemyTank, checkRange } from './check.js';
+import { checkWall, checkAbsWallBetween, checkRange } from './check.js';
 
 /**
  * Move around the enemy tank and fire bullet if the tank is facing towards player and there are no blocking walls between user and enemy tank
@@ -6,41 +6,36 @@ import { checkWall, checkAbsWallBetween, checkEnemyTank, checkRange } from './ch
 export function moveTanks() {
   for (i = 0; i < this.mapEnemies.length; i++) {
     let enemy = this.mapEnemies[i];
-    var enemyType = enemy.type;
-    var diffX = ((enemy.x - this.player.x) / BLOCK_SIZE);
-    var diffY = ((enemy.y - this.player.y) / BLOCK_SIZE);
-
+    let enemyType = enemy.type;
+    let diffX = (enemy.x - this.player.x) / BLOCK_SIZE;
+    let diffY = (enemy.y - this.player.y) / BLOCK_SIZE;
 
     if (enemy.speedX == 1) {
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (diffY < -SIDERANGE && Math.abs(diffY) >= Math.abs(diffX)) {
+      if (diffY < -SIDE_RANGE && Math.abs(diffY) >= Math.abs(diffX)) {
         enemyType = (enemyType + 2) % 7;
-      } else if (diffY > SIDERANGE && Math.abs(diffY) >= Math.abs(diffX)) {
+      } else if (diffY > SIDE_RANGE && Math.abs(diffY) >= Math.abs(diffX)) {
         enemyType = (enemyType + 6) % 7;
-      }
-      else if (diffX < 0) {
+      } else if (diffX < 0) {
         enemyType = (enemyType + 4) % 7;
       }
     } else if (enemy.speedY == 1) {
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (diffX < -SIDERANGE && Math.abs(diffX) >= Math.abs(diffY)) {
+      if (diffX < -SIDE_RANGE && Math.abs(diffX) >= Math.abs(diffY)) {
         enemyType = (enemyType + 2) % 7;
-      } else if (diffX > SIDERANGE && Math.abs(diffX) >= Math.abs(diffY)) {
+      } else if (diffX > SIDE_RANGE && Math.abs(diffX) >= Math.abs(diffY)) {
         enemyType = (enemyType + 6) % 7;
-      }
-      else if (diffY < 0) {
+      } else if (diffY < 0) {
         enemyType = (enemyType + 4) % 7;
       }
     }
 
-    // // Calculate the cell positions for user tank and enemy tank
-    // let tankXcell = Math.floor(enemy.x / BLOCK_SIZE);
-    // let tankYcell = Math.floor(enemy.y / BLOCK_SIZE);
-    // let playerXcell = Math.floor(game.player.x / BLOCK_SIZE);
-    // let playerYCell = Math.floor(game.player.y / BLOCK_SIZE);
-
     // If tank is facing towards user and no walls between fire bullet and skip the movement
-    if ((enemyType == 0 || enemyType == 1) && !checkAbsWallBetween(enemy.x, enemy.y, game.player.x, game.player.y) && checkRange(enemy.x, enemy.y, game.player.x, game.player.y, enemy.speedX)) {
+    if (
+      (enemyType == 0 || enemyType == 1) &&
+      !checkAbsWallBetween(enemy.x, enemy.y, game.player.x, game.player.y) &&
+      checkRange(enemy.x, enemy.y, game.player.x, game.player.y, enemy.speedX)
+    ) {
       this.fireBullet(enemy);
       continue;
     }
@@ -62,12 +57,15 @@ export function moveTanks() {
 
     // If enemy.moved has crossed the holdtime , or it is in collision with wall then reverse
     // the move and change the state of tank for rotation to move in opposite direction
-    if (enemy.moved > enemyTypes[enemy.type].holdTime || checkWall(tankYcell, tankXcell)) {
+    if (
+      enemy.moved > enemyTypes[enemy.type].holdTime ||
+      checkWall(tankYcell, tankXcell)
+    ) {
       enemy.x -= moveStepX;
       enemy.y -= moveStepY;
       enemy.type++;
 
-      // If type of enemy has crossed 7, move back to 0  
+      // If type of enemy has crossed 7, move back to 0
       if (enemy.type > 7) {
         enemy.type = 0;
       }
@@ -77,14 +75,13 @@ export function moveTanks() {
 }
 
 /**
- * Fires bullet from a tank 
+ * Fires bullet from a tank
  * @param {Object} tank -  The tank from which bullet is to be fired
  */
 export function fireBullet(tank) {
-  // Check the time from which the last bullet was fired from this tank and 
+  // Check the time from which the last bullet was fired from this tank and
   // if it is above the minimum time between two bullets
-  if (tank.timeSinceLastBullet > FIRINGSPEED && tank.keySpacePressed) {
-
+  if (tank.timeSinceLastBullet > FIRING_SPEED && tank.keySpacePressed) {
     // Play firing sound
     game.tankSound.play();
     // Create new bullet object
@@ -97,8 +94,8 @@ export function fireBullet(tank) {
     }
     // If the bullet is fired from enemy tank, calculated the direction of bullet according to the angle between the tank and user tank.
     else {
-      var diffX = ((tank.x - game.player.x) / BLOCK_SIZE);
-      var diffY = ((tank.y - game.player.y) / BLOCK_SIZE);
+      let diffX = (tank.x - game.player.x) / BLOCK_SIZE;
+      let diffY = (tank.y - game.player.y) / BLOCK_SIZE;
 
       let angle = Math.atan2(diffY, diffX);
       bullet.bulletXDir = Math.cos(angle);
@@ -113,7 +110,7 @@ export function fireBullet(tank) {
     bullet.fired = tank;
     bulletList.push(bullet);
 
-    // Set time since last bullet fired to 0 for this tank 
+    // Set time since last bullet fired to 0 for this tank
     tank.timeSinceLastBullet = 0;
   }
 }
@@ -125,8 +122,8 @@ export function moveBullets() {
   for (i = 0; i < bulletList.length; i++) {
     // Set bullet as current bullet from the array
     let bullet = bulletList[i];
-    let dx = (bullet.bulletXDir * bullet.speed);
-    let dy = (bullet.bulletYDir * bullet.speed);
+    let dx = bullet.bulletXDir * bullet.speed;
+    let dy = bullet.bulletYDir * bullet.speed;
     // If bullet fired from player
     if (bullet.fired == game.player) {
       // Change x and y position by addition as bullet is to be moved away from player
@@ -137,8 +134,5 @@ export function moveBullets() {
       bullet.x -= dx;
       bullet.y -= dy;
     }
-
-    // console.log(bullet.x, bullet.y);
-
   }
 }

@@ -12,8 +12,10 @@
   <title>Tank Battle</title>
 </head>   
 <body>
+
   <div class="main">
     <h1>3D Tank Battle</h1>
+
     <div id="controls">
       <button id="control-button">Controls</button>
       <div id="controls-div">
@@ -23,16 +25,21 @@
         <p>Press 'J' to Pause,'K' to play and 'Q' to quit the game or press the respective buttons</p>
       </div>
     </div>
+
     <div id="initial-screen">
       <p>Loading .....</p> 
     </div>
-    <div id="won">
-      <h2>Congratulations, you won the game, select a level to play again.</h2>
+
+    <div id="win-screen">
+      <img src="./images/win.jpg" alt="You win image">
+      <button onclick="showLevels()">Play another level</button>
     </div>
+
     <div id="start-screen">
       <img src="./images/game-poster.png" alt="Main game poster">
       <button id="start" title="start"></button>
     </div>
+
     <div id="level-screen">
       <button class="back-button" onclick="goHomeFromLevels()"><i class="fas fa-home"></i></button>
       <h2>Choose a level:</h2>
@@ -43,6 +50,7 @@
         </div>
       </div>
     </div>
+
     <div id="map-builder">
       <button class="back-button" onclick="goLevelsFromMapBuilder()"><i class="fas fa-arrow-left"></i></button>
       <div>
@@ -62,6 +70,7 @@
           <button id="save-map">Save Map</button>
         </div>
     </div>
+
     <div id="game-screen">
       <canvas id="gameCanvas" width="640" height="400">
         Loading ....
@@ -72,36 +81,29 @@
         <button onclick="game.pause()"><i id="game-pause" class="fas fa-pause"></i></button>
       </div>
     </div>
+
     <div id="end-screen">
       <img id="game_over--img" src="./images/game_over.png" alt="game-over">
       <button id="restart" onclick="game.restartGame()"> Restart Game</button>
       <button onclick="showLevels()">Play another level</button>
     </div>
+    
   </div>
-  <!-- <div class="footer">
-    <p>Created with &hearts; at Leapfrog Technologies.</p>
-  </div> -->
-
-  
-
-  <!-- <div id="minimapcontainer">
-    <canvas id="minimap"></canvas>
-   <canvas id="minimapcomponents"></canvas> -->
-  <!-- </div> -->
-  <script src="./scripts/maps.js"></script>
+ 
+  <script src="./scripts/map/maps.js"></script>
   <script src="./scripts/preloader.js"></script>
-  <script src="./scripts/globals.js"></script>
-  <script src="./scripts/trignometry.js"></script>
-  <script src="./scripts/entities.js"></script>
+  <script src="./scripts/data/globals.js"></script>
+  <script src="./scripts/data/trignometry.js"></script>
+  <script src="./scripts/data/entities.js"></script>
   <script src="./scripts/eventHandlers.js"></script>
-  <script src="./scripts/mapbuilder.js"></script>
+  <script src="./scripts/map/mapbuilder.js"></script>
   <script type="module" src="./scripts/check.js"></script>
   <script type="module" src="./scripts/initializers.js"></script>
   <script type="module" src="./scripts/moves.js"></script>
   <script type="module" src="./scripts/render.js"></script>
   <script type="module" src="./scripts/draw.js"></script>
   <script type="module" src="./scripts/raycaster.js"></script>
-  <script type="module" src="./scripts/miniMap.js"></script>
+  <script type="module" src="./scripts/map/miniMap.js"></script>
   <script type="module" src="./scripts/game.js"></script>
   <script type="module" src="./scripts/script.js"></script>
 </body>

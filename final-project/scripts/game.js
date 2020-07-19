@@ -1,10 +1,10 @@
-import { drawBackground } from "./draw.js";
-import { drawMiniMap, drawPlayerOnMiniMap } from "./miniMap.js";
-import { castRays } from "./raycaster.js";
+import { drawBackground } from './draw.js';
+import { drawMiniMap, drawPlayerOnMiniMap } from './map/miniMap.js';
+import { castRays } from './raycaster.js';
 import { checkEnemyTank, checkWall } from './check.js';
-import { renderEnemies, renderBullets, drawCanon } from "./render.js";
-import { initEnemies, clearEnemies, loadWallImages } from "./initializers.js";
-import { fireBullet, moveTanks, moveBullets } from './moves.js'
+import { renderEnemies, renderBullets, drawCanon } from './render.js';
+import { initEnemies, clearEnemies, loadWallImages } from './initializers.js';
+import { fireBullet, moveTanks, moveBullets } from './moves.js';
 
 /**
  * Game class which contains all methods and properties of our game
@@ -21,17 +21,17 @@ export class Game {
 
     // Set canvas property as the canvas argument and get it's context
     this.canvas = canvas;
-    this.canvasContext = this.canvas.getContext("2d");
+    this.canvasContext = this.canvas.getContext('2d');
 
     // Create offscreen canvas(buffer) which will be used to increase the performance and reduce visual lag
     // All the drawing for the walls and miniMap will take place on the hiddenCanvas at first and later the hiddenCanvas will be
     // cleared in each update of the screen and the data of the entire image of hiddenCanvas will be copied to main canvas of same dimensions.
-    this.hiddenCanvas = document.createElement("canvas");
+    this.hiddenCanvas = document.createElement('canvas');
 
     // Set the dimensions equal to that of onscreen canvas
     this.hiddenCanvas.width = this.width;
     this.hiddenCanvas.height = this.height;
-    this.hiddenCanvasContext = this.hiddenCanvas.getContext("2d");
+    this.hiddenCanvasContext = this.hiddenCanvas.getContext('2d');
 
     // Get imagedata, i.e- the rgba value of all the pixels of offscreen canvas
     this.hiddenCanvasPixels = this.hiddenCanvasContext.getImageData(
@@ -80,7 +80,7 @@ export class Game {
 
     // Load image of canon of user tank
     this.canonImage = new Image();
-    this.canonImage.src = "./images/canon.png";
+    this.canonImage.src = './images/canon.png';
 
     // Create sound for collsion of missile with tanks and walls
     this.wallSound = this.sound('./sounds/hit-sound.wav');
@@ -146,7 +146,6 @@ export class Game {
     this.hiddenCanvasContext.clearRect(0, 0, this.width, this.height);
   };
 
-
   /**
    * Draw Minimap
    */
@@ -168,7 +167,7 @@ export class Game {
   raycast = castRays;
 
   /**
-   * Fires bullet from a tank 
+   * Fires bullet from a tank
    * @param {Object} tank -  The tank from which bullet is to be fired
    */
   fireBullet = fireBullet;
@@ -203,12 +202,12 @@ export class Game {
    * @param {String} src - string representing the source of the audio
    */
   sound(src) {
-    let sound = document.createElement("audio");
+    let sound = document.createElement('audio');
     sound.src = src;
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
+    sound.setAttribute('preload', 'auto');
+    sound.setAttribute('controls', 'none');
     sound.volume = 0.05;
-    sound.style.display = "none";
+    sound.style.display = 'none';
     document.body.appendChild(sound);
     return sound;
   }
@@ -256,14 +255,13 @@ export class Game {
   }
 
   /**
-   * Stop the recurrent update of the page and show game won message and level selection choice 
+   * Stop the recurrent update of the page and show game won message and level selection choice
    */
   showWon() {
     this.callTimeOut = false;
     this.gamePlaying = false;
     gameContainer.style.display = 'none';
     winContainer.style.display = 'block';
-    levelContainer.style.display = 'block';
   }
 
   /**
@@ -271,15 +269,17 @@ export class Game {
    */
   showBulletCoolDown() {
     // Calculate the time remaining in floating value with one digit after decimal symbol and remove other trailing zeroes if found
-    let time = (3 - (this.player.timeSinceLastBullet / 30)).toFixed(1).replace(/\.?0*$/, '');
+    let time = (3 - this.player.timeSinceLastBullet / 30)
+      .toFixed(1)
+      .replace(/\.?0*$/, '');
 
     // If the time is less than zero that means user can fire , so set it to be 0 to be minimum
     if (time <= 0) time = 0;
 
     // Display the cooldown time on the screen
-    let cooldown = "Cooldown:" + time;
-    this.canvasContext.font = "18px Consolas";
-    this.canvasContext.fillStyle = "black";
+    let cooldown = 'Cooldown:' + time;
+    this.canvasContext.font = '18px Consolas';
+    this.canvasContext.fillStyle = 'black';
     this.canvasContext.fillText(cooldown, 200, 20);
   }
 
@@ -301,10 +301,10 @@ export class Game {
    * Initializes the game by adding event listeners and starting the update cycle
    */
   init = function () {
-    window.addEventListener("keydown", handleKeyDown.bind(this), false);
-    window.addEventListener("keyup", handleKeyUp.bind(this), false);
+    window.addEventListener('keydown', handleKeyDown.bind(this), false);
+    window.addEventListener('keyup', handleKeyUp.bind(this), false);
     this.update();
-  }
+  };
 
   /**
    * Recursive function that gets called FRAMERATE number of times every second
@@ -336,10 +336,9 @@ export class Game {
     if (this.callTimeOut) {
       this.timeOut = setTimeout(function () {
         requestAnimationFrame(game.update.bind(game));
-      }, 1000 / FRAMERATE);
+      }, 1000 / FRAME_RATE);
     }
-
-  }
+  };
 }
 
 /**
@@ -407,38 +406,44 @@ function handlePlayerMovement() {
   if (dx > 0) {
     // Player is moving right
     if (
-      (checkWall(playerYCell, playerXCell + 1) || checkEnemyTank(playerYCell, playerXCell + 1)) && playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      (checkWall(playerYCell, playerXCell + 1) ||
+        checkEnemyTank(playerYCell, playerXCell + 1)) &&
+      playerXCellOffset > BLOCK_SIZE - MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.x -= playerXCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
+      game.player.x -= playerXCellOffset - (BLOCK_SIZE - MIN_DISTANCE_TO_WALL);
     }
   } else {
     // Player is moving left
-    if ((
-      checkWall(playerYCell, playerXCell - 1) || checkEnemyTank(playerYCell, playerXCell - 1)) && playerXCellOffset < MINDISTANCETOWALL
+    if (
+      (checkWall(playerYCell, playerXCell - 1) ||
+        checkEnemyTank(playerYCell, playerXCell - 1)) &&
+      playerXCellOffset < MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.x += MINDISTANCETOWALL - playerXCellOffset;
+      game.player.x += MIN_DISTANCE_TO_WALL - playerXCellOffset;
     }
   }
 
   if (dy < 0) {
     // Player is moving up
-    if ((
-      checkWall(playerYCell - 1, playerXCell) || checkEnemyTank(playerYCell - 1, playerXCell)) &&
-      playerYCellOffset < MINDISTANCETOWALL
+    if (
+      (checkWall(playerYCell - 1, playerXCell) ||
+        checkEnemyTank(playerYCell - 1, playerXCell)) &&
+      playerYCellOffset < MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.y += MINDISTANCETOWALL - playerYCellOffset;
+      game.player.y += MIN_DISTANCE_TO_WALL - playerYCellOffset;
     }
   } else {
     // Player is moving down
-    if ((
-      checkWall(playerYCell + 1, playerXCell) || checkEnemyTank(playerYCell + 1, playerXCell)) &&
-      playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+    if (
+      (checkWall(playerYCell + 1, playerXCell) ||
+        checkEnemyTank(playerYCell + 1, playerXCell)) &&
+      playerYCellOffset > BLOCK_SIZE - MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.y -= playerYCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
+      game.player.y -= playerYCellOffset - (BLOCK_SIZE - MIN_DISTANCE_TO_WALL);
     }
   }
 }
