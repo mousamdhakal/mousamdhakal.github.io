@@ -45,8 +45,8 @@ function loadLevels() {
     let canvas = document.createElement('canvas');
 
     // Set the canvas dimensions according to mapsize and custom map scale
-    canvas.setAttribute('width', MAPSIZE * CUSTOMMAPSCALE);
-    canvas.setAttribute('height', MAPSIZE * CUSTOMMAPSCALE);
+    canvas.setAttribute('width', MAP_SIZE * CUSTOMMAP_SCALE);
+    canvas.setAttribute('height', MAP_SIZE * CUSTOMMAP_SCALE);
 
     // Pain that canvas
     loadLevelCanvas(canvas, i + 1);
@@ -80,21 +80,21 @@ function loadLevelCanvas(canvas, mapIndex) {
   canvasContext.fillRect(
     0,
     0,
-    MAPSIZE * CUSTOMMAPSCALE,
-    MAPSIZE * CUSTOMMAPSCALE
+    MAP_SIZE * CUSTOMMAP_SCALE,
+    MAP_SIZE * CUSTOMMAP_SCALE
   );
 
   // Set fillstyle to grey for painitng the walls
   canvasContext.fillStyle = 'rgb(100,100,100)';
-  for (let r = 0; r < MAPSIZE; r++) {
-    for (let c = 0; c < MAPSIZE; c++) {
+  for (let r = 0; r < MAP_SIZE; r++) {
+    for (let c = 0; c < MAP_SIZE; c++) {
       // Whenever a number other than 0 is encountered on any position of the map, fill that block
       if (map[r][c] != 0) {
         canvasContext.fillRect(
-          c * CUSTOMMAPSCALE,
-          r * CUSTOMMAPSCALE,
-          CUSTOMMAPSCALE,
-          CUSTOMMAPSCALE
+          c * CUSTOMMAP_SCALE,
+          r * CUSTOMMAP_SCALE,
+          CUSTOMMAP_SCALE,
+          CUSTOMMAP_SCALE
         );
       }
     }
@@ -111,14 +111,14 @@ function saveMap() {
 
   // Get pixel data from the mapBuilder canvas
   let mapData = mapCanvasContext.getImageData(0, 0, 640, 640).data;
-  for (let i = 0; i < MAPSIZE; i++) {
+  for (let i = 0; i < MAP_SIZE; i++) {
     // Create a new row
     newMap[i] = [];
-    for (let j = 0; j < MAPSIZE; j++) {
+    for (let j = 0; j < MAP_SIZE; j++) {
       // The first pixel falling in this block
       let sourceIndex =
-        BYTESPERPIXEL * i * MAPBUILDERSCALE * 640 +
-        BYTESPERPIXEL * MAPBUILDERSCALE * j;
+        BYTES_PER_PIXEL * i * MAPBUILDER_SCALE * 640 +
+        BYTES_PER_PIXEL * MAPBUILDER_SCALE * j;
 
       // Get color values of this pixel position
       let red = mapData[sourceIndex];
@@ -184,7 +184,7 @@ function saveMap() {
  */
 function updateMaps() {
   // Combine the maps and enemies into an maps object which will be saved in localStorage
-  var maps = {
+  let maps = {
     mapList: mapList,
     mapEnemies: mapEnemies,
   };

@@ -29,8 +29,8 @@ export function checkRange(enemyX, enemyY, playerX, playerY, speedX) {
   // If tank is moving horizontal
   if (speedX == 1) {
     if (
-      enemyX - playerX < FRONTRANGE * BLOCK_SIZE &&
-      enemyY - playerY < SIDERANGE * BLOCK_SIZE
+      enemyX - playerX < FRONT_RANGE * BLOCK_SIZE &&
+      enemyY - playerY < SIDE_RANGE * BLOCK_SIZE
     ) {
       return true;
     }
@@ -39,8 +39,8 @@ export function checkRange(enemyX, enemyY, playerX, playerY, speedX) {
   // If tank is moving vertical
   else {
     if (
-      enemyX - playerX < SIDERANGE * BLOCK_SIZE &&
-      enemyY - playerY < FRONTRANGE * BLOCK_SIZE
+      enemyX - playerX < SIDE_RANGE * BLOCK_SIZE &&
+      enemyY - playerY < FRONT_RANGE * BLOCK_SIZE
     ) {
       return true;
     }

@@ -1,5 +1,5 @@
 import { drawBackground } from './draw.js';
-import { drawMiniMap, drawPlayerOnMiniMap } from './miniMap.js';
+import { drawMiniMap, drawPlayerOnMiniMap } from './map/miniMap.js';
 import { castRays } from './raycaster.js';
 import { checkEnemyTank, checkWall } from './check.js';
 import { renderEnemies, renderBullets, drawCanon } from './render.js';
@@ -262,7 +262,6 @@ export class Game {
     this.gamePlaying = false;
     gameContainer.style.display = 'none';
     winContainer.style.display = 'block';
-    levelContainer.style.display = 'block';
   }
 
   /**
@@ -337,7 +336,7 @@ export class Game {
     if (this.callTimeOut) {
       this.timeOut = setTimeout(function () {
         requestAnimationFrame(game.update.bind(game));
-      }, 1000 / FRAMERATE);
+      }, 1000 / FRAME_RATE);
     }
   };
 }
@@ -409,20 +408,20 @@ function handlePlayerMovement() {
     if (
       (checkWall(playerYCell, playerXCell + 1) ||
         checkEnemyTank(playerYCell, playerXCell + 1)) &&
-      playerXCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      playerXCellOffset > BLOCK_SIZE - MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.x -= playerXCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
+      game.player.x -= playerXCellOffset - (BLOCK_SIZE - MIN_DISTANCE_TO_WALL);
     }
   } else {
     // Player is moving left
     if (
       (checkWall(playerYCell, playerXCell - 1) ||
         checkEnemyTank(playerYCell, playerXCell - 1)) &&
-      playerXCellOffset < MINDISTANCETOWALL
+      playerXCellOffset < MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.x += MINDISTANCETOWALL - playerXCellOffset;
+      game.player.x += MIN_DISTANCE_TO_WALL - playerXCellOffset;
     }
   }
 
@@ -431,20 +430,20 @@ function handlePlayerMovement() {
     if (
       (checkWall(playerYCell - 1, playerXCell) ||
         checkEnemyTank(playerYCell - 1, playerXCell)) &&
-      playerYCellOffset < MINDISTANCETOWALL
+      playerYCellOffset < MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.y += MINDISTANCETOWALL - playerYCellOffset;
+      game.player.y += MIN_DISTANCE_TO_WALL - playerYCellOffset;
     }
   } else {
     // Player is moving down
     if (
       (checkWall(playerYCell + 1, playerXCell) ||
         checkEnemyTank(playerYCell + 1, playerXCell)) &&
-      playerYCellOffset > BLOCK_SIZE - MINDISTANCETOWALL
+      playerYCellOffset > BLOCK_SIZE - MIN_DISTANCE_TO_WALL
     ) {
       // Move player back if wall crossed
-      game.player.y -= playerYCellOffset - (BLOCK_SIZE - MINDISTANCETOWALL);
+      game.player.y -= playerYCellOffset - (BLOCK_SIZE - MIN_DISTANCE_TO_WALL);
     }
   }
 }

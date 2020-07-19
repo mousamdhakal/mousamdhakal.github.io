@@ -1,3 +1,8 @@
+body {
+  background-color: #555555;
+  font-family: 'Exo 2', sans-serif;
+}
+
 .main {
   position: absolute;
   left: 50%;
@@ -5,35 +10,87 @@
   text-align: center;
 }
 
-body {
-  background-color: #555555;
-  font-family: 'Exo 2', sans-serif;
+/* Game control instructions  */
+
+#controls-div, #map-info {
+  display: none;
+  position: absolute;
+  top: 67px;
+  z-index: 2;
+  background-color: rgba(200, 200, 200, 0.99);
+  border-radius: 10px;
 }
 
-#level-screen {
+#control-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 10px;
+  background-color: #817777;
+  border: none;
+  cursor: pointer;
+  color: #eeeeee;
+  display: none;
+  border-radius: 5px;
+}
+
+#control-button:hover {
+  color: #413939;
+  background-color: #dddddd;
+}
+
+
+#control-button:hover+#controls-div {
+  display: block;
+}
+
+/* Screen to display on winning the game */
+
+#win-screen {
   display: none;
 }
 
-#game-screen {
-  display: none;
-  position: relative;
+#win-screen img {
+  margin-bottom: 20px;
+  width: 600px;
+  display: block;
 }
+
+#win-screen button, #end-screen button {
+  width: 175px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  background-color: #cccccc;
+}
+
+/* Start or home screen */
 
 #start-screen {
   display: none;
   position: relative;
 }
 
-#end-screen {
+#start {
+  width: 296px;
+  height: 100px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 274px;
+  top: 281px;
+  background-size: cover;
+}
+
+/* Screen where the levels are displayed */
+
+#level-screen {
   display: none;
 }
 
 .levels {
   width: 640px;
-}
-
-#custom__levels {
-  display: block;
 }
 
 .levels button{
@@ -61,27 +118,11 @@ body {
   display: table;
 }
 
-#start {
-  width: 296px;
-  height: 100px;
-  /* background: url("../images/start.png"); */
-  background: none;
-  border: none;
+#level-screen canvas {
   cursor: pointer;
-  position: absolute;
-  left: 274px;
-  top: 281px;
-  background-size: cover;
 }
 
-#game_over--img {
-  display: block;
-  margin: auto;
-}
-
-#won {
-  display: none;
-}
+/* Screen to display for building levels(map) */
 
 #map-builder {
   display: none;
@@ -105,24 +146,6 @@ body {
   display: block;
 }
 
-#custom__screen {
-  display: none;
-}
-
-#custom__levels {
-  display: none;
-  margin-top: 20px;
-}
-
-
-#custom__maps button {
-  background: none;
-  cursor: pointer;
-  border: none;
-  color: #000000;
-  font-size: 20px;
-}
-
 .back-button, #map-builder .back-button {
   position: absolute;
   left: 0;
@@ -139,13 +162,42 @@ body {
   color: white;
 }
 
-#end-screen button {
-  width: 175px;
+#map-builder button {
+  width: 215px;
+  height: 40px;
+  background-color: #cccccc;
+  cursor: pointer;
+  border: none;
+}
+
+#map-builder #show-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
   height: 50px;
+  background: none;
   border: none;
   cursor: pointer;
-  background-color: #cccccc;
+  font-size: 30px;
 }
+
+#show-info i{
+  color: white;
+}
+
+#show-info:hover+#map-info {
+  display: block;
+}
+
+
+/* Screen to display while playing the game */
+
+#game-screen {
+  display: none;
+  position: relative;
+}
+
 
 #game-controls {
   position: absolute;
@@ -178,65 +230,21 @@ body {
   color: #2e3436;
 }
 
-#map-builder button {
-  width: 215px;
-  height: 40px;
-  background-color: #cccccc;
-  cursor: pointer;
-  border: none;
-}
 
-#map-builder #show-info {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 50px;
-  height: 50px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 30px;
-}
-
-#show-info i{
-  color: white;
-}
-
-#level-screen canvas {
-  cursor: pointer;
-}
-
-#control-button {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  padding: 10px;
-  background-color: #817777;
-  border: none;
-  cursor: pointer;
-  color: #eeeeee;
+/* Screen to display on game over*/
+#end-screen {
   display: none;
-  border-radius: 5px;
 }
 
-#control-button:hover {
-  color: #413939;
-  background-color: #dddddd;
-}
-
-#controls-div, #map-info {
-  display: none;
-  position: absolute;
-  top: 67px;
-  z-index: 2;
-  background-color: rgba(200, 200, 200, 0.99);
-  border-radius: 10px;
-}
-
-#control-button:hover+#controls-div {
+#game_over--img {
   display: block;
+  margin: auto;
 }
 
-#show-info:hover+#map-info {
-  display: block;
-}
+
+
+
+
+
+
+

@@ -6,24 +6,24 @@ import { checkWall, checkAbsWallBetween, checkRange } from './check.js';
 export function moveTanks() {
   for (i = 0; i < this.mapEnemies.length; i++) {
     let enemy = this.mapEnemies[i];
-    var enemyType = enemy.type;
-    var diffX = (enemy.x - this.player.x) / BLOCK_SIZE;
-    var diffY = (enemy.y - this.player.y) / BLOCK_SIZE;
+    let enemyType = enemy.type;
+    let diffX = (enemy.x - this.player.x) / BLOCK_SIZE;
+    let diffY = (enemy.y - this.player.y) / BLOCK_SIZE;
 
     if (enemy.speedX == 1) {
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (diffY < -SIDERANGE && Math.abs(diffY) >= Math.abs(diffX)) {
+      if (diffY < -SIDE_RANGE && Math.abs(diffY) >= Math.abs(diffX)) {
         enemyType = (enemyType + 2) % 7;
-      } else if (diffY > SIDERANGE && Math.abs(diffY) >= Math.abs(diffX)) {
+      } else if (diffY > SIDE_RANGE && Math.abs(diffY) >= Math.abs(diffX)) {
         enemyType = (enemyType + 6) % 7;
       } else if (diffX < 0) {
         enemyType = (enemyType + 4) % 7;
       }
     } else if (enemy.speedY == 1) {
       // Check for difference in x and y to change the tank face(image), i.e- to show front , back ro side view accordingly
-      if (diffX < -SIDERANGE && Math.abs(diffX) >= Math.abs(diffY)) {
+      if (diffX < -SIDE_RANGE && Math.abs(diffX) >= Math.abs(diffY)) {
         enemyType = (enemyType + 2) % 7;
-      } else if (diffX > SIDERANGE && Math.abs(diffX) >= Math.abs(diffY)) {
+      } else if (diffX > SIDE_RANGE && Math.abs(diffX) >= Math.abs(diffY)) {
         enemyType = (enemyType + 6) % 7;
       } else if (diffY < 0) {
         enemyType = (enemyType + 4) % 7;
@@ -81,7 +81,7 @@ export function moveTanks() {
 export function fireBullet(tank) {
   // Check the time from which the last bullet was fired from this tank and
   // if it is above the minimum time between two bullets
-  if (tank.timeSinceLastBullet > FIRINGSPEED && tank.keySpacePressed) {
+  if (tank.timeSinceLastBullet > FIRING_SPEED && tank.keySpacePressed) {
     // Play firing sound
     game.tankSound.play();
     // Create new bullet object
@@ -94,8 +94,8 @@ export function fireBullet(tank) {
     }
     // If the bullet is fired from enemy tank, calculated the direction of bullet according to the angle between the tank and user tank.
     else {
-      var diffX = (tank.x - game.player.x) / BLOCK_SIZE;
-      var diffY = (tank.y - game.player.y) / BLOCK_SIZE;
+      let diffX = (tank.x - game.player.x) / BLOCK_SIZE;
+      let diffY = (tank.y - game.player.y) / BLOCK_SIZE;
 
       let angle = Math.atan2(diffY, diffX);
       bullet.bulletXDir = Math.cos(angle);

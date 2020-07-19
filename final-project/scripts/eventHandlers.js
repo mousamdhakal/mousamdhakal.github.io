@@ -77,6 +77,7 @@ function showLevels() {
 
   // Hide end screen and show level screen
   endContainer.style.display = 'none';
+  winContainer.style.display = 'none';
   levelContainer.style.display = 'block';
 }
 

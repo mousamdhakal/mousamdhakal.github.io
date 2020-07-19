@@ -12,7 +12,7 @@ let noOfImageLoaded = 0;
  * @param {Array} -Collector array where the image objects will be stored
  */
 function preload(collector) {
-  for (var i = 0; i < arguments.length - 1; i++) {
+  for (let i = 0; i < arguments.length - 1; i++) {
     collector[i] = new Image();
     collector[i].src = preload.arguments[i + 1];
     collector[i].onload = imageLoaded;
@@ -29,7 +29,9 @@ preload(
   './images/tank-left.png',
   './images/tank-right.png',
   './images/tank-back.png',
-  './images/canon.png'
+  './images/canon.png',
+  './images/win.jpg',
+  './images/game_over.png'
 );
 
 // Load walls image
@@ -40,7 +42,7 @@ preload(wallsArray, './images/mapSmall.png');
  */
 function imageLoaded() {
   noOfImageLoaded++;
-  if (noOfImageLoaded == 8) {
+  if (noOfImageLoaded == 10) {
     onLoadFinish();
   }
 }

@@ -5,6 +5,7 @@
 function getMap(index) {
   // Create deep copy of the array and return it, so that the original one remains intact
   let thisMaps = JSON.parse(JSON.stringify(mapList));
+  
   return thisMaps[index - 1];
 }
 
@@ -166,7 +167,7 @@ let mapEnemies = [[
  * If there are custom maps created by user, update the mapList and mapEnemies
  */
 loadMaps = function () {
-  var maps = JSON.parse(localStorage.getItem('savedMaps'));
+  let maps = JSON.parse(localStorage.getItem('savedMaps'));
   if (maps != null) {
     mapList = maps.mapList;
     mapEnemies = maps.mapEnemies;

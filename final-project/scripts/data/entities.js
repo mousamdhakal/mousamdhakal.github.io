@@ -8,9 +8,9 @@ function getPlayer() {
     y: 64 * 1 + 32,
     arc: 0,
     deg: 0,
-    distanceToProjectionPlane: VIEWDIST,
+    distanceToProjectionPlane: VIEW_DIST,
     height: 64,
-    speed: MOVEMENTSPEED,
+    speed: MOVEMENT_SPEED,
     timeSinceLastBullet: 100,
     keySpacePressed: false,
   };
@@ -35,6 +35,6 @@ function createNewBullet() {
   return {
     x: 200,
     y: 160,
-    speed: MOVEMENTSPEED * 4,
+    speed: MOVEMENT_SPEED * 4,
   };
 }

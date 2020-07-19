@@ -54,15 +54,15 @@ function showMapBuilder() {
  */
 function fillCanvas(position) {
   // Calculate the block on mapbuilder canvas where the position falls
-  let xCell = Math.floor(position.x / MAPBUILDERSCALE);
-  let yCell = Math.floor(position.y / MAPBUILDERSCALE);
+  let xCell = Math.floor(position.x / MAPBUILDER_SCALE);
+  let yCell = Math.floor(position.y / MAPBUILDER_SCALE);
 
   // If that cell is in border wall position or user position , return
   if (
     xCell == 0 ||
     yCell == 0 ||
-    xCell == MAPSIZE - 1 ||
-    yCell == MAPSIZE - 1 ||
+    xCell == MAP_SIZE - 1 ||
+    yCell == MAP_SIZE - 1 ||
     (xCell == 1 && yCell == 1)
   ) {
     return;
@@ -70,20 +70,20 @@ function fillCanvas(position) {
 
   // Fill the block according to respective color
   mapCanvasContext.fillRect(
-    xCell * MAPBUILDERSCALE,
-    yCell * MAPBUILDERSCALE,
-    MAPBUILDERSCALE,
-    MAPBUILDERSCALE
+    xCell * MAPBUILDER_SCALE,
+    yCell * MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE
   );
 
   // If setTank flag is set, draw the tank image on that block
   if (setTank) {
     mapCanvasContext.drawImage(
       tankImage,
-      xCell * MAPBUILDERSCALE,
-      yCell * MAPBUILDERSCALE,
-      MAPBUILDERSCALE,
-      MAPBUILDERSCALE
+      xCell * MAPBUILDER_SCALE,
+      yCell * MAPBUILDER_SCALE,
+      MAPBUILDER_SCALE,
+      MAPBUILDER_SCALE
     );
   }
 }
@@ -108,30 +108,40 @@ function clearCanvas() {
   mapCanvasContext.fillRect(
     0,
     0,
-    MAPSIZE * MAPBUILDERSCALE,
-    MAPSIZE * MAPBUILDERSCALE
+    MAP_SIZE * MAPBUILDER_SCALE,
+    MAP_SIZE * MAPBUILDER_SCALE
   );
   mapCanvasContext.fillStyle = 'rgb(256,0,0)';
   mapCanvasContext.fillRect(
-    MAPBUILDERSCALE,
-    MAPBUILDERSCALE,
-    MAPBUILDERSCALE,
-    MAPBUILDERSCALE
+    MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE
   );
   mapCanvasContext.fillStyle = 'rgb(100,100,100)';
-  mapCanvasContext.fillRect(0, 0, MAPBUILDERSCALE * MAPSIZE, MAPBUILDERSCALE);
-  mapCanvasContext.fillRect(0, 0, MAPBUILDERSCALE, MAPBUILDERSCALE * MAPSIZE);
   mapCanvasContext.fillRect(
-    MAPSIZE * MAPBUILDERSCALE - MAPBUILDERSCALE,
     0,
-    MAPBUILDERSCALE,
-    MAPBUILDERSCALE * MAPSIZE
+    0,
+    MAPBUILDER_SCALE * MAP_SIZE,
+    MAPBUILDER_SCALE
   );
   mapCanvasContext.fillRect(
     0,
-    MAPSIZE * MAPBUILDERSCALE - MAPBUILDERSCALE,
-    MAPBUILDERSCALE * MAPSIZE,
-    MAPBUILDERSCALE
+    0,
+    MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE * MAP_SIZE
+  );
+  mapCanvasContext.fillRect(
+    MAP_SIZE * MAPBUILDER_SCALE - MAPBUILDER_SCALE,
+    0,
+    MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE * MAP_SIZE
+  );
+  mapCanvasContext.fillRect(
+    0,
+    MAP_SIZE * MAPBUILDER_SCALE - MAPBUILDER_SCALE,
+    MAPBUILDER_SCALE * MAP_SIZE,
+    MAPBUILDER_SCALE
   );
   setTank = false;
 }
