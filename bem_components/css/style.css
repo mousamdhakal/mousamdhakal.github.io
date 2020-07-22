@@ -1,0 +1,153 @@
+.clearfix {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
+/* Header UI component  */
+
+.header {
+  background-color: #eeeeee;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Logo UI component */
+.logo {
+  width: 55%;
+  float: left;
+}
+
+.logo__link {
+  text-decoration: none;
+  color: #2c0909;
+}
+
+.logo__text {
+  display: inline-block;
+  position: relative;
+  bottom: 8px;
+  left: 10px;
+  font-size: 18px;
+}
+
+.logo__img {
+  width: 50px ;
+}
+
+/* Nav UI component  */
+.nav {
+  width: 45%;
+}
+
+.header__nav {
+  float: right;
+  text-align: right;
+}
+
+.footer__nav {
+  float: left;
+  text-align: left;
+}
+
+.nav__item {
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: #2c0909;
+}
+
+.nav__link:hover {
+  color: #ff8888;
+}
+
+.nav__link--active {
+  color: #ff8888;
+}
+
+/* Carousel UI component  */
+.carousel {
+  background-color: #555555;
+}
+
+.carousel .container {
+  position: relative;
+}
+
+.carousel__image {
+  width: 100%;
+}
+
+.carousel__text {
+  color: #111111;
+  position: absolute;
+  top: 65%;
+  left: 53%;
+  transform: translate(-50%,-50%);
+  background-color: #eeeeee;
+  opacity: 0.8;
+  padding: 20px 10px;
+  border-radius: 10px;
+}
+
+/* Footer UI component  */
+
+.footer {
+  background-color: #777777;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+}
+
+.footer__social-icons {
+  width: 35%;
+  float: left;
+  padding: 10px 0;
+}
+
+.footer__social-icon {
+  display: inline-block;
+  color: #2c1a1a;
+  margin: 0 4px;
+}
+
+.footer__social-icon--facebook i:hover {
+  color: #4267B2;
+}
+
+.footer__social-icon--twitter i:hover {
+  color: #1da1f2;
+}
+
+.footer__social-icon--pinterest i:hover {
+  color: #bd081c;
+}
+
+.footer__social-icon--dribble i:hover {
+  color: #ea4c89;
+}
+
+.footer__social-icon--google i:hover {
+  color: #db4a39;
+}
+
+.footer__social-icon--behance i:hover {
+  color: #053eff;
+}
+
+.footer__copyright {
+  position: relative;
+  top: 10px;
+  text-align: right;
+  display: inline-block;
+  width: 20%;
+}
