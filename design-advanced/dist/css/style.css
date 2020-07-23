@@ -699,29 +699,85 @@ html, body {
     .info__heading h2 {
       font-family: "Lato", sans-serif;
       font-weight: 700;
-      font-size: 26px;
+      font-size: 28px;
       margin: 20px 0;
       color: #506a85; }
       @media (min-width: 1200px) {
         .info__heading h2 {
-          font-size: 44px; } }
+          font-size: 44px;
+          margin: 30px 0; } }
     .info__heading p {
       font-family: "Source Sans Pro", sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       margin: 10px 0;
       color: #73879c; }
       @media (min-width: 1200px) {
         .info__heading p {
-          font-size: 22px; } }
+          font-size: 22px;
+          line-height: 32px; } }
+    @media (min-width: 1200px) {
+      .info__heading {
+        margin: 122px 0 60px 0; } }
   .info__list {
     width: 100%; }
   .info__list-item {
     width: 100%;
     list-style: none;
-    display: inline-block; }
+    display: inline-block;
+    margin: 10px 0; }
     .info__list-item h3 {
+      font-family: "Lato", sans-serif;
+      font-weight: 700;
       color: #506a85;
-      font-size: 15px; }
+      font-size: 20px;
+      margin-bottom: 15px; }
+      @media (min-width: 1200px) {
+        .info__list-item h3 {
+          font-size: 26px; } }
+    .info__list-item p {
+      font-family: "Source Sans Pro", sans-serif;
+      color: #73879c;
+      font-size: 14px; }
+      @media (min-width: 1200px) {
+        .info__list-item p {
+          font-size: 16px; } }
+    @media (min-width: 992px) {
+      .info__list-item {
+        width: 33%; } }
+  .info__image {
+    color: #00bb9b;
+    width: 22%;
+    float: left;
+    font-size: 45px;
+    text-align: center;
+    padding-right: 20px; }
+    @media (min-width: 576px) {
+      .info__image {
+        width: 15%; } }
+    @media (min-width: 768px) {
+      .info__image {
+        width: 20%;
+        padding-left: 65px; } }
+    @media (min-width: 992px) {
+      .info__image {
+        padding-left: 0px; } }
+    @media (min-width: 1200px) {
+      .info__image {
+        font-size: 58px;
+        width: 25%; } }
+  .info__text {
+    float: left;
+    width: 78%; }
+    @media (min-width: 768px) {
+      .info__text {
+        width: 70%; } }
+    @media (min-width: 1200px) {
+      .info__text {
+        width: 75%;
+        line-height: 26px; } }
+  @media (min-width: 1200px) {
+    .info {
+      height: 550px; } }
 
 @media (min-width: 576px) {
   .is-collapsed-mobile {
