@@ -1,0 +1,24 @@
+.nav {
+  @include e(item){
+    list-style: none;
+    display: inline-block;
+    font-family: $font-family--primary;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 10px;
+
+    a{
+      text-decoration: none; 
+      text-transform: uppercase;
+    }
+
+    @include mq(lg){
+      margin-right: 20px;
+      font-size: 15px;
+    }
+
+    @include mq(xl){
+      margin-right: 39px;
+    }
+  }
+}

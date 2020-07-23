@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  margin: 0px auto;
+  padding: 0 10px;
+
+  @include mq(sm){
+    max-width: $sm-device;
+  }
+
+  @include mq(md){
+    max-width: $md-device;
+    padding: 0 15px;
+  }
+
+  @include mq(lg){
+    max-width: $lg-device;
+  }
+
+  @include mq(xl){
+    max-width: $xl-device;
+  }
+} 
+
