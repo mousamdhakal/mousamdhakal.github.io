@@ -1,0 +1,47 @@
+.info {
+  background-color: $white;
+  margin: 70px 0px;
+
+  @include e(heading){
+    margin: 20px 0px;
+    text-align: center;
+
+    h2 {
+      font-family: $font-family--secondary;
+      font-weight: 700;
+      font-size: 26px;
+      margin: 20px 0;
+      color: $blue-bayoux;
+
+      @include mq(xl){
+        font-size: 44px;
+      }
+    }
+
+    p {
+      font-family: $font-family--primary;
+      font-size: 14px;
+      margin: 10px 0;
+      color: $lynch;
+
+      @include mq(xl){
+        font-size: 22px;
+      }
+    }
+  }
+
+  @include e(list){
+    width: 100%;
+  }
+
+  @include e(list-item){
+    width: 100%;
+    list-style: none;
+    display: inline-block;
+
+    h3 {
+      color: $blue-bayoux;
+      font-size: 15px;
+    }
+  }
+}
