@@ -10,6 +10,7 @@
     a{
       text-decoration: none; 
       text-transform: uppercase;
+      color: $blue-bayoux;
     }
 
     @include mq(lg){

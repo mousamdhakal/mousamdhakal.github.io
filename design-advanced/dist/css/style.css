@@ -578,7 +578,8 @@ html, body {
   margin-right: 10px; }
   .nav__item a {
     text-decoration: none;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    color: #506a85; }
   @media (min-width: 992px) {
     .nav__item {
       margin-right: 20px;
