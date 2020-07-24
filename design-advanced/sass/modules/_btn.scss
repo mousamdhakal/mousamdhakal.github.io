@@ -11,6 +11,10 @@
   margin-top: 25px;
   cursor: pointer;
 
+  &:hover {
+    background-color: darken($caribbean-green,10%);
+  }
+
   @include mq(md){
     font-size: 14px;
     padding: 12px 30px;
