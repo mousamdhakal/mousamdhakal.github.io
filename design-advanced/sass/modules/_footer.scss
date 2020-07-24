@@ -1,0 +1,209 @@
+.footer {
+  @include e(primary){
+    padding: 30px 0 10px 0;
+    background-color: $pickled-bluewood;
+
+    @include mq(xl){
+      padding: 70px 0 10px 0;
+    }
+  }
+
+  @include e(grid-item){
+    width: 100%;
+    margin-bottom: 40px;
+
+    @include mq(sm){
+      width: 80%;
+      margin: 0px auto 40px auto;
+    }
+
+    @include mq(md){
+      float: left;
+      width: 49%;
+      margin: 0px;
+      padding: 0px 8px 40px 8px;
+    }
+
+    @include mq(xl){
+      width: 25%;
+    }
+  }
+
+  @include e(heading){
+    color: $white;
+    font-family: $font-family--secondary;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+    @include mq(xl){
+      margin-bottom: 25px;
+    }
+  }
+
+  @include e(logo){
+    margin-bottom: 20px;
+  }
+
+  @include e(logo-img){
+    width: 80px;
+
+    @include mq(md){
+      width: 100px;
+    }
+
+    @include mq(lg){
+      width: 120px;
+    }
+
+    @include mq(xl){
+      width: 140px;
+    }
+  }
+
+  @include e(paragraph){
+    color: $cadet-blue;
+    font-family: $font-family--primary;
+    font-size: 14px;
+    margin-bottom: 10px;
+
+    @include mq(xl){
+      line-height: 20px;
+    }
+  }
+
+  @include e(link){
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  @include e(arrow){
+    position: relative;
+    left: 5px;
+    top: 1px;
+  }
+
+  @include e(projects-group){
+    margin-bottom: 30px;
+    width: 90%;
+
+    @include mq(xl){
+      width: 100%;
+    }
+  }
+
+  @include e(project){
+    @include mq(md){
+      width: 34%;
+    }
+
+    @include mq(xl){
+      width: 45%;
+      margin: 0;
+    }
+  }
+
+  @include e(icon){
+    width: 20px;
+    text-align: center;
+    margin-right: 5px;
+  }
+
+  @include e(input-container){
+    width: 100%;
+    background-color: $river-bed;
+    border-radius: 5px;
+    padding: 8px 5px;
+
+    @include mq(sm){
+      padding: 10px 5px;
+    }
+
+    @include mq(md){
+      padding: 4px 7px;
+    }
+  }
+
+  @include e(input){
+    width: 60%;
+    background-color: transparent;
+    border: none;
+    color: $cadet-blue;
+    font-family: $font-family--primary;
+    font-size: 14px;
+
+    @include mq(sm){
+      width: 68%;
+    }
+  }
+
+  @include e(button){
+    margin-top: 0px;
+    width: 35%;
+
+    @include mq(sm){
+      width: 30%;
+    }
+
+    @include mq(md){
+      padding: 9px;
+    }
+
+    @include mq(xl){
+      font-size: 13px;
+    }
+  }
+
+
+  @include e(secondary){
+    background-color: $pickled-bluewood-darker;
+    font-family: $font-family--primary;
+    font-size: 14px;
+    color: $slate-gray;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  @include e(copyright){
+    margin: 5px 0;
+
+    @include mq(md){
+      float: left;
+    }
+  }
+
+  @include e(nav){
+    list-style: none;
+    margin: 5px 0;
+
+    @include mq(md){
+      float: right;
+    }
+  }
+
+  @include e(nav-item){
+    display: inline-block;
+    margin-right: 6px;
+
+    :before {
+      content: "·";
+      padding: 6px;
+    }
+
+    @include m(first){
+      :before {
+        content: "";
+      }
+    }
+  }
+
+  @include e(nav-link){
+    font-family: $font-family--primary;
+    font-size: 14px;
+    color: $slate-gray;
+    text-decoration: none;
+  }
+
+}

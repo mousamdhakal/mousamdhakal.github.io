@@ -1,40 +1,6 @@
 .info {
   background-color: $white;
-  margin: 70px 0px;
-
-  @include e(heading){
-    margin: 20px 0px;
-    text-align: center;
-
-    h2 {
-      font-family: $font-family--secondary;
-      font-weight: 700;
-      font-size: 28px;
-      margin: 20px 0;
-      color: $blue-bayoux;
-
-      @include mq(xl){
-        font-size: 44px;
-        margin: 30px 0;
-      }
-    }
-
-    p {
-      font-family: $font-family--primary;
-      font-size: 15px;
-      margin: 10px 0;
-      color: $lynch;
-
-      @include mq(xl){
-        font-size: 22px;
-        line-height: 32px;
-      }
-    }
-
-    @include mq(xl){
-      margin: 122px 0 60px 0;
-    }
-  }
+  padding: 70px 0px;
 
   @include e(list){
     width: 100%;
@@ -69,6 +35,10 @@
     }
 
     @include mq(lg){
+      width: 32.9%;
+    }
+
+    @include mq(xl){
       width: 33%;
     }
 
@@ -117,5 +87,6 @@
 
   @include mq(xl){
     height: 550px;
+    padding: 0px;
   }
 }

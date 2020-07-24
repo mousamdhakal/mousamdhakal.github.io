@@ -1,0 +1,88 @@
+.project {
+
+  @include m(big){
+    margin: 40px 0;
+    width: 100%;
+
+    @include mq(md){
+      width: 49%;
+      display: inline-block;
+    }
+
+    @include mq(xl){
+      width: 572px;
+      margin: 10px 17px 0 0;
+    }
+  }
+
+  @include m(small){
+    width: 49%;
+    display: inline-block;
+
+    @include mq(md){
+      width: 24%;
+    }
+
+    @include mq(xl){
+      width: 275px;
+      margin: 10px 17px 0 0;
+    }
+  }
+
+  @include e(image){
+    width: 100%;
+  }
+
+  @include e(text){
+    background-color: $white;
+    text-align: center;
+    padding: 5% 0;
+    position: relative;
+    bottom: 4px;
+  }
+
+  @include e(heading){
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    color: $blue-bayoux;
+
+    @include mq(md){
+      font-size: 16px;
+    }
+
+    @include mq(lg){
+      font-size: 18px;
+    }
+
+    @include mq(xl){
+      font-size: 20px;
+    }
+  }
+
+  @include e(tag){
+    font-family: $font-family--primary;
+    font-size: 10px;
+    color: $lynch;
+
+    @include mq(sm){
+      font-size: 11px;
+    }
+
+    @include mq(md){
+      font-size: 11px;
+    }
+
+    @include mq(lg){
+      font-size: 12px;
+    }
+
+    @include mq(xl){
+      font-size: 14px;
+    }
+  }
+
+  @include e(link){
+    text-decoration: none;
+  }
+
+}

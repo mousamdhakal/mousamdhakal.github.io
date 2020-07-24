@@ -1,0 +1,63 @@
+.portfolio {
+  background-color: $aqua-haze;
+  padding: 70px 0;
+
+  @include e(projects-group){
+    width: 90%;
+    margin: 0px auto;
+
+    @include m(small){
+      @include mq(xl){
+        margin-top: 75px;
+      }
+    }
+
+    @include mq(sm){
+      width: 75%;
+    }
+
+    @include mq(md){
+      width: 90%;
+    }
+
+    @include mq(xl){
+      width: 1185px;
+    }
+
+  }
+
+  @include e(button-group){
+    text-align: center;
+    margin-top: 10px;
+
+    @include mq(xl){
+      margin: 40px 17px 0 0;
+    }
+  }
+
+  @include e(button){
+    border: none;
+    background-color: none;
+    font-size: 12px;
+    cursor: pointer;
+    color: $blue-bayoux;
+
+    @include m(active){
+      color: $caribbean-green;
+    }
+
+    :hover {
+      color: darken($caribbean-green,20%);
+    }
+
+    @include mq(xl){
+      font-size: 15px;
+      margin: 0 2px;
+    }
+  }
+
+  @include mq(xl){
+    padding: 1px 0px;
+    height: 1270px;
+  }
+}

@@ -11,81 +11,6 @@
     left: 50%;
     transform: translate(-50%,-50%);
 
-    h1 {
-      font-family: $font-family--secondary;
-      color: $white;
-      font-size: 45px;
-      text-transform: uppercase;
-
-      @include mq(md){
-        font-size: 50px;
-        margin-bottom: 10px;
-      }
-
-      @include mq(lg){
-        font-size: 58px;
-        margin-bottom: 11px;
-      }
-
-      @include mq(xl){
-        font-size: 78px;
-        font-weight: 700;
-        letter-spacing: 5px;
-        margin-bottom: 15px;
-      }
-    }
-
-    p {
-      font-family: $font-family--primary;
-      color: $cadet-blue;
-      font-size: 15px;
-      font-weight: 400;
-
-      @include mq(md){
-        font-size: 17px;
-      }
-
-      @include mq(lg){
-        font-size: 19px;
-      }
-
-      @include mq(xl){
-        font-size: 24px;
-      }
-    }
-
-    button {
-      text-transform: uppercase;
-      font-family: $font-family--primary;
-      font-weight: 700;
-      font-size: 13px;
-      padding: 10px 20px;
-      color: $white;
-      background-color: $caribbean-green;
-      border: none;
-      border-radius: 2px;
-      margin-top: 25px;
-      cursor: pointer;
-
-      @include mq(md){
-        font-size: 14px;
-        padding: 12px 30px;
-        margin-top: 35px;
-      }
-
-      @include mq(lg){
-        font-size: 15px;
-        padding: 15px 40px;
-        margin-top: 48px;
-      }
-
-      @include mq(xl){
-        font-size: 18px;
-        padding: 22px 75px;
-        margin-top: 70px;
-      }
-    }
-
     @include mq(sm){
       max-width: $sm-device - 40px;
     }
@@ -102,6 +27,49 @@
       max-width: $xl-device - 230px;
       top: 45%;
       transform: translate(-50%,-45%);
+    }
+  }
+
+  @include e(heading){
+    font-family: $font-family--secondary;
+    color: $white;
+    font-size: 45px;
+    text-transform: uppercase;
+
+    @include mq(md){
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    @include mq(lg){
+      font-size: 58px;
+      margin-bottom: 11px;
+    }
+
+    @include mq(xl){
+      font-size: 78px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @include e(paragraph){
+    font-family: $font-family--primary;
+    color: $cadet-blue;
+    font-size: 15px;
+    font-weight: 400;
+
+    @include mq(md){
+      font-size: 17px;
+    }
+
+    @include mq(lg){
+      font-size: 19px;
+    }
+
+    @include mq(xl){
+      font-size: 24px;
     }
   }
 

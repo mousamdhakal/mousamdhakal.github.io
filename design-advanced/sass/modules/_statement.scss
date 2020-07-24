@@ -1,0 +1,33 @@
+.statement{
+  margin: 20px 0px 40px 0px;
+  text-align: center;
+
+  @include e(heading) {
+    font-family: $font-family--secondary;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 20px 0;
+    color: $blue-bayoux;
+
+    @include mq(xl){
+      font-size: 44px;
+      margin: 30px 0;
+    }
+  }
+
+  @include e(paragraph) {
+    font-family: $font-family--primary;
+    font-size: 15px;
+    margin: 10px 0;
+    color: $lynch;
+
+    @include mq(xl){
+      font-size: 22px;
+      line-height: 32px;
+    }
+  }
+
+  @include mq(xl){
+    margin: 122px 0 60px 0;
+  }
+}
