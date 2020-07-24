@@ -1,0 +1,8 @@
+.contact {
+  padding: 70px 0;
+
+  @include mq(xl){
+    padding: 0px;
+    height: 360px;
+  }
+}

@@ -17,12 +17,12 @@
   <header class="header">
     <div class="header__secondary">
       <div class="container clearfix">
-        <div class="contact">
-           <div class="contact__mail">
+        <div class="contact-info">
+           <div class="contact-info__item">
              <i class="far fa-envelope"></i>
              <span>info@reen.com</span>
             </div>
-           <div class="contact__phone">
+           <div class="contact-info__item">
              <i class="fas fa-mobile-alt"></i>
              <span>+00 (123) 456 7890</span>
             </div>
@@ -39,19 +39,19 @@
     </div>
     <div class="header__main">
       <div class="container clearfix">
-        <div class="logo header__logo">
+        <div class="header__logo">
           <a href="#" title="logo">
-            <img class="logo__img" src="./images/logo.png" alt="Logo image">
+            <img class="header__logo-img" src="./images/logo.png" alt="Logo image">
           </a>
         </div>
         <ul class="nav header__nav is-collapsed-tablet">
-          <li class="nav__item"><a href="#" title="Home">Home</a></li>
-          <li class="nav__item"><a href="#" title="Portfolio">Portfolio</a></li>
-          <li class="nav__item"><a href="#" title="Blog">Blog</a></li>
-          <li class="nav__item"><a href="#" title="Pages">Pages</a></li>
-          <li class="nav__item"><a href="#" title="Features">Features</a></li>
-          <li class="nav__item"><a href="#" title="Mega menu">Mega Menu</a></li>
-          <li class="nav__item"><a href="#" title="Contact">Contact</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Home">Home</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Portfolio">Portfolio</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Blog">Blog</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Pages">Pages</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Features">Features</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Mega menu">Mega Menu</a></li>
+          <li class="nav__item"><a class="nav__link" href="#" title="Contact">Contact</a></li>
         </ul>
         <div class="search header__search is-collapsed-tablet">
           <a href="#" title="search"><i class="fas fa-search"></i></a>
@@ -66,20 +66,22 @@
     <section class="carousel">
       <div class="container">
         <div class="carousel__text">
-          <h1>Made for Designers</h1>
-          <p>Create your online portfolio in minutes with the professionally and lovingly designed 
+          <h1 class="carousel__heading">Made for Designers</h1>
+          <p class="carousel__paragraph">Create your online portfolio in minutes with the professionally and lovingly designed 
             REEN website template. Customize your site with versatile and easy to use features.</p>
-          <button>Get started now</button>
+          <button class="btn">Get started now</button>
         </div>
       </div>
     </section>
     <section class="info">
       <div class="container">
-        <div class="info__heading">
-          <h2>Beautiful. Clean. Responsive.</h2>
-          <p>REEN is a high-quality solution for those who want a beautiful website in no time. <br>
-          It's fully responsive and will adapt itself to any mobile device. iPad, iPhone, Android,<br>
-            it doesn't matter. Your content will always look its absolute best.</p>
+        <div class="statement">
+          <h2 class="statement__heading">Beautiful. Clean. Responsive.</h2>
+          <p class="statement__paragraph">
+            REEN is a high-quality solution for those who want a beautiful website in no time. <br>
+            It's fully responsive and will adapt itself to any mobile device. iPad, iPhone, Android,<br>
+            it doesn't matter. Your content will always look its absolute best.
+          </p>
         </div>
         <ul class="info__list">
           <li class="info__list-item">
@@ -115,6 +117,171 @@
         </ul>
       </div>
     </section>
+    <section class="portfolio">
+      <div class="container">
+        <div class="statement">
+          <h2 class="statement__heading">Check out our latest works</h2>
+          <p class="statement__paragraph">
+            Magnis modipsae que voloratati andigen daepeditem quiate re porem aut labor.
+          </p>
+        </div>
+        <div class="portfolio__projects-group">
+          <div class="project project--big">
+            <a class="project__link" href="#" title="Project link">
+              <img class="project__image project__image--big" src="./images/first.jpg" alt="First project image">
+            </a>
+            <div class="project__text">
+              <a class="project__link" href="#" title="Project link">
+                <h4 class="project__heading">Grand Model gets an identity brushup</h4>
+              </a>
+              <span class="project__tag">identity</span>
+            </div>
+          </div>
+          <div class="project project--big">
+            <a class="project__link" href="#" title="Project link">
+              <img class="project__image project__image--big" src="./images/second.jpg" alt="First project image">
+            </a>
+            <div class="project__text">
+              <a class="project__link" href="#" title="Project link">
+                <h4 class="project__heading">Fresh branding for a creative startup</h4>
+              </a>
+              <span class="project__tag">identity</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio__projects-group portfolio__projects-group--small">
+          <div class="project project--small">
+            <a class="project__link" href="#" title="Project link">
+              <img class="project__image" src="./images/third.jpg" alt="small project image">
+            </a>
+          </div>
+          <div class="project project--small">
+            <a class="project__link" href="#" title="Project link">
+              <img class="project__image" src="./images/fourth.jpg" alt="small project image">
+            </a>
+          </div>
+          <div class="project project--small">
+            <a class="project__link" href="#" title="Project link">
+              <img class="project__image" src="./images/fifth.jpg" alt="small project image">
+            </a>
+          </div>
+          <div class="project project--small">
+            <a class="project__link" href="#" title="Project link">
+              <img class="project__image" src="./images/sixth.jpg" alt="small project image">
+            </a>
+          </div>
+          <div class="portfolio__button-group">
+            <button class="portfolio__button"><i class="fas fa-circle"></i></button>
+            <button class="portfolio__button portfolio__button--active"><i class="fas fa-circle"></i></button>
+            <button class="portfolio__button"><i class="fas fa-circle"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact">
+      <div class="container">
+        <div class="statement">
+          <h2 class="statement__heading">Want to work with us?</h2>
+          <p class="statement__paragraph">
+            Magnis modipsae que voloratati andigen daepeditem quiate re porem aut labor.<br>
+             Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam.
+          </p>
+          <button class="btn btn--small">Get in touch</button>
+        </div>
+      </div>
+    </section>
   </main>
+  <footer class="footer">
+    <div class="footer__primary">
+      <div class="container clearfix">
+        <div class="footer__grid-item">
+          <h2 class="footer__heading">Who we are</h2>
+          <div class="footer__logo">
+            <a href="#" title="logo">
+              <img class="footer__logo-img" src="./images/logo-white.png" alt="Logo image">
+            </a>
+          </div>
+          <p class="footer__paragraph">
+            Magnis modipsae voloratati andigen daepeditem quiate re porem que aut labor. 
+            Laceaque eictemperum quiae sitiorem rest non restibusaes maio es dem tumquam
+          </p>
+          <a href="#" class="footer__link">
+            <p class="footer__paragraph">
+            More about us  <i class="footer__arrow fas fa-arrow-right"></i>
+            </p>
+          </a>
+        </div>
+        <div class="footer__grid-item">
+          <h2 class="footer__heading">Latest works</h2>
+          <div class="footer__projects-group">
+            <div class="project project--small footer__project">
+              <a class="project__link" href="#" title="Project link">
+                <img class="project__image" src="./images/first.jpg" alt="small project image">
+              </a>
+            </div>
+            <div class="project project--small footer__project">
+              <a class="project__link" href="#" title="Project link">
+                <img class="project__image" src="./images/second.jpg" alt="small project image">
+              </a>
+            </div>
+            <div class="project project--small footer__project">
+              <a class="project__link" href="#" title="Project link">
+                <img class="project__image" src="./images/third.jpg" alt="small project image">
+              </a>
+            </div>
+            <div class="project project--small footer__project">
+              <a class="project__link" href="#" title="Project link">
+                <img class="project__image" src="./images/fourth.jpg" alt="small project image">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__grid-item">
+          <h2 class="footer__heading">Get in touch</h2>
+          <p class="footer__paragraph">
+            Doloreiur quia commolu ptatemp dolupta oreprerum tibusam eumenis et consent accullignis dentibea autem inisita.
+          </p>
+          <p class="footer__paragraph">
+            <i class="footer__icon fas fa-map-marker-alt"></i>
+            <span>84 Street, City, State 24813</span>
+          </p>
+          <p class="footer__paragraph">
+            <i class="footer__icon fas fa-mobile-alt"></i>
+            <span>+00 (123) 456 7890</span>
+          </p>
+          <p class="footer__paragraph">
+            <i class="footer__icon far fa-envelope"></i>
+            <span>info@reen.com</span>
+          </p>
+        </div>
+        <div class="footer__grid-item">
+          <h2 class="footer__heading">Free updates</h2>
+          <p class="footer__paragraph">
+            Conecus iure posae volor remped modis 
+            aut lor volor accabora incim resto explabo.
+          </p>
+          <div class="footer__input-container">
+            <input class="footer__input" type="text" placeholder="Enter your email address">
+            <button class="btn footer__button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__secondary">
+      <div class="container clearfix">
+        <div class="footer__copyright">
+          <p>© 2014 REEN. All rights reserved.</p>
+        </div>
+        <ul class="footer__nav">
+          <li class="footer__nav-item footer__nav-item--first"><a class="footer__nav-link" href="#">Home</a></li>
+          <li class="footer__nav-item"><a class="footer__nav-link" href="#">Portfolio</a></li>
+          <li class="footer__nav-item"><a class="footer__nav-link" href="#">Blog</a></li>
+          <li class="footer__nav-item"><a class="footer__nav-link" href="#">About</a></li>
+          <li class="footer__nav-item"><a class="footer__nav-link" href="#">Services</a></li>
+          <li class="footer__nav-item"><a class="footer__nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

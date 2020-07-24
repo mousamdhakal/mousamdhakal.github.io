@@ -1,0 +1,15 @@
+.contact-info{
+  padding: 5px 0;
+  width: 100%;
+  float: left;
+
+  @include e(item){
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  @include mq(sm){
+    padding: 10px 0;
+    width: auto;
+  }
+}

@@ -7,10 +7,8 @@
     font-size: 14px;
     margin-right: 10px;
 
-    a{
-      text-decoration: none; 
-      text-transform: uppercase;
-      color: $blue-bayoux;
+    :hover {
+      color: darken($blue-bayoux,30%);
     }
 
     @include mq(lg){
@@ -21,5 +19,11 @@
     @include mq(xl){
       margin-right: 39px;
     }
+  }
+
+  @include e(link){
+    text-decoration: none; 
+    text-transform: uppercase;
+    color: $blue-bayoux;
   }
 }
