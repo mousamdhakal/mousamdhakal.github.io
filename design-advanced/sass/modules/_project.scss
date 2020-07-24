@@ -1,4 +1,9 @@
 .project {
+  position: relative;
+
+  &:hover .project__overlay{
+    opacity: 0.9;
+  }
 
   @include m(big){
     margin: 40px 0;
@@ -31,6 +36,55 @@
 
   @include e(image){
     width: 100%;
+  }
+
+  @include e(overlay){
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: $caribbean-green;
+
+    @include m(big){
+      height: 80%;
+      font-size: 30px;
+
+      @include mq(md){
+        font-size: 35px;
+      }
+
+      @include mq(xl){
+        font-size: 40px;
+      }
+    }
+
+    @include m(small){
+      height: 98%;
+      font-size: 13px;
+
+      @include mq(md){
+        font-size: 16px;
+      }
+
+      @include mq(xl){
+        font-size: 20px;
+      }
+    }
+  }
+
+  @include e(overlay-text){
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
   }
 
   @include e(text){
