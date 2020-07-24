@@ -77,6 +77,10 @@
     text-decoration: none;
     font-weight: 700;
     display: inline-block;
+
+    &:hover .footer__paragraph{
+      color: darken($cadet-blue,20%);
+    }
   }
 
   @include e(arrow){

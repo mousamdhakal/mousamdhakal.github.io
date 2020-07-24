@@ -7,10 +7,6 @@
     font-size: 14px;
     margin-right: 10px;
 
-    &:hover {
-      color: darken($blue-bayoux,30%);
-    }
-
     @include mq(lg){
       margin-right: 20px;
       font-size: 15px;
@@ -25,5 +21,9 @@
     text-decoration: none; 
     text-transform: uppercase;
     color: $blue-bayoux;
+
+    &:hover {
+      color: darken($blue-bayoux,30%);
+    }
   }
 }
